@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alkausar · Portfolio</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --press-black: #0a0a0a;
+        --press-dark: #111111;
+        --press-yellow: #ffcc00;
+        --press-cyan: #00ffff;
+        --press-magenta: #ff00ff;
+        --press-gray: #333333;
+        --text-light: #ffffff;
+        --text-gray: #aaaaaa;
+        --text-muted: #6b7280;
+        --border-light: rgba(255, 255, 255, 0.1);
+        --radius: 8px;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: var(--press-black);
+        color: var(--text-light);
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ===== NAVBAR (same as hero) ===== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        transition:
+          background-color 0.3s,
+          border-color 0.3s,
+          transform 0.5s;
+        transform: translateY(-100%);
+      }
+      body.loaded .navbar {
+        transform: translateY(0);
+      }
+      .navbar.scrolled {
+        background-color: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .nav-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      .nav-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 5rem;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+        font-family: "Arial Black", "Helvetica Bold", sans-serif;
+      }
+      .logo-dot {
+        color: var(--press-yellow);
+        font-size: 1.875rem;
+      }
+      .desktop-nav {
+        display: none;
+        align-items: center;
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .desktop-nav {
+          display: flex;
+        }
+      }
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #d1d5db;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: color 0.2s;
+      }
+      .nav-link:hover {
+        color: var(--press-yellow);
+      }
+      .btn-quote {
+        background-color: var(--press-yellow);
+        color: var(--press-black);
+        padding: 0.5rem 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: background-color 0.3s;
+      }
+      .btn-quote:hover {
+        background-color: white;
+      }
+      .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      @media (min-width: 768px) {
+        .mobile-menu-btn {
+          display: none;
+        }
+      }
+      .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background-color: var(--press-black);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      .mobile-overlay.open {
+        transform: translateX(0);
+      }
+      .close-btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      .mobile-nav-link {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: "Arial Black", sans-serif;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s,
+          color 0.2s;
+        transition-delay: calc(0.1s * var(--i));
+      }
+      .mobile-overlay.open .mobile-nav-link {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .mobile-quote {
+        margin-top: 2rem;
+        background-color: var(--press-yellow);
+        color: var(--press-black);
+        padding: 0.75rem 2rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s,
+          background-color 0.3s;
+        transition-delay: 0.5s;
+      }
+      .mobile-overlay.open .mobile-quote {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===== HERO (portfolio sub‑hero) ===== */
+      .portfolio-hero {
+        position: relative;
+        height: 50vh;
+        min-height: 380px;
+        background-color: var(--press-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 2px solid rgba(255, 204, 0, 0.2);
+        overflow: hidden;
+      }
+      .portfolio-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 30% 50%,
+          rgba(255, 204, 0, 0.05) 0%,
+          transparent 50%
+        );
+        pointer-events: none;
+      }
+      .parallax-bg-portfolio {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .parallax-circle {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.2;
+      }
+      .hero-content-portfolio {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        max-width: 900px;
+        padding: 0 1rem;
+      }
+      .hero-portfolio-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-family: "Arial Black", sans-serif;
+        line-height: 1.1;
+        opacity: 0;
+        transform: scale(0.96);
+        transition:
+          opacity 0.8s,
+          transform 0.8s;
+        transition-delay: 0.2s;
+      }
+      body.loaded .hero-portfolio-title {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .hero-portfolio-sub {
+        color: var(--text-gray);
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 1.5rem auto 0;
+        opacity: 0;
+        transition: opacity 0.8s;
+        transition-delay: 0.5s;
+      }
+      body.loaded .hero-portfolio-sub {
+        opacity: 1;
+      }
+
+      /* ===== SEARCH & FILTER BAR ===== */
+      .portfolio-toolbar {
+        max-width: 1280px;
+        margin: 2rem auto 2rem;
+        padding: 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+      }
+      .search-wrapper {
+        display: flex;
+        align-items: center;
+        background-color: #141414;
+        border: 1px solid var(--border-light);
+        border-radius: 50px;
+        padding: 0.6rem 1.5rem;
+        transition: border-color 0.2s;
+      }
+      .search-wrapper:focus-within {
+        border-color: var(--press-yellow);
+      }
+      .search-icon {
+        color: var(--press-yellow);
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+      }
+      .search-input {
+        background: transparent;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        color: white;
+        outline: none;
+      }
+      .search-input::placeholder {
+        color: #5f5f5f;
+        letter-spacing: 0.3px;
+      }
+
+      .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        justify-content: center;
+      }
+      .filter-btn {
+        background: transparent;
+        border: 1px solid #333;
+        color: #aaa;
+        padding: 0.6rem 1.6rem;
+        border-radius: 40px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .filter-btn.active,
+      .filter-btn:hover {
+        background-color: var(--press-yellow);
+        border-color: var(--press-yellow);
+        color: var(--press-black);
+      }
+
+      /* ===== PORTFOLIO GRID (cards) ===== */
+      .portfolio-grid-section {
+        max-width: 1280px;
+        margin: 0 auto 5rem;
+        padding: 0 1.5rem;
+      }
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+      }
+      .portfolio-card {
+        background-color: #141414;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        overflow: hidden;
+        transition:
+          transform 0.3s,
+          border-color 0.3s;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: cardFadeUp 0.5s forwards;
+      }
+      .portfolio-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--press-yellow);
+      }
+      .card-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        border-bottom: 2px solid rgba(255, 204, 0, 0.1);
+      }
+      .card-content {
+        padding: 1.2rem 1.2rem 1.5rem;
+      }
+      .card-category {
+        display: inline-block;
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        color: var(--press-yellow);
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+      }
+      .card-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        font-family: "Arial Black", sans-serif;
+        color: white;
+      }
+      .card-description {
+        color: var(--text-gray);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      @keyframes cardFadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== MODAL (same as earlier but enhanced) ===== */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        overflow: auto;
+      }
+      .modal-content {
+        background-color: #1a1a1a;
+        margin: 3% auto;
+        padding: 2rem;
+        border-radius: 20px;
+        max-width: 950px;
+        width: 90%;
+        border: 1px solid rgba(255, 204, 0, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        position: relative;
+      }
+      .close {
+        position: absolute;
+        right: 25px;
+        top: 15px;
+        font-size: 2.5rem;
+        cursor: pointer;
+        color: var(--text-gray);
+        transition: color 0.2s;
+      }
+      .close:hover {
+        color: var(--press-yellow);
+      }
+      .modal-title {
+        font-size: 2rem;
+        color: white;
+        font-family: "Arial Black", sans-serif;
+        border-left: 6px solid var(--press-yellow);
+        padding-left: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .modal-description {
+        color: #bbb;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+      }
+      .gallery {
+        display: flex;
+        gap: 1.2rem;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        scrollbar-width: thin;
+        scrollbar-color: var(--press-yellow) #333;
+      }
+      .gallery img {
+        height: 200px;
+        width: auto;
+        border-radius: 12px;
+        border: 2px solid transparent;
+        transition: border 0.2s;
+        flex-shrink: 0;
+      }
+      .gallery img:hover {
+        border-color: var(--press-yellow);
+      }
+
+      /* ===== FOOTER (copied from main) ===== */
+      .footer {
+        background-color: #0a0a0a;
+        padding: 5rem 0 2.5rem;
+        border-top: 1px solid rgba(255, 204, 0, 0.2);
+      }
+      .footer-grid {
+        max-width: 1280px;
+        margin: 0 auto 4rem;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .footer-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .footer-brand p {
+        color: #6b7280;
+        margin: 1.5rem 0;
+        line-height: 1.6;
+      }
+      .footer-title {
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 1.5rem;
+      }
+      .footer-links {
+        list-style: none;
+      }
+      .footer-links li {
+        margin-bottom: 0.75rem;
+      }
+      .footer-links a {
+        color: #6b7280;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--press-yellow);
+      }
+      .contact-info li {
+        color: #6b7280;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+      }
+      .contact-info span {
+        display: block;
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        margin-bottom: 0.25rem;
+      }
+      .footer-bottom {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 2rem 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+      @media (min-width: 768px) {
+        .footer-bottom {
+          flex-direction: row;
+        }
+      }
+      .copyright {
+        color: #4b5563;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+      }
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .social-link {
+        color: #6b7280;
+        transition:
+          color 0.2s,
+          transform 0.2s;
+      }
+      .social-link:hover {
+        color: var(--press-yellow);
+        transform: scale(1.2) rotate(5deg);
+      }
+
+      /* whatsapp float (optional) */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #25d366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .whatsapp-float:hover {
+        background-color: #128c7e;
+        transform: scale(1.1);
+      }
+
+      /* misc */
+      .text-press-yellow {
+        color: var(--press-yellow);
+      }
+      .no-results {
+        text-align: center;
+        font-size: 1.4rem;
+        color: #666;
+        grid-column: 1 / -1;
+        padding: 4rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar (same as main page) -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-content">
+          <div class="logo">Alkausar<span class="logo-dot">.</span></div>
+          <div class="desktop-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="service.html" class="nav-link">Services</a>
+            <a href="portfolio.html" class="nav-link">Portfolio</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="contact.html" class="btn-quote">Get Quote</a>
+          </div>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i data-lucide="menu" class="h-8 w-8"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay">
+      <button class="close-btn" id="closeMenuBtn">
+        <i data-lucide="x" class="h-8 w-8"></i>
+      </button>
+      <div class="mobile-nav">
+        <a href="index.html" class="mobile-nav-link" style="--i: 0">Home</a>
+        <a href="service.html" class="mobile-nav-link" style="--i: 1"
+          >Services</a
+        >
+        <a href="portfolio.html" class="mobile-nav-link" style="--i: 2"
+          >Portfolio</a
+        >
+        <a href="about.html" class="mobile-nav-link" style="--i: 3">About</a>
+        <a href="contact.html" class="mobile-nav-link" style="--i: 4"
+          >Contact</a
+        >
+        <a href="contact.html" class="mobile-quote">Get Quote</a>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO HERO -->
+    <section class="portfolio-hero">
+      <div class="parallax-bg-portfolio" id="parallaxPortfolio">
+        <div
+          class="parallax-circle"
+          style="
+            top: 10%;
+            left: 5%;
+            width: 200px;
+            height: 200px;
+            background: var(--press-cyan);
+          "
+        ></div>
+        <div
+          class="parallax-circle"
+          style="
+            bottom: 10%;
+            right: 10%;
+            width: 280px;
+            height: 280px;
+            background: var(--press-magenta);
+          "
+        ></div>
+        <div
+          class="parallax-circle"
+          style="
+            top: 40%;
+            right: 30%;
+            width: 150px;
+            height: 150px;
+            background: var(--press-yellow);
+          "
+        ></div>
+      </div>
+      <div class="hero-content-portfolio">
+        <h1 class="hero-portfolio-title">
+          Our <span class="text-press-yellow">work</span>
+        </h1>
+        <p class="hero-portfolio-sub">
+          Every project tells a story — browse our finest print creations.
+        </p>
+      </div>
+    </section>
+
+    <!-- SEARCH & FILTERS -->
+    <div class="portfolio-toolbar">
+      <div class="search-wrapper">
+        <i data-lucide="search" class="search-icon"></i>
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="Search projects... (e.g. book, label, banner)"
+        />
+      </div>
+      <div class="filter-row" id="filterRow">
+        <!-- dynamic categories from JS, but we keep a static base + js update -->
+        <button class="filter-btn active" data-category="all">All</button>
+        <!-- will be inserted via js but we keep a few for fallback -->
+      </div>
+    </div>
+
+    <!-- PORTFOLIO GRID -->
+    <section class="portfolio-grid-section">
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+    </section>
+
+    <!-- FOOTER (identical to main) -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3 class="logo">Alkausar<span class="logo-dot">.</span></h3>
+          <p>Premium printing solutions forged with precision since 1998.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Services</h4>
+          <ul class="footer-links">
+            <li><a href="#">Offset Printing</a></li>
+            <li><a href="#">Digital Printing</a></li>
+            <li><a href="#">Large Format</a></li>
+            <li><a href="#">Packaging</a></li>
+            <li><a href="#">Design</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Contact</h4>
+          <ul class="contact-info">
+            <li>
+              <span>Address</span>123 Industrial Avenue, Print District, NY
+            </li>
+            <li><span>Phone</span>+1 (555) 123-4567</li>
+            <li><span>Email</span>hello@alkausarpress.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          © 2025 Alkausar Printing Press. All rights reserved.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a
+          ><a href="#" class="social-link"><i data-lucide="twitter"></i></a
+          ><a href="#" class="social-link"><i data-lucide="facebook"></i></a
+          ><a href="#" class="social-link"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a
+      href="https://wa.me/03074123690?text=Hello%20Alkausar%20Printing!%20I%20would%20like%20to%20inquire%20about%20your%20portfolio."
+      class="whatsapp-float"
+      target="_blank"
+      ><i data-lucide="message-circle" style="width: 32px; height: 32px"></i
+    ></a>
+
+    <!-- MODAL -->
+    <div class="modal" id="portfolioModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 class="modal-title"></h2>
+        <p class="modal-description"></p>
+        <div class="gallery"></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        // ---------- PORTFOLIO DATA (enriched from the first file) ----------
+        const portfolioData = [
+          // stationery
+          {
+            title: "Premium Business Cards",
+            description: "High-quality cards with foil and spot UV.",
+            category: "stationery",
+            images: [
+              "https://img.freepik.com/free-photo/stack-business-cards-white-surface_23-2148229088.jpg",
+              "https://img.freepik.com/free-photo/close-up-business-cards-stack_23-2148229086.jpg",
+              "https://img.freepik.com/free-photo/business-cards-mockup_23-2148229084.jpg",
+            ],
+          },
+          {
+            title: "Luxury Letterheads",
+            description: "Elegant letterheads with foil stamping.",
+            category: "stationery",
+            images: [
+              "https://img.freepik.com/free-photo/close-up-letterhead-mockup_23-2148229076.jpg",
+              "https://img.freepik.com/free-photo/letterhead-mockup_23-2148229074.jpg",
+            ],
+          },
+          {
+            title: "Custom Envelopes",
+            description: "Branded envelopes for professional suites.",
+            category: "stationery",
+            images: [
+              "https://img.freepik.com/free-photo/envelope-mockup_23-2148229064.jpg",
+              "https://img.freepik.com/free-photo/close-up-envelope-mockup_23-2148229062.jpg",
+            ],
+          },
+          // promotional
+          {
+            title: "Colorful Flyers",
+            description: "Eye-catching flyers for events.",
+            category: "promotional",
+            images: [
+              "https://img.freepik.com/free-photo/stack-flyers_23-2148229052.jpg",
+              "https://img.freepik.com/free-photo/close-up-flyers-stack_23-2148229050.jpg",
+            ],
+          },
+          {
+            title: "Large Posters",
+            description: "Vibrant posters for advertising.",
+            category: "promotional",
+            images: [
+              "https://img.freepik.com/free-photo/rolled-poster-mockup_23-2148229040.jpg",
+              "https://img.freepik.com/free-photo/close-up-rolled-poster_23-2148229038.jpg",
+            ],
+          },
+          {
+            title: "Tri-Fold Brochures",
+            description: "Informative brochures for business.",
+            category: "promotional",
+            images: [
+              "https://img.freepik.com/free-photo/brochure-mockup_23-2148229028.jpg",
+              "https://img.freepik.com/free-photo/close-up-brochure-mockup_23-2148229026.jpg",
+            ],
+          },
+          // books
+          {
+            title: "Perfect Bound Books",
+            description: "Softcover books for novels & guides.",
+            category: "books",
+            images: [
+              "https://img.freepik.com/free-photo/stack-books_23-2148229016.jpg",
+              "https://img.freepik.com/free-photo/close-up-stack-books_23-2148229014.jpg",
+            ],
+          },
+          {
+            title: "Glossy Magazines",
+            description: "High-quality magazines with visuals.",
+            category: "books",
+            images: [
+              "https://img.freepik.com/free-photo/open-magazine_23-2148229004.jpg",
+              "https://img.freepik.com/free-photo/close-up-open-magazine_23-2148229002.jpg",
+            ],
+          },
+          // signage
+          {
+            title: "Outdoor Banners",
+            description: "Durable banners for outdoor ads.",
+            category: "signage",
+            images: [
+              "https://img.freepik.com/free-photo/banner-mockup_23-2148228980.jpg",
+              "https://img.freepik.com/free-photo/close-up-banner-mockup_23-2148228978.jpg",
+            ],
+          },
+          {
+            title: "Illuminated Store Signs",
+            description: "Eye‑catching storefront signs.",
+            category: "signage",
+            images: [
+              "https://img.freepik.com/free-photo/sign-mockup_23-2148228968.jpg",
+              "https://img.freepik.com/free-photo/close-up-sign-mockup_23-2148228966.jpg",
+            ],
+          },
+          // labels
+          {
+            title: "Custom Product Labels",
+            description: "High-quality packaging labels.",
+            category: "labels",
+            images: [
+              "https://margoandbees.com/thumbs/887/templates/template_7/8/images/products/529/cc72bb1683879c439795177ae18de7a5/minimalist_wedding_invitation_monogram5.jpg",
+              "https://creativecustomprints.com/cdn/shop/files/E6441E74-0346-4B66-9042-E0026A831548.jpg",
+            ],
+          },
+          {
+            title: "Die-Cut Stickers",
+            description: "Fun custom shaped stickers.",
+            category: "labels",
+            images: [
+              "https://img.freepik.com/free-photo/sticker-sheet-mockup_23-2148228938.jpg",
+              "https://img.freepik.com/free-photo/close-up-sticker-sheet_23-2148228936.jpg",
+            ],
+          },
+          // custom
+          {
+            title: "Elegant Wedding Invitations",
+            description: "Beautiful invitations for special days.",
+            category: "custom",
+            images: [
+              "https://img.freepik.com/free-photo/invitation-mockup_23-2148228926.jpg",
+              "https://img.freepik.com/free-photo/close-up-invitation-mockup_23-2148228924.jpg",
+            ],
+          },
+          {
+            title: "Spiral Bound Notebooks",
+            description: "Custom cover notebooks.",
+            category: "custom",
+            images: [
+              "https://transform.octanecdn.com/crop/700x492/https://octanecdn.com/colorvisionprintingcom/colorvisionprintingcom_892097615.jpg",
+              "https://www.qinprinting.com/wp-content/uploads/2024/01/The-Complete-Guide-to-Spiral-Bound-Book-Printing.webp",
+            ],
+          },
+          // corporate
+          {
+            title: "Annual Reports",
+            description: "Professional reports for stakeholders.",
+            category: "corporate",
+            images: [
+              "https://thomasgroupprinting.com/wp-content/uploads/2023/07/Annual-Report-Printing-Example-FIT.webp",
+              "https://thomasgroupprinting.com/wp-content/uploads/2022/11/Annual-Report-Printing-Example-NRDC.webp",
+            ],
+          },
+          // packaging
+          {
+            title: "Luxury Perfume Boxes",
+            description: "Elegant packaging for fragrances.",
+            category: "packaging",
+            images: [
+              "https://www.thecustomboxes.com/ckeditor_f/uploads/Luxury-Perfume-Box-Packaging-Perfection.webp",
+              "https://www.wecustomboxes.com/images/perfume-box.webp",
+            ],
+          },
+          // editorial
+          {
+            title: "Coffee Table Books",
+            description: "Luxury photo books.",
+            category: "editorial",
+            images: [
+              "https://www.ohdesignstudio.com/resource/img/coffee-table-book-printing.jpg",
+              "https://thinkinganew.uk/wp-content/uploads/2023/02/8-Joy-book.jpg",
+            ],
+          },
+          // large format
+          {
+            title: "Trade Show Banners",
+            description: "Impressive retractable banners.",
+            category: "large-format",
+            images: [
+              "https://megaformat.net/blog/wp-content/uploads/2018/04/Retractable-Banner-Large-Format-Printing.jpg",
+              "https://giantprinting.com/wp-content/uploads/2023/05/Giant_Printing_30ft_G-Free-1024x768.jpg",
+            ],
+          },
+          // branding
+          {
+            title: "Complete Rebrand Stationery",
+            description: "Full stationery suite for brand refresh.",
+            category: "branding",
+            images: [
+              "https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/9a34d114869221.56289f89bee3e.jpg",
+              "https://admin.itsnicethat.com/images/d3tx2jK8RfHzk356OumTcI_PDFE=/197147/width-1440/crane_paper_rebrand_collins_graphic_design_itsnicethat5.jpg",
+            ],
+          },
+        ];
+
+        // get unique categories
+        const categories = [
+          "all",
+          ...new Set(portfolioData.map((item) => item.category)),
+        ];
+
+        // render filter buttons dynamically
+        const filterRow = document.getElementById("filterRow");
+        filterRow.innerHTML = "";
+        categories.forEach((cat) => {
+          const btn = document.createElement("button");
+          btn.className = `filter-btn ${cat === "all" ? "active" : ""}`;
+          btn.dataset.category = cat;
+          btn.textContent =
+            cat === "all"
+              ? "All"
+              : cat
+                  .split("-")
+                  .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                  .join(" ");
+          filterRow.appendChild(btn);
+        });
+
+        // references
+        const grid = document.getElementById("portfolioGrid");
+        const searchInput = document.getElementById("searchInput");
+        let activeCategory = "all";
+        let searchTerm = "";
+
+        function renderPortfolio() {
+          let filtered = portfolioData;
+          // filter by category
+          if (activeCategory !== "all") {
+            filtered = filtered.filter(
+              (item) => item.category === activeCategory,
+            );
+          }
+          // filter by search term (title + description)
+          if (searchTerm.trim() !== "") {
+            const term = searchTerm.toLowerCase();
+            filtered = filtered.filter(
+              (item) =>
+                item.title.toLowerCase().includes(term) ||
+                item.description.toLowerCase().includes(term) ||
+                item.category.toLowerCase().includes(term),
+            );
+          }
+
+          if (filtered.length === 0) {
+            grid.innerHTML = `<div class="no-results">⛔ No projects match your criteria</div>`;
+            return;
+          }
+
+          grid.innerHTML = filtered
+            .map(
+              (item, idx) => `
+          <div class="portfolio-card" data-index="${portfolioData.indexOf(item)}">
+            <img src="${item.images[0]}" alt="${item.title}" class="card-image" loading="lazy">
+            <div class="card-content">
+              <span class="card-category">${item.category}</span>
+              <h3 class="card-title">${item.title}</h3>
+              <p class="card-description">${item.description.substring(0, 70)}…</p>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+        }
+
+        // event listeners for filters
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".filter-btn")
+              .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeCategory = btn.dataset.category;
+            renderPortfolio();
+          });
+        });
+
+        searchInput.addEventListener("input", (e) => {
+          searchTerm = e.target.value;
+          renderPortfolio();
+        });
+
+        // initial render
+        renderPortfolio();
+
+        // modal logic
+        const modal = document.getElementById("portfolioModal");
+        const modalTitle = modal.querySelector(".modal-title");
+        const modalDesc = modal.querySelector(".modal-description");
+        const modalGallery = modal.querySelector(".gallery");
+        const closeModal = modal.querySelector(".close");
+
+        document.addEventListener("click", (e) => {
+          const card = e.target.closest(".portfolio-card");
+          if (!card) return;
+          const idx = card.dataset.index;
+          const item = portfolioData[idx];
+          if (!item) return;
+          modalTitle.textContent = item.title;
+          modalDesc.textContent = item.description;
+          modalGallery.innerHTML = item.images
+            .map((src) => `<img src="${src}" alt="${item.title}">`)
+            .join("");
+          modal.style.display = "block";
+        });
+
+        closeModal.addEventListener(
+          "click",
+          () => (modal.style.display = "none"),
+        );
+        window.addEventListener("click", (e) => {
+          if (e.target === modal) modal.style.display = "none";
+        });
+
+        // ---------- BOOTSTRAP (navbar, preloader, etc) ----------
+        if (typeof lucide !== "undefined") lucide.createIcons();
+
+        // preloader (optional mini)
+        document.body.classList.add("loaded"); // since no big preloader here
+
+        // navbar scroll effect
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) navbar.classList.add("scrolled");
+          else navbar.classList.remove("scrolled");
+        });
+
+        // mobile menu
+        const mobileBtn = document.getElementById("mobileMenuBtn");
+        const mobileOverlay = document.getElementById("mobileOverlay");
+        const closeBtn = document.getElementById("closeMenuBtn");
+        if (mobileBtn && mobileOverlay && closeBtn) {
+          mobileBtn.addEventListener("click", () =>
+            mobileOverlay.classList.add("open"),
+          );
+          closeBtn.addEventListener("click", () =>
+            mobileOverlay.classList.remove("open"),
+          );
+          document
+            .querySelectorAll(".mobile-nav-link, .mobile-quote")
+            .forEach((l) =>
+              l.addEventListener("click", () =>
+                mobileOverlay.classList.remove("open"),
+              ),
+            );
+        }
+
+        // tiny parallax effect in portfolio hero (optional)
+        const hero = document.querySelector(".portfolio-hero");
+        if (hero) {
+          window.addEventListener("scroll", () => {
+            let scrolled = window.scrollY * 0.2;
+            document.querySelectorAll(".parallax-circle").forEach((el, i) => {
+              let direction = i % 2 === 0 ? 1 : -1;
+              el.style.transform = `translateY(${scrolled * direction * 0.2}px)`;
+            });
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

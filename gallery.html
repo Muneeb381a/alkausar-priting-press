@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alkausar · dynamic gallery</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --press-black: #0a0a0a;
+        --press-dark: #111111;
+        --press-yellow: #ffcc00;
+        --press-cyan: #00ffff;
+        --press-magenta: #ff00ff;
+        --press-gray: #333333;
+        --text-light: #ffffff;
+        --text-gray: #aaaaaa;
+        --text-muted: #6b7280;
+        --border-light: rgba(255, 255, 255, 0.1);
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: var(--press-black);
+        color: var(--text-light);
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ===== NAVBAR ===== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        transition:
+          background-color 0.3s,
+          border-color 0.3s,
+          transform 0.5s;
+        transform: translateY(-100%);
+      }
+      body.loaded .navbar {
+        transform: translateY(0);
+      }
+      .navbar.scrolled {
+        background-color: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .nav-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      .nav-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 5rem;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+        font-family: "Arial Black", "Helvetica Bold", sans-serif;
+      }
+      .logo-dot {
+        color: var(--press-yellow);
+        font-size: 1.875rem;
+      }
+      .desktop-nav {
+        display: none;
+        align-items: center;
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .desktop-nav {
+          display: flex;
+        }
+      }
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #d1d5db;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: color 0.2s;
+      }
+      .nav-link:hover {
+        color: var(--press-yellow);
+      }
+      .btn-quote {
+        background-color: var(--press-yellow);
+        color: var(--press-black);
+        padding: 0.5rem 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: background-color 0.3s;
+      }
+      .btn-quote:hover {
+        background-color: white;
+      }
+      .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      @media (min-width: 768px) {
+        .mobile-menu-btn {
+          display: none;
+        }
+      }
+      .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background-color: var(--press-black);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      .mobile-overlay.open {
+        transform: translateX(0);
+      }
+      .close-btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      .mobile-nav-link {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: "Arial Black", sans-serif;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s,
+          color 0.2s;
+        transition-delay: calc(0.1s * var(--i));
+      }
+      .mobile-overlay.open .mobile-nav-link {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .mobile-quote {
+        margin-top: 2rem;
+        background-color: var(--press-yellow);
+        color: var(--press-black);
+        padding: 0.75rem 2rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s,
+          background-color 0.3s;
+        transition-delay: 0.5s;
+      }
+      .mobile-overlay.open .mobile-quote {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===== GALLERY HERO — more presence ===== */
+      .gallery-hero {
+        position: relative;
+        height: 42vh;
+        min-height: 340px;
+        background: linear-gradient(165deg, #0a0a0a 0%, #1e1e1e 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 2px solid rgba(255, 204, 0, 0.2);
+        overflow: hidden;
+      }
+      /* subtle animated grain */
+      .gallery-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 30% 40%,
+            rgba(255, 204, 0, 0.03) 0%,
+            transparent 40%
+          ),
+          repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.01) 0px,
+            rgba(255, 255, 255, 0.01) 2px,
+            transparent 2px,
+            transparent 6px
+          );
+        pointer-events: none;
+      }
+      .gallery-hero h1 {
+        font-size: clamp(2.4rem, 8vw, 4.8rem);
+        font-family: "Arial Black", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        color: white;
+        text-align: center;
+        z-index: 2;
+        text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        animation: gentlePulse 3s infinite alternate;
+      }
+      @keyframes gentlePulse {
+        0% {
+          text-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+        }
+        100% {
+          text-shadow: 0 0 30px rgba(255, 204, 0, 0.5);
+        }
+      }
+      .hero-accent {
+        color: var(--press-yellow);
+        position: relative;
+        display: inline-block;
+      }
+      .hero-accent::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 30%;
+        bottom: 5px;
+        left: 0;
+        background: rgba(255, 204, 0, 0.15);
+        z-index: -1;
+        filter: blur(8px);
+      }
+
+      /* ===== TOOLBAR ===== */
+      .gallery-toolbar {
+        max-width: 1280px;
+        margin: 2rem auto 2rem;
+        padding: 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+      .filter-btn {
+        background: transparent;
+        border: 1px solid #333;
+        color: #aaa;
+        padding: 0.5rem 1.4rem;
+        border-radius: 40px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .filter-btn.active,
+      .filter-btn:hover {
+        background-color: var(--press-yellow);
+        border-color: var(--press-yellow);
+        color: var(--press-black);
+      }
+      .search-wrapper {
+        display: flex;
+        align-items: center;
+        background-color: #141414;
+        border: 1px solid var(--border-light);
+        border-radius: 60px;
+        padding: 0.6rem 1.6rem;
+        max-width: 400px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .search-icon {
+        color: var(--press-yellow);
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+      }
+      .search-input {
+        background: transparent;
+        border: none;
+        width: 100%;
+        font-size: 0.95rem;
+        color: white;
+        outline: none;
+      }
+      .search-input::placeholder {
+        color: #555;
+      }
+
+      /* ===== MASONRY GALLERY (varying sizes) ===== */
+      .gallery-section {
+        max-width: 1280px;
+        margin: 0 auto 4rem;
+        padding: 0 1.5rem;
+      }
+      /* multi‑column masonry */
+      .image-grid {
+        column-count: 4;
+        column-gap: 1.2rem;
+      }
+      @media (max-width: 900px) {
+        .image-grid {
+          column-count: 3;
+        }
+      }
+      @media (max-width: 600px) {
+        .image-grid {
+          column-count: 2;
+        }
+      }
+      @media (max-width: 380px) {
+        .image-grid {
+          column-count: 1;
+        }
+      }
+
+      .image-card {
+        display: inline-block; /* essential for column break */
+        width: 100%;
+        margin-bottom: 1.2rem;
+        border-radius: 14px;
+        overflow: hidden;
+        background-color: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+        transition:
+          transform 0.25s ease,
+          border-color 0.2s,
+          box-shadow 0.2s;
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+        animation: cardReveal 0.5s forwards;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      }
+      .image-card:hover {
+        transform: scale(1.02) translateY(-3px);
+        border-color: var(--press-yellow);
+        box-shadow: 0 15px 30px rgba(255, 204, 0, 0.15);
+      }
+      @keyframes cardReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .image-card img {
+        width: 100%;
+        height: auto; /* natural aspect ratio */
+        display: block;
+        transition: filter 0.3s;
+      }
+      .image-card:hover img {
+        filter: brightness(0.75) contrast(1.1);
+      }
+
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.85) 0%,
+          transparent 70%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.2rem 1rem;
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .image-card {
+        position: relative; /* for overlay */
+      }
+      .image-card:hover .image-overlay {
+        opacity: 1;
+      }
+      .overlay-title {
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        line-height: 1.2;
+      }
+      .overlay-cat {
+        color: var(--press-yellow);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.2rem;
+      }
+
+      /* Lightbox */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.96);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+      }
+      .modal.active {
+        display: flex;
+      }
+      .modal-content {
+        max-width: 900px;
+        width: 90%;
+        position: relative;
+        text-align: center;
+      }
+      .modal-img {
+        max-width: 100%;
+        max-height: 80vh;
+        border-radius: 12px;
+        border: 3px solid rgba(255, 204, 0, 0.3);
+        box-shadow: 0 20px 40px black;
+      }
+      .modal-close {
+        position: absolute;
+        top: -45px;
+        right: -10px;
+        font-size: 3.5rem;
+        color: #aaa;
+        cursor: pointer;
+        transition: color 0.2s;
+        line-height: 1;
+      }
+      .modal-close:hover {
+        color: var(--press-yellow);
+      }
+      .modal-caption {
+        color: white;
+        margin-top: 0.8rem;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .modal-cat {
+        color: var(--press-yellow);
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #666;
+        font-size: 1.5rem;
+        grid-column: 1/-1;
+        background: #111;
+        border-radius: 40px;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #0a0a0a;
+        padding: 4rem 0 2rem;
+        border-top: 1px solid rgba(255, 204, 0, 0.2);
+      }
+      .footer-grid {
+        max-width: 1280px;
+        margin: 0 auto 3rem;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .footer-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .footer-brand p {
+        color: #6b7280;
+        margin: 1rem 0;
+        line-height: 1.5;
+      }
+      .footer-title {
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 1.2rem;
+      }
+      .footer-links {
+        list-style: none;
+      }
+      .footer-links li {
+        margin-bottom: 0.6rem;
+      }
+      .footer-links a {
+        color: #6b7280;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--press-yellow);
+      }
+      .contact-info li {
+        color: #6b7280;
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+      }
+      .contact-info span {
+        display: block;
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+      }
+      .footer-bottom {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+      @media (min-width: 768px) {
+        .footer-bottom {
+          flex-direction: row;
+        }
+      }
+      .copyright {
+        color: #4b5563;
+        font-size: 0.8rem;
+      }
+      .social-links {
+        display: flex;
+        gap: 1.2rem;
+      }
+      .social-link {
+        color: #6b7280;
+        transition: color 0.2s;
+      }
+      .social-link:hover {
+        color: var(--press-yellow);
+      }
+
+      /* WhatsApp */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #25d366;
+        color: white;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        text-decoration: none;
+      }
+      .whatsapp-float:hover {
+        background-color: #128c7e;
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-content">
+          <div class="logo">Alkausar<span class="logo-dot">.</span></div>
+          <div class="desktop-nav">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Services</a>
+            <a href="#" class="nav-link">Portfolio</a>
+            <a href="#" class="nav-link">Gallery</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Contact</a>
+            <a href="#" class="btn-quote">Get Quote</a>
+          </div>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay">
+      <button class="close-btn" id="closeMenuBtn">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="mobile-nav">
+        <a href="#" class="mobile-nav-link" style="--i: 0">Home</a>
+        <a href="#" class="mobile-nav-link" style="--i: 1">Services</a>
+        <a href="#" class="mobile-nav-link" style="--i: 2">Portfolio</a>
+        <a href="#" class="mobile-nav-link" style="--i: 3">Gallery</a>
+        <a href="#" class="mobile-nav-link" style="--i: 4">About</a>
+        <a href="#" class="mobile-nav-link" style="--i: 5">Contact</a>
+        <a href="#" class="mobile-quote">Get Quote</a>
+      </div>
+    </div>
+
+    <!-- Hero with enhanced visual presence -->
+    <section class="gallery-hero">
+      <h1><span class="hero-accent">image</span> gallery</h1>
+    </section>
+
+    <!-- Toolbar -->
+    <div class="gallery-toolbar">
+      <div class="filter-row" id="filterRow"></div>
+      <div class="search-wrapper">
+        <i data-lucide="search" class="search-icon"></i>
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="Search images..."
+        />
+      </div>
+    </div>
+
+    <!-- masonry image grid (varying sizes) -->
+    <section class="gallery-section">
+      <div class="image-grid" id="imageGrid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3 class="logo">Alkausar<span class="logo-dot">.</span></h3>
+          <p>Precision printing since 1998.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Quick</h4>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Services</h4>
+          <ul class="footer-links">
+            <li><a href="#">Offset</a></li>
+            <li><a href="#">Digital</a></li>
+            <li><a href="#">Large Format</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Contact</h4>
+          <ul class="contact-info">
+            <li><span>Address</span>123 Industrial Ave, NY</li>
+            <li><span>Phone</span>+1 (555) 123-4567</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          © 2025 Alkausar Printing Press. All rights reserved.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp -->
+    <a
+      href="https://wa.me/03074123690?text=Hello%20Alkausar!%20I%20saw%20your%20gallery."
+      class="whatsapp-float"
+      target="_blank"
+    >
+      <i data-lucide="message-circle" style="width: 28px; height: 28px"></i>
+    </a>
+
+    <!-- Lightbox Modal -->
+    <div class="modal" id="lightbox">
+      <div class="modal-content">
+        <span class="modal-close" id="closeLightbox">&times;</span>
+        <img src="" alt="" class="modal-img" id="lightboxImg" />
+        <div class="modal-caption">
+          <span id="lightboxTitle"></span>
+          <span class="modal-cat" id="lightboxCat"></span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        // ----- GALLERY WITH VARIED ASPECT RATIOS (landscape, portrait, square) -----
+        const images = [
+          // landscape dominant
+          {
+            url: "https://images.unsplash.com/photo-1586075010923-64785c162af8?w=420&h=280&fit=crop&auto=format",
+            title: "Business Cards",
+            category: "stationery",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=280&h=380&fit=crop&auto=format",
+            title: "Letterhead Set",
+            category: "stationery",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1586339276761-33a5a38b3c6c?w=320&h=320&fit=crop&auto=format",
+            title: "Envelopes",
+            category: "stationery",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=450&h=300&fit=crop&auto=format",
+            title: "Flyers Stack",
+            category: "promotional",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1531835551805-16d864c8d311?w=280&h=400&fit=crop&auto=format",
+            title: "Poster Mockup",
+            category: "promotional",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=440&h=300&fit=crop&auto=format",
+            title: "Brochure",
+            category: "promotional",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=260&h=360&fit=crop&auto=format",
+            title: "Hardcover Book",
+            category: "books",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=420&h=280&fit=crop&auto=format",
+            title: "Magazine",
+            category: "books",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1600132806608-23144b283de5?w=290&h=430&fit=crop&auto=format",
+            title: "Outdoor Banner",
+            category: "signage",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1621544402532-78c514d8cc00?w=340&h=340&fit=crop&auto=format",
+            title: "Store Sign",
+            category: "signage",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1619983081566-430f636b96e5?w=400&h=280&fit=crop&auto=format",
+            title: "Product Label",
+            category: "labels",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1572375992501-4b0892d50c69?w=320&h=320&fit=crop&auto=format",
+            title: "Sticker Sheet",
+            category: "labels",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=280&h=400&fit=crop&auto=format",
+            title: "Wedding Invite",
+            category: "custom",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=430&h=280&fit=crop&auto=format",
+            title: "Calendar",
+            category: "custom",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1585829365295-f7f6cb2a436f?w=340&h=340&fit=crop&auto=format",
+            title: "Annual Report",
+            category: "corporate",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1606063081890-03f5fdab3c6d?w=270&h=380&fit=crop&auto=format",
+            title: "Perfume Box",
+            category: "packaging",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1612966871992-7ebc63f0aad5?w=300&h=400&fit=crop&auto=format",
+            title: "Booklet",
+            category: "editorial",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1620120966883-d977b57a96ec?w=280&h=420&fit=crop&auto=format",
+            title: "Large Banner",
+            category: "large-format",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=440&h=300&fit=crop&auto=format",
+            title: "Brand Kit",
+            category: "branding",
+          },
+          {
+            url: "https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg?w=340&h=340&fit=crop&auto=format",
+            title: "Notebooks",
+            category: "custom",
+          },
+          {
+            url: "https://images.pexels.com/photos/3815690/pexels-photo-3815690.jpeg?w=420&h=280&fit=crop&auto=format",
+            title: "Flyer Design",
+            category: "promotional",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1618354691792-d1d42acfd860?w=380&h=260&fit=crop&auto=format",
+            title: "Roll-up Banner",
+            category: "signage",
+          }, // extra landscape
+        ];
+
+        // categories
+        const categories = [
+          "all",
+          ...new Set(images.map((img) => img.category)),
+        ];
+        const filterRow = document.getElementById("filterRow");
+        filterRow.innerHTML = "";
+        categories.forEach((cat) => {
+          const btn = document.createElement("button");
+          btn.className = `filter-btn ${cat === "all" ? "active" : ""}`;
+          btn.dataset.category = cat;
+          btn.textContent =
+            cat === "all"
+              ? "All"
+              : cat
+                  .split("-")
+                  .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                  .join(" ");
+          filterRow.appendChild(btn);
+        });
+
+        const grid = document.getElementById("imageGrid");
+        const searchInput = document.getElementById("searchInput");
+        let activeCategory = "all";
+        let searchTerm = "";
+
+        function renderGallery() {
+          let filtered = images;
+          if (activeCategory !== "all") {
+            filtered = filtered.filter(
+              (item) => item.category === activeCategory,
+            );
+          }
+          if (searchTerm.trim() !== "") {
+            const term = searchTerm.toLowerCase();
+            filtered = filtered.filter(
+              (item) =>
+                item.title.toLowerCase().includes(term) ||
+                item.category.toLowerCase().includes(term),
+            );
+          }
+
+          if (filtered.length === 0) {
+            grid.innerHTML = `<div class="no-results">✨ no matching images</div>`;
+            return;
+          }
+
+          grid.innerHTML = filtered
+            .map(
+              (item) => `
+          <div class="image-card" data-url="${item.url}" data-title="${item.title}" data-cat="${item.category}">
+            <img src="${item.url}" alt="${item.title}" loading="lazy">
+            <div class="image-overlay">
+              <span class="overlay-cat">${item.category}</span>
+              <span class="overlay-title">${item.title}</span>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+        }
+
+        // filter buttons
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".filter-btn")
+              .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeCategory = btn.dataset.category;
+            renderGallery();
+          });
+        });
+
+        searchInput.addEventListener("input", (e) => {
+          searchTerm = e.target.value;
+          renderGallery();
+        });
+
+        renderGallery();
+
+        // LIGHTBOX
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const lightboxTitle = document.getElementById("lightboxTitle");
+        const lightboxCat = document.getElementById("lightboxCat");
+        const closeLightbox = document.getElementById("closeLightbox");
+
+        grid.addEventListener("click", (e) => {
+          const card = e.target.closest(".image-card");
+          if (!card) return;
+          lightboxImg.src = card.dataset.url;
+          lightboxTitle.textContent = card.dataset.title;
+          lightboxCat.textContent = card.dataset.cat;
+          lightbox.classList.add("active");
+        });
+
+        closeLightbox.addEventListener("click", () =>
+          lightbox.classList.remove("active"),
+        );
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox) lightbox.classList.remove("active");
+        });
+
+        // UI init
+        if (typeof lucide !== "undefined") lucide.createIcons();
+        document.body.classList.add("loaded");
+
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) navbar.classList.add("scrolled");
+          else navbar.classList.remove("scrolled");
+        });
+
+        // mobile menu
+        const mobileBtn = document.getElementById("mobileMenuBtn");
+        const mobileOverlay = document.getElementById("mobileOverlay");
+        const closeBtn = document.getElementById("closeMenuBtn");
+        if (mobileBtn && mobileOverlay && closeBtn) {
+          mobileBtn.addEventListener("click", () =>
+            mobileOverlay.classList.add("open"),
+          );
+          closeBtn.addEventListener("click", () =>
+            mobileOverlay.classList.remove("open"),
+          );
+          document
+            .querySelectorAll(".mobile-nav-link, .mobile-quote")
+            .forEach((l) =>
+              l.addEventListener("click", () =>
+                mobileOverlay.classList.remove("open"),
+              ),
+            );
+        }
+      })();
+    </script>
+  </body>
+</html>
