@@ -45,7 +45,7 @@
         color: inherit;
       }
 
-      /* ===== NAVBAR (same as hero) ===== */
+      /* ===== NAVBAR ===== */
       .navbar {
         position: fixed;
         top: 0;
@@ -205,7 +205,7 @@
         transform: translateY(0);
       }
 
-      /* ===== HERO (portfolio sub‑hero) ===== */
+      /* ===== HERO ===== */
       .portfolio-hero {
         position: relative;
         height: 50vh;
@@ -342,16 +342,17 @@
         color: var(--press-black);
       }
 
-      /* ===== PORTFOLIO GRID (cards) ===== */
+      /* ===== PORTFOLIO GRID ===== */
       .portfolio-grid-section {
         max-width: 1280px;
-        margin: 0 auto 5rem;
+        margin: 0 auto 3rem;
         padding: 0 1.5rem;
       }
       .portfolio-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 25px;
+        margin-bottom: 2.5rem;
       }
       .portfolio-card {
         background-color: #141414;
@@ -409,7 +410,44 @@
         }
       }
 
-      /* ===== MODAL (same as earlier but enhanced) ===== */
+      /* ===== PAGINATION ===== */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+      .page-btn {
+        background: transparent;
+        border: 1px solid #333;
+        color: #aaa;
+        min-width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .page-btn.active {
+        background-color: var(--press-yellow);
+        border-color: var(--press-yellow);
+        color: var(--press-black);
+      }
+      .page-btn:not(.active):hover {
+        background-color: #222;
+        border-color: #555;
+        color: white;
+      }
+      .page-btn.prev-next {
+        padding: 0 1rem;
+      }
+
+      /* ===== MODAL ===== */
       .modal {
         display: none;
         position: fixed;
@@ -478,7 +516,7 @@
         border-color: var(--press-yellow);
       }
 
-      /* ===== FOOTER (copied from main) ===== */
+      /* ===== FOOTER ===== */
       .footer {
         background-color: #0a0a0a;
         padding: 5rem 0 2.5rem;
@@ -576,7 +614,7 @@
         transform: scale(1.2) rotate(5deg);
       }
 
-      /* whatsapp float (optional) */
+      /* WhatsApp Float */
       .whatsapp-float {
         position: fixed;
         bottom: 30px;
@@ -600,7 +638,6 @@
         transform: scale(1.1);
       }
 
-      /* misc */
       .text-press-yellow {
         color: var(--press-yellow);
       }
@@ -614,7 +651,7 @@
     </style>
   </head>
   <body>
-    <!-- Navbar (same as main page) -->
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
       <div class="nav-container">
         <div class="nav-content">
@@ -654,7 +691,7 @@
       </div>
     </div>
 
-    <!-- PORTFOLIO HERO -->
+    <!-- HERO -->
     <section class="portfolio-hero">
       <div class="parallax-bg-portfolio" id="parallaxPortfolio">
         <div
@@ -709,19 +746,17 @@
           placeholder="Search projects... (e.g. book, label, banner)"
         />
       </div>
-      <div class="filter-row" id="filterRow">
-        <!-- dynamic categories from JS, but we keep a static base + js update -->
-        <button class="filter-btn active" data-category="all">All</button>
-        <!-- will be inserted via js but we keep a few for fallback -->
-      </div>
+      <div class="filter-row" id="filterRow"></div>
     </div>
 
     <!-- PORTFOLIO GRID -->
     <section class="portfolio-grid-section">
       <div class="portfolio-grid" id="portfolioGrid"></div>
+      <!-- Pagination controls -->
+      <div class="pagination" id="pagination"></div>
     </section>
 
-    <!-- FOOTER (identical to main) -->
+    <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-grid">
         <div class="footer-brand">
@@ -764,10 +799,10 @@
           © 2025 Alkausar Printing Press. All rights reserved.
         </p>
         <div class="social-links">
-          <a href="#" class="social-link"><i data-lucide="instagram"></i></a
-          ><a href="#" class="social-link"><i data-lucide="twitter"></i></a
-          ><a href="#" class="social-link"><i data-lucide="facebook"></i></a
-          ><a href="#" class="social-link"><i data-lucide="linkedin"></i></a>
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-link"><i data-lucide="linkedin"></i></a>
         </div>
       </div>
     </footer>
@@ -777,8 +812,9 @@
       href="https://wa.me/03074123690?text=Hello%20Alkausar%20Printing!%20I%20would%20like%20to%20inquire%20about%20your%20portfolio."
       class="whatsapp-float"
       target="_blank"
-      ><i data-lucide="message-circle" style="width: 32px; height: 32px"></i
-    ></a>
+    >
+      <i data-lucide="message-circle" style="width: 32px; height: 32px"></i>
+    </a>
 
     <!-- MODAL -->
     <div class="modal" id="portfolioModal">
@@ -790,233 +826,82 @@
       </div>
     </div>
 
+    <!-- Load external data FIRST -->
+    <script src="work.js"></script>
+
+    <!-- Main application script -->
     <script>
       (function () {
-        // ---------- PORTFOLIO DATA (enriched from the first file) ----------
-        const portfolioData = [
-          // stationery
-          {
-            title: "Premium Business Cards",
-            description: "High-quality cards with foil and spot UV.",
-            category: "stationery",
-            images: [
-              "https://img.freepik.com/free-photo/stack-business-cards-white-surface_23-2148229088.jpg",
-              "https://img.freepik.com/free-photo/close-up-business-cards-stack_23-2148229086.jpg",
-              "https://img.freepik.com/free-photo/business-cards-mockup_23-2148229084.jpg",
-            ],
-          },
-          {
-            title: "Luxury Letterheads",
-            description: "Elegant letterheads with foil stamping.",
-            category: "stationery",
-            images: [
-              "https://img.freepik.com/free-photo/close-up-letterhead-mockup_23-2148229076.jpg",
-              "https://img.freepik.com/free-photo/letterhead-mockup_23-2148229074.jpg",
-            ],
-          },
-          {
-            title: "Custom Envelopes",
-            description: "Branded envelopes for professional suites.",
-            category: "stationery",
-            images: [
-              "https://img.freepik.com/free-photo/envelope-mockup_23-2148229064.jpg",
-              "https://img.freepik.com/free-photo/close-up-envelope-mockup_23-2148229062.jpg",
-            ],
-          },
-          // promotional
-          {
-            title: "Colorful Flyers",
-            description: "Eye-catching flyers for events.",
-            category: "promotional",
-            images: [
-              "https://img.freepik.com/free-photo/stack-flyers_23-2148229052.jpg",
-              "https://img.freepik.com/free-photo/close-up-flyers-stack_23-2148229050.jpg",
-            ],
-          },
-          {
-            title: "Large Posters",
-            description: "Vibrant posters for advertising.",
-            category: "promotional",
-            images: [
-              "https://img.freepik.com/free-photo/rolled-poster-mockup_23-2148229040.jpg",
-              "https://img.freepik.com/free-photo/close-up-rolled-poster_23-2148229038.jpg",
-            ],
-          },
-          {
-            title: "Tri-Fold Brochures",
-            description: "Informative brochures for business.",
-            category: "promotional",
-            images: [
-              "https://img.freepik.com/free-photo/brochure-mockup_23-2148229028.jpg",
-              "https://img.freepik.com/free-photo/close-up-brochure-mockup_23-2148229026.jpg",
-            ],
-          },
-          // books
-          {
-            title: "Perfect Bound Books",
-            description: "Softcover books for novels & guides.",
-            category: "books",
-            images: [
-              "https://img.freepik.com/free-photo/stack-books_23-2148229016.jpg",
-              "https://img.freepik.com/free-photo/close-up-stack-books_23-2148229014.jpg",
-            ],
-          },
-          {
-            title: "Glossy Magazines",
-            description: "High-quality magazines with visuals.",
-            category: "books",
-            images: [
-              "https://img.freepik.com/free-photo/open-magazine_23-2148229004.jpg",
-              "https://img.freepik.com/free-photo/close-up-open-magazine_23-2148229002.jpg",
-            ],
-          },
-          // signage
-          {
-            title: "Outdoor Banners",
-            description: "Durable banners for outdoor ads.",
-            category: "signage",
-            images: [
-              "https://img.freepik.com/free-photo/banner-mockup_23-2148228980.jpg",
-              "https://img.freepik.com/free-photo/close-up-banner-mockup_23-2148228978.jpg",
-            ],
-          },
-          {
-            title: "Illuminated Store Signs",
-            description: "Eye‑catching storefront signs.",
-            category: "signage",
-            images: [
-              "https://img.freepik.com/free-photo/sign-mockup_23-2148228968.jpg",
-              "https://img.freepik.com/free-photo/close-up-sign-mockup_23-2148228966.jpg",
-            ],
-          },
-          // labels
-          {
-            title: "Custom Product Labels",
-            description: "High-quality packaging labels.",
-            category: "labels",
-            images: [
-              "https://margoandbees.com/thumbs/887/templates/template_7/8/images/products/529/cc72bb1683879c439795177ae18de7a5/minimalist_wedding_invitation_monogram5.jpg",
-              "https://creativecustomprints.com/cdn/shop/files/E6441E74-0346-4B66-9042-E0026A831548.jpg",
-            ],
-          },
-          {
-            title: "Die-Cut Stickers",
-            description: "Fun custom shaped stickers.",
-            category: "labels",
-            images: [
-              "https://img.freepik.com/free-photo/sticker-sheet-mockup_23-2148228938.jpg",
-              "https://img.freepik.com/free-photo/close-up-sticker-sheet_23-2148228936.jpg",
-            ],
-          },
-          // custom
-          {
-            title: "Elegant Wedding Invitations",
-            description: "Beautiful invitations for special days.",
-            category: "custom",
-            images: [
-              "https://img.freepik.com/free-photo/invitation-mockup_23-2148228926.jpg",
-              "https://img.freepik.com/free-photo/close-up-invitation-mockup_23-2148228924.jpg",
-            ],
-          },
-          {
-            title: "Spiral Bound Notebooks",
-            description: "Custom cover notebooks.",
-            category: "custom",
-            images: [
-              "https://transform.octanecdn.com/crop/700x492/https://octanecdn.com/colorvisionprintingcom/colorvisionprintingcom_892097615.jpg",
-              "https://www.qinprinting.com/wp-content/uploads/2024/01/The-Complete-Guide-to-Spiral-Bound-Book-Printing.webp",
-            ],
-          },
-          // corporate
-          {
-            title: "Annual Reports",
-            description: "Professional reports for stakeholders.",
-            category: "corporate",
-            images: [
-              "https://thomasgroupprinting.com/wp-content/uploads/2023/07/Annual-Report-Printing-Example-FIT.webp",
-              "https://thomasgroupprinting.com/wp-content/uploads/2022/11/Annual-Report-Printing-Example-NRDC.webp",
-            ],
-          },
-          // packaging
-          {
-            title: "Luxury Perfume Boxes",
-            description: "Elegant packaging for fragrances.",
-            category: "packaging",
-            images: [
-              "https://www.thecustomboxes.com/ckeditor_f/uploads/Luxury-Perfume-Box-Packaging-Perfection.webp",
-              "https://www.wecustomboxes.com/images/perfume-box.webp",
-            ],
-          },
-          // editorial
-          {
-            title: "Coffee Table Books",
-            description: "Luxury photo books.",
-            category: "editorial",
-            images: [
-              "https://www.ohdesignstudio.com/resource/img/coffee-table-book-printing.jpg",
-              "https://thinkinganew.uk/wp-content/uploads/2023/02/8-Joy-book.jpg",
-            ],
-          },
-          // large format
-          {
-            title: "Trade Show Banners",
-            description: "Impressive retractable banners.",
-            category: "large-format",
-            images: [
-              "https://megaformat.net/blog/wp-content/uploads/2018/04/Retractable-Banner-Large-Format-Printing.jpg",
-              "https://giantprinting.com/wp-content/uploads/2023/05/Giant_Printing_30ft_G-Free-1024x768.jpg",
-            ],
-          },
-          // branding
-          {
-            title: "Complete Rebrand Stationery",
-            description: "Full stationery suite for brand refresh.",
-            category: "branding",
-            images: [
-              "https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/9a34d114869221.56289f89bee3e.jpg",
-              "https://admin.itsnicethat.com/images/d3tx2jK8RfHzk356OumTcI_PDFE=/197147/width-1440/crane_paper_rebrand_collins_graphic_design_itsnicethat5.jpg",
-            ],
-          },
-        ];
+        // Ensure portfolioData is available (from work.js)
+        if (typeof portfolioData === "undefined") {
+          console.error(
+            "portfolioData not loaded. Make sure work.js is present.",
+          );
+          return;
+        }
 
-        // get unique categories
+        // Configuration
+        const ITEMS_PER_PAGE = 6;
+        let currentPage = 1;
+        let activeCategory = "all";
+        let searchTerm = "";
+
+        // DOM elements
+        const grid = document.getElementById("portfolioGrid");
+        const filterRow = document.getElementById("filterRow");
+        const searchInput = document.getElementById("searchInput");
+        const paginationDiv = document.getElementById("pagination");
+        const modal = document.getElementById("portfolioModal");
+        const modalTitle = modal.querySelector(".modal-title");
+        const modalDesc = modal.querySelector(".modal-description");
+        const modalGallery = modal.querySelector(".gallery");
+        const closeModal = modal.querySelector(".close");
+
+        // Get unique categories from data
         const categories = [
           "all",
           ...new Set(portfolioData.map((item) => item.category)),
         ];
 
-        // render filter buttons dynamically
-        const filterRow = document.getElementById("filterRow");
-        filterRow.innerHTML = "";
-        categories.forEach((cat) => {
-          const btn = document.createElement("button");
-          btn.className = `filter-btn ${cat === "all" ? "active" : ""}`;
-          btn.dataset.category = cat;
-          btn.textContent =
-            cat === "all"
-              ? "All"
-              : cat
-                  .split("-")
-                  .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                  .join(" ");
-          filterRow.appendChild(btn);
-        });
+        // Build filter buttons
+        function renderFilters() {
+          filterRow.innerHTML = "";
+          categories.forEach((cat) => {
+            const btn = document.createElement("button");
+            btn.className = `filter-btn ${cat === activeCategory ? "active" : ""}`;
+            btn.dataset.category = cat;
+            btn.textContent =
+              cat === "all"
+                ? "All"
+                : cat
+                    .split("-")
+                    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                    .join(" ");
+            filterRow.appendChild(btn);
+          });
 
-        // references
-        const grid = document.getElementById("portfolioGrid");
-        const searchInput = document.getElementById("searchInput");
-        let activeCategory = "all";
-        let searchTerm = "";
+          // Attach filter event listeners
+          document.querySelectorAll(".filter-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document
+                .querySelectorAll(".filter-btn")
+                .forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+              activeCategory = btn.dataset.category;
+              currentPage = 1; // reset to first page
+              renderPortfolio();
+            });
+          });
+        }
 
-        function renderPortfolio() {
+        // Filter data based on category and search
+        function getFilteredData() {
           let filtered = portfolioData;
-          // filter by category
           if (activeCategory !== "all") {
             filtered = filtered.filter(
               (item) => item.category === activeCategory,
             );
           }
-          // filter by search term (title + description)
           if (searchTerm.trim() !== "") {
             const term = searchTerm.toLowerCase();
             filtered = filtered.filter(
@@ -1026,67 +911,109 @@
                 item.category.toLowerCase().includes(term),
             );
           }
+          return filtered;
+        }
 
-          if (filtered.length === 0) {
+        // Render grid and pagination
+        function renderPortfolio() {
+          const filtered = getFilteredData();
+          const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE) || 1;
+
+          // Adjust current page if out of bounds
+          if (currentPage > totalPages) currentPage = totalPages;
+          if (currentPage < 1) currentPage = 1;
+
+          // Slice data for current page
+          const start = (currentPage - 1) * ITEMS_PER_PAGE;
+          const pageItems = filtered.slice(start, start + ITEMS_PER_PAGE);
+
+          // Render grid
+          if (pageItems.length === 0) {
             grid.innerHTML = `<div class="no-results">⛔ No projects match your criteria</div>`;
+          } else {
+            grid.innerHTML = pageItems
+              .map((item) => {
+                // Find original index for modal (we need to pass the index in the original array)
+                const originalIndex = portfolioData.indexOf(item);
+                return `
+                <div class="portfolio-card" data-index="${originalIndex}">
+                  <img src="${item.images[0]}" alt="${item.title}" class="card-image" loading="lazy">
+                  <div class="card-content">
+                    <span class="card-category">${item.category}</span>
+                    <h3 class="card-title">${item.title}</h3>
+                    <p class="card-description">${item.description.substring(0, 70)}…</p>
+                  </div>
+                </div>
+              `;
+              })
+              .join("");
+          }
+
+          // Render pagination
+          renderPagination(totalPages);
+        }
+
+        // Build pagination buttons
+        function renderPagination(totalPages) {
+          if (totalPages <= 1) {
+            paginationDiv.innerHTML = "";
             return;
           }
 
-          grid.innerHTML = filtered
-            .map(
-              (item, idx) => `
-          <div class="portfolio-card" data-index="${portfolioData.indexOf(item)}">
-            <img src="${item.images[0]}" alt="${item.title}" class="card-image" loading="lazy">
-            <div class="card-content">
-              <span class="card-category">${item.category}</span>
-              <h3 class="card-title">${item.title}</h3>
-              <p class="card-description">${item.description.substring(0, 70)}…</p>
-            </div>
-          </div>
-        `,
-            )
-            .join("");
+          let html = "";
+
+          // Previous button
+          html += `<button class="page-btn prev-next" data-page="prev" ${currentPage === 1 ? "disabled" : ""}>Prev</button>`;
+
+          // Page numbers
+          for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="page-btn ${i === currentPage ? "active" : ""}" data-page="${i}">${i}</button>`;
+          }
+
+          // Next button
+          html += `<button class="page-btn prev-next" data-page="next" ${currentPage === totalPages ? "disabled" : ""}>Next</button>`;
+
+          paginationDiv.innerHTML = html;
+
+          // Attach event listeners to pagination buttons
+          paginationDiv.querySelectorAll(".page-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const targetPage = e.target.dataset.page;
+              if (targetPage === "prev" && currentPage > 1) {
+                currentPage--;
+              } else if (targetPage === "next" && currentPage < totalPages) {
+                currentPage++;
+              } else if (!isNaN(parseInt(targetPage))) {
+                currentPage = parseInt(targetPage);
+              } else {
+                return; // disabled button
+              }
+              renderPortfolio();
+              // Scroll smoothly to grid top
+              document
+                .querySelector(".portfolio-grid-section")
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+          });
         }
 
-        // event listeners for filters
-        document.querySelectorAll(".filter-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            document
-              .querySelectorAll(".filter-btn")
-              .forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-            activeCategory = btn.dataset.category;
-            renderPortfolio();
-          });
-        });
-
-        searchInput.addEventListener("input", (e) => {
-          searchTerm = e.target.value;
-          renderPortfolio();
-        });
-
-        // initial render
-        renderPortfolio();
-
-        // modal logic
-        const modal = document.getElementById("portfolioModal");
-        const modalTitle = modal.querySelector(".modal-title");
-        const modalDesc = modal.querySelector(".modal-description");
-        const modalGallery = modal.querySelector(".gallery");
-        const closeModal = modal.querySelector(".close");
-
-        document.addEventListener("click", (e) => {
-          const card = e.target.closest(".portfolio-card");
-          if (!card) return;
-          const idx = card.dataset.index;
-          const item = portfolioData[idx];
-          if (!item) return;
+        // Modal handling
+        function openModal(item) {
           modalTitle.textContent = item.title;
           modalDesc.textContent = item.description;
           modalGallery.innerHTML = item.images
             .map((src) => `<img src="${src}" alt="${item.title}">`)
             .join("");
           modal.style.display = "block";
+        }
+
+        // Event delegation for cards
+        document.addEventListener("click", (e) => {
+          const card = e.target.closest(".portfolio-card");
+          if (!card) return;
+          const idx = card.dataset.index;
+          const item = portfolioData[idx];
+          if (item) openModal(item);
         });
 
         closeModal.addEventListener(
@@ -1097,20 +1024,31 @@
           if (e.target === modal) modal.style.display = "none";
         });
 
-        // ---------- BOOTSTRAP (navbar, preloader, etc) ----------
+        // Search input with debounce
+        let searchTimeout;
+        searchInput.addEventListener("input", (e) => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            searchTerm = e.target.value;
+            currentPage = 1;
+            renderPortfolio();
+          }, 300);
+        });
+
+        // Initialize Lucide icons
         if (typeof lucide !== "undefined") lucide.createIcons();
 
-        // preloader (optional mini)
-        document.body.classList.add("loaded"); // since no big preloader here
+        // Mark body as loaded for entrance animations
+        document.body.classList.add("loaded");
 
-        // navbar scroll effect
+        // Navbar scroll effect
         const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
           if (window.scrollY > 50) navbar.classList.add("scrolled");
           else navbar.classList.remove("scrolled");
         });
 
-        // mobile menu
+        // Mobile menu
         const mobileBtn = document.getElementById("mobileMenuBtn");
         const mobileOverlay = document.getElementById("mobileOverlay");
         const closeBtn = document.getElementById("closeMenuBtn");
@@ -1130,17 +1068,18 @@
             );
         }
 
-        // tiny parallax effect in portfolio hero (optional)
-        const hero = document.querySelector(".portfolio-hero");
-        if (hero) {
-          window.addEventListener("scroll", () => {
-            let scrolled = window.scrollY * 0.2;
-            document.querySelectorAll(".parallax-circle").forEach((el, i) => {
-              let direction = i % 2 === 0 ? 1 : -1;
-              el.style.transform = `translateY(${scrolled * direction * 0.2}px)`;
-            });
+        // Simple parallax effect in hero
+        window.addEventListener("scroll", () => {
+          const scrolled = window.scrollY * 0.2;
+          document.querySelectorAll(".parallax-circle").forEach((el, i) => {
+            const direction = i % 2 === 0 ? 1 : -1;
+            el.style.transform = `translateY(${scrolled * direction * 0.2}px)`;
           });
-        }
+        });
+
+        // Start everything
+        renderFilters();
+        renderPortfolio();
       })();
     </script>
   </body>
