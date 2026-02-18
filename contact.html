@@ -1,986 +1,1924 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alkausar · press & contact</title>
-    <!-- Lucide Icons -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Contact — Alkausar Printing Press</title>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      * {
+      :root {
+        --yellow: #ffcc00;
+        --cyan: #00ffff;
+        --magenta: #ff00ff;
+        --bg: #080808;
+        --bg2: #101010;
+        --bg3: #161616;
+        --bgc: #121212;
+        --sfc: rgba(255, 255, 255, 0.03);
+        --txt: #f0f0f0;
+        --txt2: #777;
+        --txt3: #333;
+        --bdr: rgba(255, 255, 255, 0.07);
+        --bdg: rgba(255, 204, 0, 0.2);
+        --nbg: rgba(8, 8, 8, 0.88);
+        --noise: 0.034;
+      }
+      [data-theme="light"] {
+        --yellow: #c49a00;
+        --cyan: #007a8a;
+        --magenta: #aa00aa;
+        --bg: #f4f0e8;
+        --bg2: #ede8dc;
+        --bg3: #ffffff;
+        --bgc: #ffffff;
+        --sfc: rgba(0, 0, 0, 0.03);
+        --txt: #0d0d0d;
+        --txt2: #555;
+        --txt3: #aaa;
+        --bdr: rgba(0, 0, 0, 0.07);
+        --bdg: rgba(180, 130, 0, 0.22);
+        --nbg: rgba(244, 240, 232, 0.9);
+        --noise: 0.055;
+      }
+      *,
+      *::before,
+      *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
-
-      :root {
-        --press-black: #0a0a0a;
-        --press-dark: #111111;
-        --press-yellow: #ffcc00;
-        --press-cyan: #00ffff;
-        --press-magenta: #ff00ff;
-        --press-gray: #333333;
-        --text-light: #ffffff;
-        --text-gray: #aaaaaa;
-        --border-light: rgba(255, 255, 255, 0.1);
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
       }
-
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          "Segoe UI",
-          Roboto,
-          sans-serif;
-        background-color: var(--press-black);
-        color: var(--text-light);
-        line-height: 1.5;
+        font-family: "Outfit", sans-serif;
+        background: var(--bg);
+        color: var(--txt);
+        line-height: 1.6;
         overflow-x: hidden;
+        transition:
+          background 0.5s,
+          color 0.5s;
+        cursor: none;
       }
-
-      /* paper grain texture (exact from original) */
-      .paper-grain {
-        position: relative;
+      a {
+        text-decoration: none;
+        color: inherit;
       }
-      .paper-grain::after {
+      body::after {
         content: "";
-        position: absolute;
+        position: fixed;
         inset: 0;
-        background-image: url(/clean-gray-paper.png);
-        opacity: 0.1;
+        z-index: 9998;
         pointer-events: none;
-        z-index: 1;
-      }
-      .paper-grain > * {
-        position: relative;
-        z-index: 2;
+        opacity: var(--noise);
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 160px;
       }
 
-      /* ----- navbar (fixed, identical to main) ----- */
-      .navbar {
+      /* CURSOR */
+      .cur,
+      .curR {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 99999;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
+      .cur {
+        width: 10px;
+        height: 10px;
+        background: var(--yellow);
+        transition:
+          width 0.25s,
+          height 0.25s;
+      }
+      .curR {
+        width: 38px;
+        height: 38px;
+        border: 1.5px solid var(--yellow);
+        opacity: 0.5;
+        transition:
+          width 0.4s,
+          height 0.4s,
+          opacity 0.3s,
+          border-color 0.3s;
+      }
+      body.ch .cur {
+        width: 6px;
+        height: 6px;
+      }
+      body.ch .curR {
+        width: 58px;
+        height: 58px;
+        opacity: 0.9;
+        border-color: var(--cyan);
+      }
+      @media (pointer: coarse) {
+        .cur,
+        .curR {
+          display: none;
+        }
+        body {
+          cursor: auto;
+        }
+      }
+
+      /* THEME TOGGLE */
+      .tmBtn {
+        position: relative;
+        width: 52px;
+        height: 28px;
+        background: var(--sfc);
+        border: 1px solid var(--bdg);
+        border-radius: 14px;
+        flex-shrink: 0;
+      }
+      .tmKnob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--yellow);
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .tmKnob svg {
+        width: 11px;
+        height: 11px;
+        color: #0a0a0a;
+      }
+      [data-theme="light"] .tmKnob {
+        transform: translateX(24px);
+      }
+
+      /* NAVBAR */
+      .nav {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        z-index: 40;
-        transition:
-          background-color 0.3s,
-          border-color 0.3s;
-        background-color: rgba(10, 10, 10, 0.9);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border-light);
-      }
-      .nav-container {
-        max-width: 1280px;
-        margin: 0 auto;
+        z-index: 500;
         padding: 0 2rem;
+        background: var(--nbg);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        border-bottom: 1px solid var(--bdr);
       }
-      .nav-content {
+      .nIn {
+        max-width: 1360px;
+        margin: 0 auto;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        height: 5rem;
+        justify-content: space-between;
+        height: 76px;
       }
       .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: -0.05em;
-        font-family: "Arial Black", sans-serif;
-      }
-      .logo-dot {
-        color: var(--press-yellow);
-        font-size: 1.875rem;
-      }
-      .desktop-nav {
-        display: none;
+        display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 0.6rem;
       }
-      @media (min-width: 768px) {
-        .desktop-nav {
-          display: flex;
-        }
+      .logo img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
       }
-      .nav-link {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #d1d5db;
-        text-transform: uppercase;
+      .logoN {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.5rem;
         letter-spacing: 0.1em;
-        transition: color 0.2s;
-        text-decoration: none;
+        color: var(--txt);
       }
-      .nav-link:hover,
-      .nav-link.active {
-        color: var(--press-yellow);
+      .logoDot {
+        color: var(--yellow);
       }
-      .btn-quote {
-        background-color: var(--press-yellow);
-        color: var(--press-black);
-        padding: 0.5rem 1.5rem;
-        font-size: 0.875rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        transition: background-color 0.3s;
-        text-decoration: none;
+      .dLinks {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
       }
-      .btn-quote:hover {
-        background-color: white;
-      }
-
-      /* mobile menu button (kept for consistency) */
-      .mobile-menu-btn {
-        display: block;
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-      }
-      @media (min-width: 768px) {
-        .mobile-menu-btn {
+      @media (max-width: 880px) {
+        .dLinks {
           display: none;
         }
       }
-
-      /* ----- HERO SECTION (contact specific) ----- */
-      .contact-hero {
+      .nA {
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--txt2);
         position: relative;
-        height: 60vh;
-        min-height: 400px;
+        padding-bottom: 4px;
+        transition: color 0.2s;
+      }
+      .nA::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background: var(--yellow);
+        transition: width 0.3s;
+      }
+      .nA:hover {
+        color: var(--txt);
+      }
+      .nA:hover::after,
+      .nA.active::after {
+        width: 100%;
+      }
+      .nA.active {
+        color: var(--yellow);
+      }
+      .nActs {
         display: flex;
         align-items: center;
-        justify-content: center;
-        text-align: center;
-        background-color: var(--press-black);
-        overflow: hidden;
-        margin-top: 0;
-        padding-top: 5rem; /* navbar space */
+        gap: 1rem;
       }
-      .parallax-bg {
+      .qBtn {
+        padding: 0.55rem 1.5rem;
+        background: var(--yellow);
+        color: #0a0a0a;
+        font-weight: 800;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 0 100%);
+        transition: color 0.4s;
+      }
+      .qBtn::before {
+        content: "";
         position: absolute;
         inset: 0;
-        overflow: hidden;
+        background: #0a0a0a;
+        transform: translateX(-105%);
+        transition: transform 0.42s ease;
       }
-      .parallax-element {
+      .qBtn span {
+        position: relative;
+        z-index: 1;
+      }
+      .qBtn:hover::before {
+        transform: translateX(0);
+      }
+      .qBtn:hover span {
+        color: var(--yellow);
+      }
+      .hamBtn {
+        background: none;
+        border: none;
+        color: var(--txt);
+        display: none;
+        padding: 0.4rem;
+        cursor: pointer;
+      }
+      @media (max-width: 880px) {
+        .hamBtn {
+          display: flex;
+        }
+      }
+
+      /* MOBILE MENU */
+      .mobM {
+        position: fixed;
+        inset: 0;
+        z-index: 490;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        transform: translateX(100%);
+        transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      .mobM.open {
+        transform: translateX(0);
+      }
+      .mobCl {
         position: absolute;
-        transition: transform 0.1s linear;
+        top: 1.8rem;
+        right: 1.8rem;
+        background: none;
+        border: none;
+        color: var(--txt);
+        cursor: pointer;
+        padding: 0.4rem;
       }
-      .hero-content {
+      .mobA {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 3.5rem;
+        letter-spacing: 0.08em;
+        color: var(--txt);
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.4s,
+          transform 0.4s,
+          color 0.2s;
+      }
+      .mobM.open .mobA {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .mobM.open .mobA:nth-child(2) {
+        transition-delay: 0.06s;
+      }
+      .mobM.open .mobA:nth-child(3) {
+        transition-delay: 0.12s;
+      }
+      .mobM.open .mobA:nth-child(4) {
+        transition-delay: 0.18s;
+      }
+      .mobM.open .mobA:nth-child(5) {
+        transition-delay: 0.24s;
+      }
+      .mobM.open .mobA:nth-child(6) {
+        transition-delay: 0.3s;
+      }
+      .mobA:hover {
+        color: var(--yellow);
+      }
+
+      /* PAGE HERO */
+      .pgHero {
+        position: relative;
+        min-height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 8rem 2rem 5rem;
+        background: var(--bg);
+        overflow: hidden;
+        border-bottom: 1px solid var(--bdr);
+      }
+      .pgGrid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(var(--bdr) 1px, transparent 1px),
+          linear-gradient(90deg, var(--bdr) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 100%,
+          black,
+          transparent
+        );
+      }
+      .pgB {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+      }
+      .pgB1 {
+        width: 500px;
+        height: 500px;
+        background: var(--cyan);
+        opacity: 0.06;
+        top: -20%;
+        right: -10%;
+      }
+      .pgB2 {
+        width: 320px;
+        height: 320px;
+        background: var(--magenta);
+        opacity: 0.06;
+        bottom: -10%;
+        left: -5%;
+      }
+      .pgB3 {
+        width: 200px;
+        height: 200px;
+        background: var(--yellow);
+        opacity: 0.09;
+        top: 30%;
+        left: 40%;
+      }
+      .pgBody {
         position: relative;
         z-index: 10;
-        max-width: 1000px;
-        padding: 0 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
       }
-      .hero-pre-title {
-        color: var(--press-yellow);
-        font-family: monospace;
-        font-size: 0.9rem;
-        letter-spacing: 0.3em;
+      .pgEye {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.35em;
         text-transform: uppercase;
-        margin-bottom: 1rem;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeUp 0.8s forwards 0.3s;
-      }
-      .hero-title {
-        font-size: 4rem;
-        font-weight: 700;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: -0.02em;
-        line-height: 1;
+        color: var(--yellow);
         margin-bottom: 1.5rem;
-        font-family: "Arial Black", sans-serif;
         opacity: 0;
-        transform: scale(0.95);
-        animation: fadeScale 1s forwards 0.5s;
+        transform: translateY(14px);
+        animation: fUp 0.7s 0.1s ease forwards;
       }
-      .hero-title-gradient {
-        background: linear-gradient(to right, white, #aaa, #666);
+      .pgEye::before,
+      .pgEye::after {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--yellow);
+        opacity: 0.5;
+      }
+      .pgH {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(4rem, 10vw, 9rem);
+        line-height: 0.9;
+        letter-spacing: 0.03em;
+        opacity: 0;
+        animation: fSc 0.9s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .pgH span {
+        display: block;
+        color: var(--txt);
+      }
+      .pgH em {
+        display: block;
+        font-style: italic;
+        font-family: "DM Serif Display", serif;
+        background: linear-gradient(135deg, var(--yellow), var(--cyan));
         -webkit-background-clip: text;
         background-clip: text;
-        color: transparent;
+        -webkit-text-fill-color: transparent;
       }
-      .hero-subtitle {
-        color: #9ca3af;
-        font-size: 1.2rem;
-        max-width: 600px;
-        margin: 0 auto;
+      .pgSub {
+        margin: 1.5rem auto 0; 
+        margin-top: 1.5rem;
+        font-size: 1rem;
+        text-align: center;
+        color: var(--txt2);
+        max-width: 520px;
+        line-height: 1.78;
         opacity: 0;
-        animation: fadeUp 0.8s forwards 0.7s;
-      }
-      @keyframes fadeUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes fadeScale {
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
+        animation: fUp 0.7s 0.6s ease forwards;
       }
 
-      /* ----- MAIN CONTACT SECTION (two columns) ----- */
-      .contact-page {
-        padding: 5rem 1.5rem 5rem;
-        /* max-width: 1280px; */
-        margin: 0 auto;
+      /* TICKER */
+      .tckr {
+        background: var(--yellow);
+        padding: 0.7rem 0;
+        overflow: hidden;
       }
-
-      .contact-header {
-        margin-bottom: 3rem;
+      .tckrTk {
+        display: flex;
+        width: max-content;
+        animation: tSc 26s linear infinite;
       }
-      .section-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: white;
+      .tckrIt {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        padding: 0 2rem;
+        white-space: nowrap;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        letter-spacing: -0.02em;
-        font-family: "Arial Black", sans-serif;
+        color: #0a0a0a;
       }
-      .section-underline {
-        height: 0.25rem;
-        width: 6rem;
-        background-color: var(--press-yellow);
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
+      .tckrDt {
+        opacity: 0.3;
+        font-size: 1.1rem;
+      }
+      @keyframes tSc {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
       }
 
-      .contact-grid {
+      /* MAIN GRID */
+      .contactWrap {
+        max-width: 1280px;
         margin: 0 auto;
-        width: 80%;
+        padding: 6rem 2rem;
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 3rem;
+        grid-template-columns: 1fr 1.6fr;
+        gap: 5rem;
+        align-items: start;
       }
-      @media (min-width: 1024px) {
-        .contact-grid {
-          grid-template-columns: 1fr 1fr;
+      @media (max-width: 960px) {
+        .contactWrap {
+          grid-template-columns: 1fr;
           gap: 4rem;
         }
       }
 
-      /* left side: info cards (refined) */
-      .info-card {
-        background-color: rgba(20, 20, 20, 0.7);
-        border: 1px solid var(--border-light);
-        padding: 2rem;
-        margin-bottom: 2rem;
-        backdrop-filter: blur(4px);
-        transition:
-          border-color 0.2s,
-          transform 0.2s;
+      /* INFO PANEL */
+      .infoPanel {
+        position: sticky;
+        top: 100px;
       }
-      .info-card:hover {
-        border-color: rgba(255, 204, 0, 0.4);
-        transform: translateY(-3px);
+      .secLbl {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--yellow);
+        margin-bottom: 1rem;
       }
-      .info-icon {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+      .infoH {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+        line-height: 0.95;
+        letter-spacing: 0.03em;
+        color: var(--txt);
         margin-bottom: 1.5rem;
       }
-      .info-icon i {
-        width: 2rem;
-        height: 2rem;
-        color: var(--press-yellow);
-        stroke-width: 1.5;
+      .infoH em {
+        font-style: italic;
+        font-family: "DM Serif Display", serif;
+        color: var(--txt2);
       }
-      .info-icon h3 {
-        font-size: 1.3rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .info-detail {
-        color: #d1d5db;
-        padding-left: calc(2rem + 1rem);
+      .infoP {
+        font-size: 0.92rem;
+        color: var(--txt2);
         line-height: 1.8;
-      }
-      .info-detail a {
-        color: var(--press-yellow);
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.2s;
-      }
-      .info-detail a:hover {
-        border-bottom-color: var(--press-yellow);
-      }
-      .info-detail .label {
-        color: var(--text-gray);
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-top: 1rem;
-        display: block;
+        max-width: 380px;
+        margin-bottom: 2.5rem;
       }
 
-      /* map container with print flavour */
-      .map-container {
-        background-color: #1a1a1a;
-        border: 1px solid var(--border-light);
-        padding: 1rem;
+      /* Contact cards */
+      .cCards {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--bdr);
+        border: 1px solid var(--bdr);
+        margin-bottom: 2rem;
       }
-      .map-placeholder {
-        background: #222;
+      .cCard {
+        background: var(--bgc);
+        padding: 1.7rem 1.8rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.2rem;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.3s;
+      }
+      .cCard::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, var(--yellow), var(--cyan));
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.4s;
+      }
+      .cCard:hover {
+        background: var(--bg3);
+      }
+      .cCard:hover::before {
+        transform: scaleY(1);
+      }
+      .cCardI {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        border: 1px solid var(--bdr);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--yellow);
+        transition:
+          background 0.3s,
+          border-color 0.3s;
+      }
+      .cCard:hover .cCardI {
+        background: var(--yellow);
+        border-color: var(--yellow);
+      }
+      .cCard:hover .cCardI svg {
+        color: #0a0a0a;
+      }
+      .cCardI svg {
+        transition: color 0.3s;
+      }
+      .cCardLbl {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--txt3);
+        margin-bottom: 0.25rem;
+      }
+      .cCardVal {
+        font-size: 0.88rem;
+        color: var(--txt);
+        font-weight: 500;
+        line-height: 1.6;
+      }
+      .cCardVal a:hover {
+        color: var(--yellow);
+      }
+
+      /* Hours */
+      .hoursBox {
+        border: 1px solid var(--bdr);
+        padding: 1.8rem;
+        background: var(--bgc);
+      }
+      .hoursH {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--yellow);
+        margin-bottom: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      .hoursH::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--bdr);
+      }
+      .hourRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--bdr);
+        font-size: 0.84rem;
+      }
+      .hourRow:last-child {
+        border-bottom: none;
+      }
+      .hDay {
+        color: var(--txt2);
+      }
+      .hTime {
+        color: var(--txt);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.78rem;
+      }
+      .hTime.cl {
+        color: var(--txt3);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.2rem 0.65rem;
+        border-radius: 20px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 1.1rem;
+      }
+      .badge.open {
+        background: rgba(0, 200, 80, 0.1);
+        border: 1px solid rgba(0, 200, 80, 0.25);
+        color: #00cc55;
+      }
+      .badge.closed {
+        background: rgba(200, 60, 0, 0.1);
+        border: 1px solid rgba(200, 60, 0, 0.2);
+        color: #cc4400;
+      }
+      .badge .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        animation: pls 2s infinite;
+      }
+      .badge.open .dot {
+        background: #00cc55;
+      }
+      .badge.closed .dot {
+        background: #cc4400;
+      }
+      @keyframes pls {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.25;
+        }
+      }
+
+      /* FORM PANEL */
+      .formHead {
+        margin-bottom: 2.8rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--bdr);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .formH {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        line-height: 0.92;
+        letter-spacing: 0.04em;
+        color: var(--txt);
+      }
+      .formH em {
+        font-style: italic;
+        font-family: "DM Serif Display", serif;
+        color: var(--txt2);
+      }
+      .formNote {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.67rem;
+        letter-spacing: 0.12em;
+        color: var(--txt3);
+        text-align: right;
+        line-height: 1.6;
+      }
+      .formNote span {
+        color: var(--yellow);
+      }
+
+      .fGrid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+      @media (max-width: 600px) {
+        .fGrid2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      .fFull {
+        grid-column: 1/-1;
+      }
+      .fGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .fLabel {
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--txt3);
+      }
+      .req {
+        color: var(--yellow);
+      }
+      .fInput,
+      .fTextarea {
         width: 100%;
-        height: 220px;
+        background: var(--bgc);
+        border: 1px solid var(--bdr);
+        color: var(--txt);
+        font-family: "Outfit", sans-serif;
+        font-size: 0.92rem;
+        padding: 0.82rem 1rem;
+        outline: none;
+        appearance: none;
+        transition:
+          border-color 0.3s,
+          background 0.3s,
+          box-shadow 0.3s;
+      }
+      .fInput:focus,
+      .fTextarea:focus {
+        border-color: var(--yellow);
+        background: var(--bg3);
+        box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.07);
+      }
+      .fInput::placeholder,
+      .fTextarea::placeholder {
+        color: var(--txt3);
+      }
+      .fTextarea {
+        resize: vertical;
+        min-height: 130px;
+        line-height: 1.65;
+      }
+
+      /* Service pills */
+      .pillRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+      .sPill {
+        padding: 0.42rem 1rem;
+        border: 1px solid var(--bdr);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--txt2);
+        cursor: pointer;
+        transition: all 0.22s;
+        user-select: none;
+        background: transparent;
+        font-family: "Outfit", sans-serif;
+      }
+      .sPill:hover {
+        border-color: var(--yellow);
+        color: var(--yellow);
+      }
+      .sPill.sel {
+        background: var(--yellow);
+        border-color: var(--yellow);
+        color: #0a0a0a;
+      }
+
+      /* File drop */
+      .fileUp {
+        position: relative;
+        border: 1px dashed var(--bdr);
+        padding: 1.8rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        color: var(--text-gray);
-        gap: 0.8rem;
-        border: 1px dashed rgba(255, 204, 0, 0.2);
-      }
-
-      /* right side: form (improved) */
-      .form-card {
-        background-color: rgba(20, 20, 20, 0.9);
-        border: 1px solid var(--border-light);
-        padding: 2.5rem;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.8);
-      }
-      .form-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
-      }
-      .form-sub {
-        color: var(--text-gray);
-        margin-bottom: 2.5rem;
-        font-size: 0.95rem;
-      }
-
-      .input-group {
-        margin-bottom: 1.8rem;
-      }
-      .input-label {
-        display: block;
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 0.1em;
-        color: var(--text-gray);
-        margin-bottom: 0.5rem;
-      }
-      .input-field {
-        width: 100%;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 0.75rem 0.5rem;
-        color: white;
-        font-size: 1rem;
-        transition: border-color 0.2s;
-      }
-      .input-field:focus {
-        outline: none;
-        border-bottom-color: var(--press-yellow);
-      }
-      .input-field::placeholder {
-        color: rgba(255, 255, 255, 0.2);
-        font-style: italic;
-      }
-      textarea.input-field {
-        min-height: 120px;
-        resize: vertical;
-      }
-
-      .file-attach {
-        background: rgba(255, 204, 0, 0.05);
-        border: 1px dashed rgba(255, 204, 0, 0.4);
-        padding: 1.2rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+        gap: 0.65rem;
         cursor: pointer;
-        transition: background 0.2s;
-      }
-      .file-attach:hover {
-        background: rgba(255, 204, 0, 0.1);
-      }
-      .file-attach i {
-        color: var(--press-yellow);
-        width: 1.8rem;
-        height: 1.8rem;
-      }
-
-      .btn-submit {
-        background-color: var(--press-yellow);
-        color: var(--press-black);
-        border: none;
-        padding: 1.2rem 2rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        width: 100%;
-        margin-top: 2rem;
-        cursor: pointer;
-        transition: background 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.8rem;
-      }
-      .btn-submit:hover {
-        background-color: white;
-      }
-
-      .quick-social {
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-      }
-      .quick-social a {
-        color: #555;
         transition:
-          color 0.2s,
-          transform 0.2s;
+          border-color 0.3s,
+          background 0.3s;
+        text-align: center;
       }
-      .quick-social a:hover {
-        color: var(--press-yellow);
-        transform: scale(1.2) rotate(3deg);
+      .fileUp:hover,
+      .fileUp.drag {
+        border-color: var(--yellow);
+        background: rgba(255, 204, 0, 0.03);
+      }
+      .fileUp input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+      .fileUpI {
+        color: var(--txt3);
+        transition: color 0.3s;
+      }
+      .fileUp:hover .fileUpI,
+      .fileUp.drag .fileUpI {
+        color: var(--yellow);
+      }
+      .fileUpTxt {
+        font-size: 0.82rem;
+        color: var(--txt3);
+        line-height: 1.5;
+      }
+      .fileUpTxt strong {
+        color: var(--yellow);
+      }
+      .fileUpSub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.63rem;
+        letter-spacing: 0.1em;
+        color: var(--txt3);
+      }
+      .fileSel {
+        font-size: 0.8rem;
+        color: var(--yellow);
+        display: none;
+      }
+      .fileSel.show {
+        display: block;
       }
 
-      /* ----- stats mini (like main site) ----- */
-      .contact-stats {
-        background-color: var(--press-dark);
-        padding: 3rem 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      /* Submit */
+      .submitRow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 0.5rem;
       }
-      .stats-grid {
+      .submitNote {
+        font-size: 0.78rem;
+        color: var(--txt3);
+        line-height: 1.55;
+      }
+      .submitNote strong {
+        color: var(--txt2);
+      }
+      .btnSub {
+        padding: 1rem 3rem;
+        background: var(--yellow);
+        color: #0a0a0a;
+        font-weight: 800;
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+        transition: color 0.4s;
+        font-family: "Outfit", sans-serif;
+      }
+      .btnSub::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #0a0a0a;
+        transform: translateX(-105%);
+        transition: transform 0.42s ease;
+      }
+      .btnSub span {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition: color 0.42s;
+      }
+      .btnSub:hover::before {
+        transform: translateX(0);
+      }
+      .btnSub:hover span {
+        color: var(--yellow);
+      }
+      .btnSub:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* Success */
+      .successMsg {
+        display: none;
+        padding: 2.5rem;
+        background: rgba(0, 200, 80, 0.05);
+        border: 1px solid rgba(0, 200, 80, 0.2);
+        text-align: center;
+      }
+      .successMsg.show {
+        display: block;
+      }
+      .successMsg h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 0.1em;
+        color: #00cc55;
+        margin-bottom: 0.5rem;
+      }
+      .successMsg p {
+        font-size: 0.9rem;
+        color: var(--txt2);
+      }
+
+      /* MAP */
+      .mapSec {
+        background: var(--bg2);
+        padding: 5rem 2rem;
+        border-top: 1px solid var(--bdr);
+        border-bottom: 1px solid var(--bdr);
+      }
+      .mapInner {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+      .mapHead {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+      .mapH {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        color: var(--txt);
+        letter-spacing: 0.04em;
+      }
+      .mapH em {
+        font-style: italic;
+        font-family: "DM Serif Display", serif;
+        color: var(--txt2);
+      }
+      .coordPill {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.12em;
+        color: var(--yellow);
+        border: 1px solid var(--bdg);
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .mapPlaceholder {
+        position: relative;
+        height: 360px;
+        background: var(--bgc);
+        border: 1px solid var(--bdr);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mapGrid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(var(--bdr) 1px, transparent 1px),
+          linear-gradient(90deg, var(--bdr) 1px, transparent 1px);
+        background-size: 44px 44px;
+      }
+      .mapPin {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .mapPinI {
+        width: 54px;
+        height: 54px;
+        background: var(--yellow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        clip-path: polygon(50% 100%, 0 40%, 0 0, 100% 0, 100% 40%);
+        animation: pinBob 2.5s ease-in-out infinite;
+      }
+      .mapPinI svg {
+        color: #0a0a0a;
+        margin-top: -14px;
+      }
+      @keyframes pinBob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .mapPinLbl {
+        background: var(--bgc);
+        border: 1px solid var(--bdg);
+        padding: 0.55rem 1.2rem;
+        font-size: 0.82rem;
+        color: var(--txt);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .mapActions {
+        margin-top: 1.5rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .mapBtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 1.4rem;
+        border: 1px solid var(--bdg);
+        color: var(--yellow);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: background 0.3s;
+      }
+      .mapBtn:hover {
+        background: var(--bdg);
+      }
+
+      /* STATS ROW */
+      .statsRow {
+        background: var(--bg);
+      }
+      .statsRowW {
         max-width: 1280px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        text-align: center;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--bdr);
+        border-top: none;
       }
-      @media (min-width: 768px) {
-        .stats-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-      .stat-item-mini .stat-number {
-        font-size: 2.5rem;
-        font-weight: 700;
-        font-family: monospace;
-        color: white;
-      }
-      .stat-item-mini .stat-label {
-        color: var(--text-gray);
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 0.1em;
-      }
-      .stat-underline-short {
-        width: 3rem;
-        height: 2px;
-        background: var(--press-yellow);
-        margin: 0.5rem auto 0.5rem;
-      }
-
-      /* ----- footer (full, exactly like main) ----- */
-      .footer {
-        background-color: #0a0a0a;
-        padding: 5rem 0 2.5rem;
-        border-top: 1px solid rgba(255, 204, 0, 0.2);
-      }
-      .footer-grid {
-        max-width: 1280px;
-        margin: 0 auto 4rem;
-        padding: 0 1.5rem;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-      @media (min-width: 768px) {
-        .footer-grid {
+      @media (max-width: 700px) {
+        .statsRowW {
           grid-template-columns: repeat(2, 1fr);
         }
       }
-      @media (min-width: 1024px) {
-        .footer-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-      .footer-brand p {
-        color: #6b7280;
-        margin: 1.5rem 0;
-        line-height: 1.6;
-      }
-      .footer-title {
-        color: white;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 1.5rem;
-      }
-      .footer-links {
-        list-style: none;
-      }
-      .footer-links li {
-        margin-bottom: 0.75rem;
-      }
-      .footer-links a {
-        color: #6b7280;
-        text-transform: uppercase;
-        font-size: 0.875rem;
-        letter-spacing: 0.02em;
-        transition: color 0.2s;
-      }
-      .footer-links a:hover {
-        color: var(--press-yellow);
-      }
-      .contact-info li {
-        color: #6b7280;
-        font-size: 0.875rem;
-        margin-bottom: 1rem;
-      }
-      .contact-info span {
-        display: block;
-        color: white;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-        margin-bottom: 0.25rem;
-      }
-      .footer-bottom {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-      }
-      @media (min-width: 768px) {
-        .footer-bottom {
-          flex-direction: row;
-        }
-      }
-      .copyright {
-        color: #4b5563;
-        font-size: 0.875rem;
-        margin-bottom: 1rem;
-      }
-      @media (min-width: 768px) {
-        .copyright {
-          margin-bottom: 0;
-        }
-      }
-      .social-links {
-        display: flex;
-        gap: 1.5rem;
-      }
-      .social-link {
-        color: #6b7280;
-        transition:
-          color 0.2s,
-          transform 0.2s;
-      }
-      .social-link:hover {
-        color: var(--press-yellow);
-        transform: scale(1.2) rotate(5deg);
-      }
-
-      /* fade-up utility */
-      .fade-up {
+      .statR {
+        padding: 2.8rem 2.5rem;
+        border-right: 1px solid var(--bdr);
+        position: relative;
+        overflow: hidden;
         opacity: 0;
         transform: translateY(20px);
         transition:
           opacity 0.6s,
           transform 0.6s;
       }
-      .fade-up.in-view {
+      .statR:last-child {
+        border-right: none;
+      }
+      .statR.vis {
         opacity: 1;
         transform: translateY(0);
       }
+      .statR::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 0;
+        background: linear-gradient(180deg, var(--yellow), var(--cyan));
+        transition: height 0.6s 0.2s;
+      }
+      .statR.vis::before {
+        height: 100%;
+      }
+      .statR:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .statR:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .statR:nth-child(4) {
+        transition-delay: 0.3s;
+      }
+      .statRV {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 4rem;
+        line-height: 0.9;
+        color: var(--txt);
+        margin-bottom: 0.4rem;
+      }
+      .statRL {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--txt3);
+      }
 
-      @media (max-width: 600px) {
-        .hero-title {
-          font-size: 2.8rem;
+      /* WA FLOAT */
+      .waF {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 200;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #25d366, #128c7e);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        box-shadow: 0 6px 22px rgba(37, 211, 102, 0.35);
+        transition:
+          transform 0.3s,
+          opacity 0.3s,
+          box-shadow 0.3s;
+      }
+      .waF::before {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1px solid rgba(37, 211, 102, 0.35);
+        animation: waP 2.8s ease-in-out infinite;
+      }
+      @keyframes waP {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
         }
-        .contact-page {
-          padding-top: 2rem;
+        50% {
+          transform: scale(1.35);
+          opacity: 0;
         }
+      }
+      .waF:hover {
+        transform: scale(1.1);
+      }
+      .waF.hide {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(80px);
+      }
+
+      /* FOOTER */
+      .footer {
+        background: #080808;
+        padding: 6rem 2rem 2rem;
+        border-top: 1px solid rgba(255, 204, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+      [data-theme="light"] .footer {
+        background: #0a0a0a;
+      }
+      .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #ffcc00,
+          #00ffff,
+          #ff00ff,
+          transparent
+        );
+        opacity: 0.7;
+      }
+      .fGrid {
+        max-width: 1280px;
+        margin: 0 auto 4rem;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 4rem;
+      }
+      @media (max-width: 860px) {
+        .fGrid {
+          grid-template-columns: 1fr 1fr;
+          gap: 2.5rem;
+        }
+      }
+      @media (max-width: 520px) {
+        .fGrid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .fBrow {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.4rem;
+      }
+      .fBrow img {
+        width: 38px;
+      }
+      .fBN {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.4rem;
+        letter-spacing: 0.1em;
+        color: #fff;
+      }
+      .fBDot {
+        color: #ffcc00;
+      }
+      .fBP {
+        color: #444;
+        font-size: 0.87rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+      }
+      .fSocs {
+        display: flex;
+        gap: 0.85rem;
+      }
+      .fSoc {
+        width: 34px;
+        height: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #444;
+        transition: all 0.3s;
+      }
+      .fSoc:hover {
+        border-color: #ffcc00;
+        color: #ffcc00;
+        transform: translateY(-2px);
+      }
+      .fCT {
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 1.4rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .fLks {
+        list-style: none;
+      }
+      .fLks li {
+        margin-bottom: 0.7rem;
+      }
+      .fLks a {
+        font-size: 0.84rem;
+        color: #444;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        transition: color 0.2s;
+      }
+      .fLks a:hover {
+        color: #ffcc00;
+      }
+      .fCI {
+        margin-bottom: 1.2rem;
+      }
+      .fCLbl {
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #333;
+        margin-bottom: 0.2rem;
+      }
+      .fCV {
+        font-size: 0.85rem;
+        color: #444;
+      }
+      .fBot {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .fCopy {
+        font-size: 0.76rem;
+        color: #333;
+        letter-spacing: 0.04em;
+      }
+      .fCmyk {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+      .pip {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+      }
+      .pC {
+        background: #00ffff;
+      }
+      .pM {
+        background: #ff00ff;
+      }
+      .pY {
+        background: #ffcc00;
+      }
+      .pK {
+        background: #fff;
+        opacity: 0.22;
+      }
+
+      /* ANIMATIONS */
+      @keyframes fUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fSc {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .rv {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s,
+          transform 0.6s;
+      }
+      .rv.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .rv2 {
+        transition-delay: 0.1s;
+      }
+      .rv3 {
+        transition-delay: 0.2s;
+      }
+      .rv4 {
+        transition-delay: 0.3s;
       }
     </style>
   </head>
   <body>
-    <!-- Navbar (identical to main) -->
-    <nav class="navbar" id="navbar">
-      <div class="nav-container">
-        <div class="nav-content">
-          <div class="logo">Alkausar<span class="logo-dot">.</span></div>
-          <div class="desktop-nav">
-            <a href="#" class="nav-link">Home</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#portfolio" class="nav-link">Portfolio</a>
-            <a href="#why-us" class="nav-link">About</a>
-            <a href="#contact" class="nav-link active">Contact</a>
-            <a href="#contact" class="btn-quote">Get Quote</a>
-          </div>
-          <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i data-lucide="menu" style="width: 2rem; height: 2rem"></i>
+    <div class="cur" id="cur"></div>
+    <div class="curR" id="curR"></div>
+
+    <a
+      href="https://wa.me/03074123690?text=Hello%20Alkausar%20Printing!"
+      class="waF"
+      id="waF"
+      target="_blank"
+      rel="noopener"
+      aria-label="WhatsApp"
+    >
+      <i data-lucide="message-circle" style="width: 28px; height: 28px"></i>
+    </a>
+
+    <nav class="nav" id="nav">
+      <div class="nIn">
+        <a href="index.html" class="logo">
+          <img
+            src="https://res.cloudinary.com/djjz0rkuy/image/upload/c_thumb,w_200,g_face/v1771261157/Logo_aL_kausar...._rmckyb.png"
+            alt="Alkausar"
+          />
+          <span class="logoN">Alkausar<span class="logoDot">.</span></span>
+        </a>
+        <div class="dLinks">
+          <a href="index.html" class="nA">Home</a>
+          <a href="service.html" class="nA">Services</a>
+          <a href="portfolio.html" class="nA">Portfolio</a>
+          <a href="about.html" class="nA">About</a>
+          <a href="contact.html" class="nA active">Contact</a>
+        </div>
+        <div class="nActs">
+          <button class="tmBtn" id="tmBtn" aria-label="Toggle theme">
+            <div class="tmKnob" id="tmKnob">
+              <svg
+                id="tmIco"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <path
+                  d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                />
+              </svg>
+            </div>
+          </button>
+          <a href="contact.html" class="qBtn"><span>Get Quote</span></a>
+          <button class="hamBtn" id="hamBtn" aria-label="Menu">
+            <i data-lucide="menu" style="width: 28px; height: 28px"></i>
           </button>
         </div>
       </div>
     </nav>
 
-    <!-- HERO SECTION (contact specific, with parallax) -->
-    <section class="contact-hero paper-grain" id="contactHero">
-      <div class="parallax-bg" id="parallaxBg">
-        <div
-          class="parallax-element"
-          style="
-            top: 15%;
-            left: 5%;
-            width: 200px;
-            height: 200px;
-            background: var(--press-cyan);
-            opacity: 0.1;
-            filter: blur(60px);
-          "
-          id="p1"
-        ></div>
-        <div
-          class="parallax-element"
-          style="
-            bottom: 10%;
-            right: 10%;
-            width: 250px;
-            height: 250px;
-            background: var(--press-magenta);
-            opacity: 0.1;
-            filter: blur(70px);
-          "
-          id="p2"
-        ></div>
-        <div
-          class="parallax-element"
-          style="
-            top: 30%;
-            right: 20%;
-            width: 120px;
-            height: 120px;
-            border: 2px solid rgba(255, 204, 0, 0.15);
-            transform: rotate(15deg);
-          "
-          id="p3"
-        ></div>
-        <div
-          class="parallax-element"
-          style="
-            bottom: 20%;
-            left: 15%;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-          "
-          id="p4"
-        ></div>
-      </div>
-      <div class="hero-content">
-        <h2 class="hero-pre-title">drop a line · visit the press</h2>
-        <h1 class="hero-title">
-          Let’s create
-          <span class="hero-title-gradient">something</span> printable
-        </h1>
-        <p class="hero-subtitle">
-          Whether it's a billion brochures or a single letterpress business card
-          — we're ready.
-        </p>
-      </div>
-    </section>
+    <div class="mobM" id="mobM">
+      <button class="mobCl" id="mobCl">
+        <i data-lucide="x" style="width: 30px; height: 30px"></i>
+      </button>
+      <a href="index.html" class="mobA">Home</a>
+      <a href="service.html" class="mobA">Services</a>
+      <a href="portfolio.html" class="mobA">Portfolio</a>
+      <a href="about.html" class="mobA">About</a>
+      <a href="contact.html" class="mobA">Contact</a>
+    </div>
 
-    <!-- MAIN CONTENT (two columns + map) -->
-    <main class="contact-page paper-grain">
-      <div class="contact-header fade-up" id="contactHeader">
-        <h2 class="section-title">How to reach us</h2>
-        <div class="section-underline"></div>
-      </div>
+    <main>
+      <!-- HERO -->
+      <section class="pgHero">
+        <div class="pgGrid"></div>
+        <div class="pgB pgB1"></div>
+        <div class="pgB pgB2"></div>
+        <div class="pgB pgB3"></div>
+        <div class="pgBody">
+          <div class="pgEye">— Get In Touch</div>
+          <h1 class="pgH">
+            <span>Drop a</span>
+            <em>Line</em>
+          </h1>
+          <p class="pgSub">
+            Whether it's a billion brochures or a single letterpress business
+            card — we're ready. Reach out and let's create something printable
+            together.
+          </p>
+        </div>
+      </section>
 
-      <div class="contact-grid">
-        <!-- left side: info cards & map (enriched) -->
-        <div class="contact-details">
-          <div class="info-card fade-up" id="infocard1">
-            <div class="info-icon">
-              <i data-lucide="map-pin"></i>
-              <h3>Visit the press</h3>
-            </div>
-            <div class="info-detail">
-              <span class="label">print district</span>
-              <p>123 Industrial Avenue, Building 4<br />New York, NY 10001</p>
-              <p>
-                <i
-                  data-lucide="navigation"
-                  style="width: 1rem; height: 1rem; display: inline"
-                ></i>
-                Open weekdays 9:00 – 18:00
-              </p>
-            </div>
+      <!-- TICKER -->
+      <div class="tckr" aria-hidden="true">
+        <div class="tckrTk">
+          <div class="tckrIt">
+            Get In Touch<span class="tckrDt">✦</span>4-Hour Reply<span
+              class="tckrDt"
+              >✦</span
+            >Free Quotes<span class="tckrDt">✦</span>WhatsApp Support<span
+              class="tckrDt"
+              >✦</span
+            >Visit The Press<span class="tckrDt">✦</span>Expert Advice<span
+              class="tckrDt"
+              >✦</span
+            >Fast Turnaround<span class="tckrDt">✦</span>No Minimum Order<span
+              class="tckrDt"
+              >✦</span
+            >
           </div>
-          <div class="info-card fade-up" id="infocard2">
-            <div class="info-icon">
-              <i data-lucide="phone"></i>
-              <h3>Call / text</h3>
-            </div>
-            <div class="info-detail">
-              <span class="label">quote hotline</span>
-              <p>
-                <a href="tel:+15551234567">+1 (555) 123-4567</a> (press 1 for
-                sales)
-              </p>
-              <span class="label">technical support</span>
-              <p><a href="tel:+15557654321">+1 (555) 765-4321</a></p>
-            </div>
-          </div>
-          <div class="info-card fade-up" id="infocard3">
-            <div class="info-icon">
-              <i data-lucide="mail"></i>
-              <h3>Email</h3>
-            </div>
-            <div class="info-detail">
-              <span class="label">general</span>
-              <p>
-                <a href="mailto:hello@alkausarpress.com"
-                  >hello@alkausarpress.com</a
-                >
-              </p>
-              <span class="label">artwork / pre-press</span>
-              <p>
-                <a href="mailto:art@alkausarpress.com">art@alkausarpress.com</a>
-              </p>
-            </div>
-          </div>
-          <!-- map with CMYK registration -->
-          <div class="map-container fade-up">
-            <div class="map-placeholder">
-              <i
-                data-lucide="crosshair"
-                style="width: 2.5rem; height: 2.5rem"
-              ></i>
-              <span style="font-family: monospace">40.7128° N, 74.0060° W</span>
-              <div style="display: flex; gap: 0.5rem; margin: 0.5rem 0">
-                <span
-                  style="
-                    background: #00ffff;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;
-                    opacity: 0.4;
-                  "
-                ></span>
-                <span
-                  style="
-                    background: #ff00ff;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;
-                    opacity: 0.4;
-                  "
-                ></span>
-                <span
-                  style="
-                    background: #ffcc00;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;
-                    opacity: 0.4;
-                  "
-                ></span>
-                <span
-                  style="
-                    background: #000;
-                    border: 1px solid gray;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;
-                  "
-                ></span>
-              </div>
-              <span style="color: var(--press-yellow); font-size: 0.75rem"
-                >ALKausar · press district</span
-              >
-            </div>
+          <div class="tckrIt">
+            Get In Touch<span class="tckrDt">✦</span>4-Hour Reply<span
+              class="tckrDt"
+              >✦</span
+            >Free Quotes<span class="tckrDt">✦</span>WhatsApp Support<span
+              class="tckrDt"
+              >✦</span
+            >Visit The Press<span class="tckrDt">✦</span>Expert Advice<span
+              class="tckrDt"
+              >✦</span
+            >Fast Turnaround<span class="tckrDt">✦</span>No Minimum Order<span
+              class="tckrDt"
+              >✦</span
+            >
           </div>
         </div>
+      </div>
 
-        <!-- right side: the excellent form (now with more fields) -->
-        <div class="form-card fade-up" id="contactFormCard">
-          <h2 class="form-title">Send a carrier pigeon</h2>
-          <div class="form-sub">
-            or use this form — we reply within 4 hours (printers are fast).
+      <!-- CONTACT MAIN -->
+      <div class="contactWrap">
+        <!-- LEFT INFO -->
+        <aside class="infoPanel">
+          <div class="secLbl">— How to reach us</div>
+          <h2 class="infoH">Let's create<br />something <em>printable</em></h2>
+          <p class="infoP">
+            We reply within 4 hours on business days. Printers are fast — so are
+            we. Come visit the press or drop us a message and we'll make it
+            happen.
+          </p>
+
+          <div class="cCards rv">
+            <div class="cCard">
+              <div class="cCardI">
+                <i data-lucide="map-pin" style="width: 17px; height: 17px"></i>
+              </div>
+              <div>
+                <div class="cCardLbl">Visit the press</div>
+                <div class="cCardVal">
+                  Airport Road Kapurwali,<br />Sialkot, Pakistan
+                </div>
+              </div>
+            </div>
+            <div class="cCard">
+              <div class="cCardI">
+                <i data-lucide="phone" style="width: 17px; height: 17px"></i>
+              </div>
+              <div>
+                <div class="cCardLbl">Call / text</div>
+                <div class="cCardVal">
+                  <a href="tel:+923239062418">+92 323 906 2418</a><br />
+                  <a
+                    href="tel:+923074123690"
+                    style="color: var(--txt3); font-size: 0.83rem"
+                    >+92 307 412 3690 (WhatsApp)</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="cCard">
+              <div class="cCardI">
+                <i data-lucide="mail" style="width: 17px; height: 17px"></i>
+              </div>
+              <div>
+                <div class="cCardLbl">Email</div>
+                <div class="cCardVal">
+                  <a href="mailto:alkausarprinting418@gmail.com"
+                    >alkausarprinting418@gmail.com</a
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <form
-            id="contactForm"
-            onsubmit="
-              event.preventDefault();
-              alert(
-                '✨ Thank you! Your message has been sent (simulated). We’ll get back to you in CMYK.',
-              );
-            "
-          >
-            <div class="input-group">
-              <label class="input-label" for="name"
-                >Full name
-                <span style="color: var(--press-yellow)">*</span></label
-              >
-              <input
-                type="text"
-                id="name"
-                class="input-field"
-                placeholder="e.g., Jane D. Ink"
-                required
-              />
+
+          <div class="hoursBox rv rv2">
+            <div class="hoursH">
+              <i data-lucide="clock" style="width: 12px; height: 12px"></i>Press
+              Hours
             </div>
-            <div class="input-group">
-              <label class="input-label" for="email"
-                >Email <span style="color: var(--press-yellow)">*</span></label
-              >
-              <input
-                type="email"
-                id="email"
-                class="input-field"
-                placeholder="you@example.com"
-                required
-              />
+            <div class="hourRow">
+              <span class="hDay">Mon – Thu</span
+              ><span class="hTime">09:00 – 18:00</span>
             </div>
-            <div class="input-group">
-              <label class="input-label" for="phone">Phone (optional)</label>
-              <input
-                type="tel"
-                id="phone"
-                class="input-field"
-                placeholder="+1 555 123 4567"
-              />
+            <div class="hourRow">
+              <span class="hDay">Friday</span
+              ><span class="hTime">09:00 – 12:30</span>
             </div>
-            <div class="input-group">
-              <label class="input-label" for="company"
-                >Company / organization</label
-              >
-              <input
-                type="text"
-                id="company"
-                class="input-field"
-                placeholder="optional"
-              />
+            <div class="hourRow">
+              <span class="hDay">Saturday</span
+              ><span class="hTime">10:00 – 16:00</span>
             </div>
-            <div class="input-group">
-              <label class="input-label" for="service">Service interest</label>
-              <select id="service" class="input-field" style="appearance: none">
-                <option value="" disabled selected>— select —</option>
-                <option value="offset">Offset printing</option>
-                <option value="digital">Digital / short run</option>
-                <option value="large">Large format</option>
-                <option value="packaging">Packaging & labels</option>
-                <option value="other">Other / consultation</option>
-              </select>
+            <div class="hourRow">
+              <span class="hDay">Sunday</span
+              ><span class="hTime cl">Closed</span>
             </div>
-            <div class="input-group">
-              <label class="input-label" for="message"
-                >Message
-                <span style="color: var(--press-yellow)">*</span></label
-              >
-              <textarea
-                id="message"
-                class="input-field"
-                placeholder="Tell us about your project, quantity, paper preferences ..."
-                required
-              ></textarea>
+            <div id="badgeWrap"></div>
+          </div>
+        </aside>
+
+        <!-- RIGHT FORM -->
+        <div class="rv rv2">
+          <div class="formHead">
+            <h2 class="formH">Send a <em>message</em></h2>
+            <div class="formNote">
+              We reply within <span>4 hours</span><br />Mon – Sat
             </div>
-            <div class="file-attach" id="fakeFileBtn">
-              <i data-lucide="paperclip"></i>
-              <span>📎 attach a brief or sketch (max 10 MB, PDF/PNG/AI)</span>
-            </div>
-            <p
-              style="
-                font-size: 0.7rem;
-                color: #444;
-                margin-top: 0.3rem;
-                text-align: right;
-              "
-            >
-              (demo — file upload not active)
-            </p>
-            <button type="submit" class="btn-submit">
-              <i data-lucide="send"></i> Send message
-            </button>
-            <div class="quick-social">
-              <a href="#" aria-label="Instagram"
-                ><i data-lucide="instagram"></i
-              ></a>
-              <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-              <a href="#" aria-label="LinkedIn"
-                ><i data-lucide="linkedin"></i
-              ></a>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="fGrid2">
+              <div class="fGroup">
+                <label class="fLabel" for="fname"
+                  >Full Name <span class="req">*</span></label
+                >
+                <input
+                  class="fInput"
+                  type="text"
+                  id="fname"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+              <div class="fGroup">
+                <label class="fLabel" for="femail"
+                  >Email <span class="req">*</span></label
+                >
+                <input
+                  class="fInput"
+                  type="email"
+                  id="femail"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+              <div class="fGroup">
+                <label class="fLabel" for="fphone"
+                  >Phone
+                  <span
+                    style="
+                      color: var(--txt3);
+                      font-weight: 400;
+                      letter-spacing: 0;
+                      text-transform: none;
+                    "
+                    >(optional)</span
+                  ></label
+                >
+                <input
+                  class="fInput"
+                  type="tel"
+                  id="fphone"
+                  placeholder="+92 xxx xxx xxxx"
+                />
+              </div>
+              <div class="fGroup">
+                <label class="fLabel" for="fco">Company</label>
+                <input
+                  class="fInput"
+                  type="text"
+                  id="fco"
+                  placeholder="Your company (optional)"
+                />
+              </div>
+
+              <!-- Service pills -->
+              <div class="fGroup fFull">
+                <label class="fLabel">Service Interest</label>
+                <div class="pillRow" id="pillRow">
+                  <button type="button" class="sPill" data-val="offset">
+                    Offset Printing
+                  </button>
+                  <button type="button" class="sPill" data-val="digital">
+                    Digital / Short Run
+                  </button>
+                  <button type="button" class="sPill" data-val="large">
+                    Large Format
+                  </button>
+                  <button type="button" class="sPill" data-val="packaging">
+                    Packaging & Labels
+                  </button>
+                  <button type="button" class="sPill" data-val="design">
+                    Design Services
+                  </button>
+                  <button type="button" class="sPill" data-val="other">
+                    Consultation
+                  </button>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="fGroup fFull">
+                <label class="fLabel" for="fmsg"
+                  >Message <span class="req">*</span></label
+                >
+                <textarea
+                  class="fTextarea"
+                  id="fmsg"
+                  placeholder="Tell us about your project — quantity, size, materials, deadline…"
+                  required
+                ></textarea>
+              </div>
+
+              <!-- File drop -->
+              <div class="fileUp fFull" id="fileUp">
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept=".pdf,.png,.ai,.jpg,.jpeg,.eps"
+                />
+                <div class="fileUpI">
+                  <i
+                    data-lucide="paperclip"
+                    style="width: 22px; height: 22px"
+                  ></i>
+                </div>
+                <div class="fileUpTxt">
+                  <strong>Attach a brief or artwork</strong> — drag &amp; drop
+                  or click
+                </div>
+                <div class="fileUpSub">PDF · PNG · AI · EPS — max 10 MB</div>
+                <div class="fileSel" id="fileSel"></div>
+              </div>
+
+              <!-- Submit -->
+              <div class="submitRow fFull">
+                <p class="submitNote" id="submitNote">
+                  <strong>No commitment.</strong><br />We'll respond with a free
+                  quote.
+                </p>
+                <button type="submit" class="btnSub" id="submitBtn">
+                  <span
+                    >Send Message
+                    <i
+                      data-lucide="arrow-right"
+                      style="width: 15px; height: 15px"
+                    ></i
+                  ></span>
+                </button>
+              </div>
+
+              <div class="successMsg fFull" id="successMsg">
+                <h3>Message Sent ✓</h3>
+                <p>
+                  We'll be in touch within 4 hours. Thanks for reaching out!
+                </p>
+              </div>
             </div>
           </form>
         </div>
       </div>
-    </main>
 
-    <!-- Stats section (like main site, but compact) -->
-    <section class="contact-stats paper-grain">
-      <div class="stats-grid">
-        <div class="stat-item-mini">
-          <div class="stat-number">25+</div>
-          <div class="stat-underline-short"></div>
-          <div class="stat-label">years in print</div>
-        </div>
-        <div class="stat-item-mini">
-          <div class="stat-number">10K+</div>
-          <div class="stat-underline-short"></div>
-          <div class="stat-label">projects</div>
-        </div>
-        <div class="stat-item-mini">
-          <div class="stat-number">500+</div>
-          <div class="stat-underline-short"></div>
-          <div class="stat-label">clients</div>
-        </div>
-        <div class="stat-item-mini">
-          <div class="stat-number">99%</div>
-          <div class="stat-underline-short"></div>
-          <div class="stat-label">satisfaction</div>
+      <!-- MAP -->
+      <div class="mapSec">
+        <div class="mapInner">
+          <div class="mapHead rv">
+            <div>
+              <div class="secLbl">— Find Us</div>
+              <h2 class="mapH">Visit <em>the Press</em></h2>
+            </div>
+            <div class="coordPill">
+              <i data-lucide="navigation" style="width: 13px; height: 13px"></i
+              >32.4945° N · 74.5229° E
+            </div>
+          </div>
+          <div class="mapPlaceholder rv rv2">
+            <div class="mapGrid"></div>
+            <div class="mapPin">
+              <div class="mapPinI">
+                <i data-lucide="map-pin" style="width: 22px; height: 22px"></i>
+              </div>
+              <div class="mapPinLbl">Alkausar Printing Press · Sialkot</div>
+            </div>
+          </div>
+          <div class="mapActions rv rv3">
+            <a
+              href="https://maps.google.com/?q=Airport+Road+Kapurwali+Sialkot+Pakistan"
+              target="_blank"
+              rel="noopener"
+              class="mapBtn"
+              ><i
+                data-lucide="navigation-2"
+                style="width: 13px; height: 13px"
+              ></i
+              >Get Directions</a
+            >
+            <a
+              href="https://wa.me/03074123690"
+              target="_blank"
+              rel="noopener"
+              class="mapBtn"
+              ><i
+                data-lucide="message-circle"
+                style="width: 13px; height: 13px"
+              ></i
+              >WhatsApp Us</a
+            >
+          </div>
         </div>
       </div>
-    </section>
 
-    <!-- FULL FOOTER (identical to original) -->
-    <footer id="contact" class="footer">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3 class="logo">Alkausar<span class="logo-dot">.</span></h3>
-          <p>
+      <!-- STATS ROW -->
+      <div class="statsRow">
+        <div class="statsRowW">
+          <div class="statR" data-count="25" data-suf="+">
+            <div class="statRV">0+</div>
+            <div class="statRL">Years in Print</div>
+          </div>
+          <div class="statR" data-count="10" data-suf="K+">
+            <div class="statRV">0K+</div>
+            <div class="statRL">Projects</div>
+          </div>
+          <div class="statR" data-count="500" data-suf="+">
+            <div class="statRV">0+</div>
+            <div class="statRL">Clients</div>
+          </div>
+          <div class="statR" data-count="99" data-suf="%">
+            <div class="statRV">0%</div>
+            <div class="statRL">Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="fGrid">
+        <div>
+          <div class="fBrow">
+            <img
+              src="https://res.cloudinary.com/djjz0rkuy/image/upload/c_thumb,w_200,g_face/v1771261157/Logo_aL_kausar...._rmckyb.png"
+              alt=""
+              width="38"
+            /><span class="fBN">Alkausar<span class="fBDot">.</span></span>
+          </div>
+          <p class="fBP">
             Premium printing solutions forged with precision and passion since
-            1998. We bring your vision to life.
+            2019. We bring your vision to life with industrial-grade quality.
           </p>
+          <div class="fSocs">
+            <a href="#" class="fSoc"
+              ><i data-lucide="instagram" style="width: 15px; height: 15px"></i
+            ></a>
+            <a href="#" class="fSoc"
+              ><i data-lucide="twitter" style="width: 15px; height: 15px"></i
+            ></a>
+            <a href="#" class="fSoc"
+              ><i data-lucide="facebook" style="width: 15px; height: 15px"></i
+            ></a>
+            <a href="#" class="fSoc"
+              ><i data-lucide="linkedin" style="width: 15px; height: 15px"></i
+            ></a>
+          </div>
         </div>
         <div>
-          <h4 class="footer-title">Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#why-us">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <div class="fCT">Quick Links</div>
+          <ul class="fLks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="footer-title">Services</h4>
-          <ul class="footer-links">
+          <div class="fCT">Services</div>
+          <ul class="fLks">
             <li><a href="#">Offset Printing</a></li>
             <li><a href="#">Digital Printing</a></li>
             <li><a href="#">Large Format</a></li>
@@ -989,94 +1927,251 @@
           </ul>
         </div>
         <div>
-          <h4 class="footer-title">Contact Us</h4>
-          <ul class="contact-info">
-            <li>
-              <span>Address</span>123 Industrial Avenue, Print District<br />New
-              York, NY 10001
-            </li>
-            <li><span>Phone</span>+1 (555) 123-4567</li>
-            <li><span>Email</span>hello@alkausarpress.com</li>
-          </ul>
+          <div class="fCT">Contact</div>
+          <div class="fCI">
+            <div class="fCLbl">Address</div>
+            <div class="fCV">
+              Airport Road Kapurwali,<br />Sialkot, Pakistan
+            </div>
+          </div>
+          <div class="fCI">
+            <div class="fCLbl">Phone</div>
+            <div class="fCV">+92 323 906 2418</div>
+          </div>
+          <div class="fCI">
+            <div class="fCLbl">Email</div>
+            <div class="fCV">alkausarprinting418@gmail.com</div>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p class="copyright">
-          © 2024 Alkausar Printing Press. All rights reserved.
+      <div class="fBot">
+        <p class="fCopy">
+          © 2026 Alkausar Printing Press. All rights reserved.
         </p>
-        <div class="social-links">
-          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
-          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
-          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
-          <a href="#" class="social-link"><i data-lucide="linkedin"></i></a>
+        <div class="fCmyk">
+          <div class="pip pC"></div>
+          <div class="pip pM"></div>
+          <div class="pip pY"></div>
+          <div class="pip pK"></div>
         </div>
       </div>
     </footer>
 
     <script>
-      (function () {
-        lucide.createIcons();
+      document.addEventListener("DOMContentLoaded", () => {
+        if (typeof lucide !== "undefined") lucide.createIcons();
 
-        // navbar scroll effect (like original)
-        const navbar = document.getElementById("navbar");
-        window.addEventListener("scroll", function () {
-          if (window.scrollY > 50) navbar.classList.add("scrolled");
-          else navbar.classList.remove("scrolled");
+        // Cursor
+        const cur = document.getElementById("cur"),
+          curR = document.getElementById("curR");
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
         });
-
-        // Parallax for hero
-        const p1 = document.getElementById("p1"),
-          p2 = document.getElementById("p2"),
-          p3 = document.getElementById("p3"),
-          p4 = document.getElementById("p4");
-        window.addEventListener("scroll", function () {
-          const scrollY = window.scrollY;
-          if (p1) p1.style.transform = `translateY(${scrollY * 0.2}px)`;
-          if (p2) p2.style.transform = `translateY(${scrollY * -0.15}px)`;
-          if (p3)
-            p3.style.transform = `translateY(${scrollY * 0.1}px) rotate(15deg)`;
-          if (p4) p4.style.transform = `translateY(${scrollY * 0.05}px)`;
-        });
-
-        // Intersection observer for fade-up
-        const faders = document.querySelectorAll(".fade-up");
-        const obs = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(
-              (e) => e.isIntersecting && e.target.classList.add("in-view"),
+        (function r() {
+          if (cur) {
+            cur.style.left = mx + "px";
+            cur.style.top = my + "px";
+          }
+          rx += (mx - rx) * 0.11;
+          ry += (my - ry) * 0.11;
+          if (curR) {
+            curR.style.left = rx + "px";
+            curR.style.top = ry + "px";
+          }
+          requestAnimationFrame(r);
+        })();
+        document
+          .querySelectorAll("a,button,.cCard,.mapBtn,.sPill")
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () =>
+              document.body.classList.add("ch"),
             );
-          },
-          { threshold: 0.2, once: true },
+            el.addEventListener("mouseleave", () =>
+              document.body.classList.remove("ch"),
+            );
+          });
+
+        // Theme
+        const html = document.documentElement,
+          tmBtn = document.getElementById("tmBtn"),
+          tmIco = document.getElementById("tmIco");
+        const SUN = `<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>`;
+        const MOON = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+        const applyT = (t) => {
+          html.setAttribute("data-theme", t);
+          if (tmIco) tmIco.innerHTML = t === "dark" ? SUN : MOON;
+          localStorage.setItem("ap-t", t);
+        };
+        applyT(
+          localStorage.getItem("ap-t") ||
+            (matchMedia("(prefers-color-scheme:dark)").matches
+              ? "dark"
+              : "light"),
         );
-        faders.forEach((el) => obs.observe(el));
-
-        // file attach simulation
-        document
-          .getElementById("fakeFileBtn")
-          ?.addEventListener("click", () =>
-            alert("📁 Demo: file picker would open."),
+        if (tmBtn)
+          tmBtn.addEventListener("click", () =>
+            applyT(
+              html.getAttribute("data-theme") === "dark" ? "light" : "dark",
+            ),
           );
 
-        // mobile menu simulation (just for consistency)
-        document
-          .getElementById("mobileMenuBtn")
-          ?.addEventListener("click", () =>
-            alert("Mobile menu would open — this is a contact page demo."),
+        // Navbar
+        const nav = document.getElementById("nav");
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (nav) nav.classList.toggle("sc", window.scrollY > 50);
+          },
+          { passive: true },
+        );
+
+        // Mobile menu
+        const ham = document.getElementById("hamBtn"),
+          mm = document.getElementById("mobM"),
+          mcl = document.getElementById("mobCl");
+        if (ham && mm) {
+          ham.addEventListener("click", () => mm.classList.add("open"));
+          if (mcl)
+            mcl.addEventListener("click", () => mm.classList.remove("open"));
+          mm.querySelectorAll("a").forEach((a) =>
+            a.addEventListener("click", () => mm.classList.remove("open")),
           );
-      })();
-    </script>
-    <style>
-      .scrolled {
-        background-color: rgba(10, 10, 10, 0.95) !important;
-      }
-      .mobile-only {
-        display: none;
-      }
-      @media (max-width: 500px) {
-        .desktop-only {
-          display: none;
         }
-      }
-    </style>
+
+        // Intersection observer (reveal)
+        const io = new IntersectionObserver(
+          (es) => {
+            es.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("vis");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+        document
+          .querySelectorAll(".rv,.statR,.mapHead")
+          .forEach((el) => io.observe(el));
+
+        // Service pills
+        let sel = [];
+        document.querySelectorAll(".sPill").forEach((p) => {
+          p.addEventListener("click", () => {
+            p.classList.toggle("sel");
+            const v = p.dataset.val;
+            sel = p.classList.contains("sel")
+              ? [...sel, v]
+              : sel.filter((x) => x !== v);
+          });
+        });
+
+        // File upload
+        const fu = document.getElementById("fileUp"),
+          fi = document.getElementById("fileInput"),
+          fs = document.getElementById("fileSel");
+        fi.addEventListener("change", () => {
+          if (fi.files.length) {
+            fs.textContent = "📎 " + fi.files[0].name;
+            fs.classList.add("show");
+          }
+        });
+        ["dragenter", "dragover"].forEach((e) =>
+          fu.addEventListener(e, (ev) => {
+            ev.preventDefault();
+            fu.classList.add("drag");
+          }),
+        );
+        ["dragleave", "drop"].forEach((e) =>
+          fu.addEventListener(e, (ev) => {
+            ev.preventDefault();
+            fu.classList.remove("drag");
+          }),
+        );
+        fu.addEventListener("drop", (ev) => {
+          const f = ev.dataTransfer.files[0];
+          if (f) {
+            fs.textContent = "📎 " + f.name;
+            fs.classList.add("show");
+          }
+        });
+
+        // Form submit (demo)
+        document
+          .getElementById("contactForm")
+          .addEventListener("submit", (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("submitBtn");
+            btn.disabled = true;
+            btn.querySelector("span").innerHTML = "Sending…";
+            setTimeout(() => {
+              document.getElementById("successMsg").classList.add("show");
+              btn.style.display = "none";
+              document.getElementById("submitNote").style.display = "none";
+            }, 1100);
+          });
+
+        // WA hide on scroll
+        const wa = document.getElementById("waF");
+        let lsy = 0;
+        window.addEventListener(
+          "scroll",
+          () => {
+            const sy = window.scrollY;
+            if (wa) wa.classList.toggle("hide", sy > lsy && sy > 400);
+            lsy = sy;
+          },
+          { passive: true },
+        );
+
+        // Open/closed badge
+        const now = new Date();
+        const d = now.getDay(),
+          h = now.getHours() + now.getMinutes() / 60;
+        let open = false;
+        if (d >= 1 && d <= 4 && h >= 9 && h < 18) open = true;
+        else if (d === 5 && h >= 9 && h < 12.5) open = true;
+        else if (d === 6 && h >= 10 && h < 16) open = true;
+        const bw = document.getElementById("badgeWrap");
+        if (bw) {
+          bw.innerHTML = open
+            ? '<span class="badge open"><span class="dot"></span>Open Now</span>'
+            : '<span class="badge closed"><span class="dot"></span>Closed Now</span>';
+        }
+
+        // Counter animation
+        const cio = new IntersectionObserver(
+          (es) => {
+            es.forEach((e) => {
+              if (!e.isIntersecting) return;
+              const el = e.target,
+                t = parseInt(el.dataset.count),
+                s = el.dataset.suf || "",
+                v = el.querySelector(".statRV");
+              if (!v) return;
+              let c = 0;
+              const step = t / 60;
+              const ti = setInterval(() => {
+                c = Math.min(c + step, t);
+                v.textContent = Math.floor(c) + s;
+                if (c >= t) clearInterval(ti);
+              }, 1000 / 60);
+              cio.unobserve(el);
+            });
+          },
+          { threshold: 0.5 },
+        );
+        document
+          .querySelectorAll(".statR[data-count]")
+          .forEach((el) => cio.observe(el));
+
+        if (typeof lucide !== "undefined") lucide.createIcons();
+      });
+    </script>
   </body>
 </html>
