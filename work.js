@@ -34,9 +34,9 @@ const portfolioData = [
       "Window envelopes in custom sizes and colors with security tint options. Enhances brand identity in mailing.",
     category: "stationery",
     images: [
-      "https://img.freepik.com/free-photo/envelope-mockup_23-2148229064.jpg",
-      "https://img.freepik.com/free-photo/close-up-envelope-mockup_23-2148229062.jpg",
       "https://img.freepik.com/free-photo/die-cut-envelope-design_23-2148229060.jpg",
+      "https://img.freepik.com/free-photo/close-up-envelope-mockup_23-2148229062.jpg",
+      "",
     ],
   },
   {
