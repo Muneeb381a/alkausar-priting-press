@@ -190,6 +190,21 @@
         align-items: center;
         gap: 0.6rem;
       }
+      /* Default to light logo */
+      .logo-light {
+        display: block;
+      }
+      .logo-dark {
+        display: none;
+      }
+
+      /* When data-theme="dark", switch */
+      [data-theme="dark"] .logo-light {
+        display: none;
+      }
+      [data-theme="dark"] .logo-dark {
+        display: block;
+      }
       .logo img {
         width: 42px;
         height: 42px;
@@ -464,7 +479,7 @@
         -webkit-text-fill-color: transparent;
       }
       .pgSub {
-        margin: 1.5rem auto 0; 
+        margin: 1.5rem auto 0;
         margin-top: 1.5rem;
         font-size: 1rem;
         color: var(--txt2);
@@ -1282,8 +1297,14 @@
       <div class="nIn">
         <a href="index.html" class="logo">
           <img
+            src="https://res.cloudinary.com/djjz0rkuy/image/upload/v1772267857/ak-logo_socyfy.png"
+            class="logo-light"
+            alt="Logo"
+          />
+          <img
             src="https://res.cloudinary.com/djjz0rkuy/image/upload/c_thumb,w_200,g_face/v1771261157/Logo_aL_kausar...._rmckyb.png"
-            alt="Alkausar"
+            class="logo-dark"
+            alt="Logo"
           />
           <span class="logoN">Alkausar<span class="logoDot">.</span></span>
         </a>
@@ -1673,7 +1694,10 @@
             <a href="#" class="fSoc"
               ><i data-lucide="twitter" style="width: 15px; height: 15px"></i
             ></a>
-            <a href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/" target="_blank" class="fSoc"
+            <a
+              href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/"
+              target="_blank"
+              class="fSoc"
               ><i data-lucide="facebook" style="width: 15px; height: 15px"></i
             ></a>
             <a href="#" class="fSoc"

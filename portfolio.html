@@ -332,6 +332,21 @@
         align-items: center;
         gap: 0.6rem;
       }
+      /* Default to light logo */
+      .logo-light {
+        display: block;
+      }
+      .logo-dark {
+        display: none;
+      }
+
+      /* When data-theme="dark", switch */
+      [data-theme="dark"] .logo-light {
+        display: none;
+      }
+      [data-theme="dark"] .logo-dark {
+        display: block;
+      }
       .logo img {
         width: 42px;
         height: 42px;
@@ -1700,8 +1715,14 @@
       <div class="nIn">
         <a href="index.html" class="logo">
           <img
+            src="https://res.cloudinary.com/djjz0rkuy/image/upload/v1772267857/ak-logo_socyfy.png"
+            class="logo-light"
+            alt="Logo"
+          />
+          <img
             src="https://res.cloudinary.com/djjz0rkuy/image/upload/c_thumb,w_200,g_face/v1771261157/Logo_aL_kausar...._rmckyb.png"
-            alt="Alkausar"
+            class="logo-dark"
+            alt="Logo"
           />
           <span class="logoN">Alkausar<span class="logoDot">.</span></span>
         </a>
@@ -1868,7 +1889,10 @@
             <a href="#" class="fSoc"
               ><i data-lucide="twitter" style="width: 15px; height: 15px"></i
             ></a>
-            <a href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/" target="_blank" class="fSoc"
+            <a
+              href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/"
+              target="_blank"
+              class="fSoc"
               ><i data-lucide="facebook" style="width: 15px; height: 15px"></i
             ></a>
             <a href="#" class="fSoc"
@@ -2089,7 +2113,7 @@
               "https://cdn.magicdecor.in/com/2023/02/29215232/image-1684845232-1963-710x488.jpg",
               "https://cdn.magicdecor.in/com/2023/02/29202408/image-1686148972-5865-710x488.jpg",
               "https://en.vavex.cz/uploads/item/23583/template/10118/images/x-10055.jpg",
-              "https://orchiddigitals.com/wp-content/uploads/2025/09/Large-sized-wallpaper-print-for-an-office-1024x683-1.jpg"
+              "https://orchiddigitals.com/wp-content/uploads/2025/09/Large-sized-wallpaper-print-for-an-office-1024x683-1.jpg",
             ],
           },
           {
@@ -2107,7 +2131,7 @@
             images: [
               "https://cdn.onlinefabricstore.com/products/NW47104_3.jpg?width=900",
               "https://cdn.onlinefabricstore.com/products/NW52810_2.jpg",
-              "https://magicdecor.com/wp-content/uploads/2025/10/Dreamer-Blue-Gold-Bohemian-Pattern-Wallpaper-m1-600x450.jpg"
+              "https://magicdecor.com/wp-content/uploads/2025/10/Dreamer-Blue-Gold-Bohemian-Pattern-Wallpaper-m1-600x450.jpg",
             ],
           },
           {
@@ -2125,7 +2149,7 @@
             images: [
               "https://png.pngtree.com/thumb_back/fh260/background/20251224/pngtree-abstract-red-and-black-metallic-background-with-silver-accents-image_20912164.webp",
               "https://png.pngtree.com/thumb_back/fh260/background/20260102/pngtree-metallic-grain-shimmer-in-blue-black-with-pink-accent-image_20987029.webp",
-              "https://www.shutterstock.com/shutterstock/videos/3697080971/thumb/1.jpg?ip=x480"
+              "https://www.shutterstock.com/shutterstock/videos/3697080971/thumb/1.jpg?ip=x480",
             ],
           },
 
@@ -2148,7 +2172,7 @@
             images: [
               "https://www.multiviscomindo.com/wp-content/uploads/2021/06/fronlit-banner-multi-viscomindo.jpg",
               "https://www.hdl-corp.com/uploads/202335296/pvc-coated-frontlit-bannerdcc04d85-08a6-4725-855e-d1369fa2d996.jpg",
-              ""
+              "",
             ],
           },
           {
@@ -2165,7 +2189,7 @@
             ],
             images: [
               "https://www.multiviscomindo.com/wp-content/uploads/2021/06/backlit-fabric-multi-viscomindo.jpg",
-              ""
+              "",
             ],
           },
           {
@@ -2198,7 +2222,7 @@
             ],
             images: [
               "https://static.vecteezy.com/system/resources/thumbnails/034/060/188/small/grey-soccer-fabric-texture-with-air-mesh-sportswear-background-photo.jpg",
-              "https://static.vecteezy.com/system/resources/thumbnails/076/733/733/small/vibrant-blank-banner-on-construction-site-fence-photo.jpg"
+              "https://static.vecteezy.com/system/resources/thumbnails/076/733/733/small/vibrant-blank-banner-on-construction-site-fence-photo.jpg",
             ],
           },
           // ═══════════════════════════════════════════════════════════
@@ -2221,7 +2245,7 @@
               "https://img.freepik.com/premium-psd/luxury-black-business-card-mockup-with-spot-uv-gold-embossed-effect_180294-247.jpg",
               "https://img.freepik.com/premium-psd/gold-foil-modern-dark-business-card-mockup-with-spot-uv-effect_658083-23.jpg",
               "https://img.freepik.com/premium-psd/luxury-gold-foil-dark-business-card-mockup-with-spot-uv-effect_658083-26.jpg",
-              "https://t3.ftcdn.net/jpg/16/65/59/78/360_F_1665597815_B2og6U69xvnAPeKQwQoURGysIcluQWtf.jpg"
+              "https://t3.ftcdn.net/jpg/16/65/59/78/360_F_1665597815_B2og6U69xvnAPeKQwQoURGysIcluQWtf.jpg",
             ],
           },
           {
@@ -2239,7 +2263,7 @@
             images: [
               "https://img.freepik.com/free-photo/embossed-letterhead-stack_23-2148229072.jpg",
               "https://img.freepik.com/free-photo/letterhead-mockup_23-2148229074.jpg",
-              "https://s36499.pcdn.co/wp-content/uploads/2021/03/embossed-paper-that-was-designed-using-an-embosser.jpg"
+              "https://s36499.pcdn.co/wp-content/uploads/2021/03/embossed-paper-that-was-designed-using-an-embosser.jpg",
             ],
           },
           {
@@ -2257,7 +2281,7 @@
             images: [
               "https://img.freepik.com/free-photo/die-cut-envelope-design_23-2148229060.jpg",
               "https://static.vecteezy.com/system/resources/previews/002/317/390/non_2x/envelope-die-cut-mock-up-template-vector.jpg",
-              "https://printandcopy.ndsu.edu/graphics/487-Envelope.jpg"
+              "https://printandcopy.ndsu.edu/graphics/487-Envelope.jpg",
             ],
           },
           {
@@ -2275,7 +2299,7 @@
             images: [
               "https://www.qualitylogoproducts.com/custom-notebooks/mini-spiral-notebook-q84704-hq-874214.jpg",
               "https://png.pngtree.com/png-clipart/20200224/original/pngtree-spiral-empty-notepad-blank-mockup-set-template-for-advertising-branding-corporate-png-image_5221993.jpg",
-              "https://www.qualitylogoproducts.com/custom-notepads/spiral-notebook-and-pen-hq-814421.jpg"
+              "https://www.qualitylogoproducts.com/custom-notepads/spiral-notebook-and-pen-hq-814421.jpg",
             ],
           },
           {
@@ -2292,7 +2316,7 @@
             ],
             images: [
               "https://gforceprinting.com.au/wp-content/uploads/2025/03/istockphoto-176574122-612x612-1.jpg",
-              "https://aura-print.com/media/wysiwyg/AP_A4_Folder_Printing_Angled-500x500px_1.jpg"
+              "https://aura-print.com/media/wysiwyg/AP_A4_Folder_Printing_Angled-500x500px_1.jpg",
             ],
           },
           {
@@ -2310,7 +2334,7 @@
             images: [
               "https://www.qualitylogoproducts.com/custom-notepads/4x6x25-sticky-note-pad-hq.jpg",
               "https://www.qualitylogoproducts.com/note-pad-cubes/post-it-custom-printed-notes3x350count-hq.jpg",
-              ""
+              "",
             ],
           },
           {
@@ -2329,7 +2353,7 @@
               "https://media.istockphoto.com/id/859610656/photo/blank-white-reinforced-pocket-folders-on-grey-background-for-mock-up-3d-rendering.jpg?s=612x612&w=0&k=20&c=7OnguWdAftlS3U_yz7oMH7CGBhwHNGgqjvBi0Ps4Icc=",
               "https://www.qualitylogoproducts.com/folders/splash-presentation-pocket-folders-hq.jpg",
               "https://static.vecteezy.com/system/resources/thumbnails/026/532/684/small/professional-presentation-folder-mockup-vector.jpg",
-              "https://content.oppictures.com/Master_Images/Master_Variants/Variant_1500/739803.jpg"
+              "https://content.oppictures.com/Master_Images/Master_Variants/Variant_1500/739803.jpg",
             ],
           },
           {
@@ -2348,8 +2372,8 @@
               "https://static.vecteezy.com/system/resources/thumbnails/065/908/837/small_2x/realistic-invoice-pad-design-mockup-free-psd.png",
               "https://www.printedinvoicebooks.co.uk/wp-content/uploads/2023/06/receipt-book-768x768.jpg",
               "https://static.vecteezy.com/system/resources/previews/065/987/675/non_2x/editable-cash-memo-invoice-pad-mockup-template-isolated-view-free-psd.png",
-              "https://static.vecteezy.com/system/resources/previews/049/947/683/non_2x/corporate-invoice-receipt-book-design-template-vector.jpg?odnHeight=117&odnWidth=117&odnBg=FFFFFF"
-              ,"https://img.freepik.com/premium-psd/receipt-book-mockup_899942-79.jpg"
+              "https://static.vecteezy.com/system/resources/previews/049/947/683/non_2x/corporate-invoice-receipt-book-design-template-vector.jpg?odnHeight=117&odnWidth=117&odnBg=FFFFFF",
+              "https://img.freepik.com/premium-psd/receipt-book-mockup_899942-79.jpg",
             ],
           },
           {
@@ -2368,7 +2392,7 @@
               "https://img.freepik.com/premium-psd/landscape-a7-greeting-card-mockup-with-envelope_1332-777.jpg",
               "https://img.freepik.com/premium-psd/dark-greeting-card-with-envelope-mockup-close-up_1332-44821.jpg",
               "https://img.freepik.com/premium-psd/dark-greeting-card-with-envelope-mockup-top-view_1332-43290.jpg?w=360",
-              "https://img.freepik.com/free-vector/christmas-greeting-card-envelope-template_1361-1892.jpg"
+              "https://img.freepik.com/free-vector/christmas-greeting-card-envelope-template_1361-1892.jpg",
             ],
           },
           {
@@ -2386,7 +2410,7 @@
             images: [
               "https://img.freepik.com/premium-vector/appointment-reminder-card-professional-concept-design_842344-421.jpg",
               "https://t4.ftcdn.net/jpg/10/89/51/89/360_F_1089518965_8hqMP5tbIK2sI8A3ImtU55duIwmTiVcO.jpg",
-              "https://img.freepik.com/premium-vector/flat-design-appointment-card-template_23-2149627511.jpg"
+              "https://img.freepik.com/premium-vector/flat-design-appointment-card-template_23-2149627511.jpg",
             ],
           },
           {
@@ -2405,7 +2429,7 @@
               "https://png.pngtree.com/templates/20190516/ourmid/pngtree-fitness-platinum-membership-card-design-weightmotionscientific-slimmingincrease-muscle-image_172788.jpg",
               "https://deq64r0ss2hgl.cloudfront.net/images/product/thick-premium-visitingbusiness-cards-84043033675883.jpg",
               "https://jiarfidtag.com/wp-content/uploads/2025/02/pvc-id-card-4.jpg",
-              "https://img.freepik.com/free-vector/realistic-vip-card-template-with-golden-details_23-2149129368.jpg"
+              "https://img.freepik.com/free-vector/realistic-vip-card-template-with-golden-details_23-2149129368.jpg",
             ],
           },
           {
@@ -2424,7 +2448,7 @@
               "https://thumbs.dreamstime.com/b/spiral-bound-desk-calendar-year-displayed-white-background-features-black-stand-open-to-show-multiple-monthly-417959231.jpg",
               "https://png.pngtree.com/png-vector/20251218/ourlarge/pngtree-three-white-spiral-bound-desk-calendars-arranged-staggered-on-grey-background-png-image_18257069.webp",
               "https://thumbs.dreamstime.com/b/spiral-bound-desk-calendar-displaying-month-january-days-arranged-grid-format-sundays-highlighted-red-394166244.jpg",
-              "https://png.pngtree.com/thumb_back/fw800/background/20251122/pngtree-a-2025-spiral-bound-desk-calendar-open-to-january-standing-on-image_20533258.webp"
+              "https://png.pngtree.com/thumb_back/fw800/background/20251122/pngtree-a-2025-spiral-bound-desk-calendar-open-to-january-standing-on-image_20533258.webp",
             ],
           },
           {
@@ -2442,7 +2466,7 @@
             images: [
               "https://static.vecteezy.com/system/resources/previews/052/943/932/non_2x/wall-calendar-2025-a3-size-vector.jpg",
               "https://www.creativefabrica.com/wp-content/uploads/2021/10/11/Wall-Calendar-Template-2022-Template-Graphics-18668232-1-1-580x387.jpg",
-              "https://cdn.dribbble.com/userupload/40763255/file/original-fa10160c0d8091bebcdf722b0537354f.jpg?resize=400x0"
+              "https://cdn.dribbble.com/userupload/40763255/file/original-fa10160c0d8091bebcdf722b0537354f.jpg?resize=400x0",
             ],
           },
 
@@ -2466,7 +2490,7 @@
               "https://img.freepik.com/free-photo/double-sided-flyer-mockup_23-2148229000.jpg",
               "https://djuqbvg97u5zb.cloudfront.net/bestatpri/images/products_gallery_images/flyer_printing_a5_1738752243761.jpg",
               "https://elements-resized.envatousercontent.com/elements-preview-images/89eed655-a6a6-4cb2-a6df-8dd9d9ef061f?w=632&cf_fit=scale-down&q=85&format=auto&s=c526e73a317d9fbb5804efd9a1ce7e73ea8778977dc58fe4cc3ae1228a175f8e",
-              "https://img.freepik.com/free-vector/leaflet-with-blue-polygonal-shapes_1207-510.jpg"
+              "https://img.freepik.com/free-vector/leaflet-with-blue-polygonal-shapes_1207-510.jpg",
             ],
           },
           {
@@ -2485,7 +2509,7 @@
               "https://img.freepik.com/free-photo/large-poster-mockup_23-2148228996.jpg",
               "https://www.inknition.com.au/wp-content/uploads/bb-plugin/cache/Full-colour-wide-format-printed-posters-square-815ba011c0a93daec16cbe5714f5ed49-.jpg",
               "https://t3.ftcdn.net/jpg/01/99/45/20/360_F_199452023_aIYQnl38PXT9F1Gyz8RClqsfxZs22StS.jpg",
-              "https://yi-files.s3.amazonaws.com/products/290000/290682/290686-cover.jpg"
+              "https://yi-files.s3.amazonaws.com/products/290000/290682/290686-cover.jpg",
             ],
           },
           {
@@ -2505,7 +2529,7 @@
               "https://img.freepik.com/premium-vector/two-sides-cosmetic-trifold-brochure-commercial-uses_317810-1483.jpg",
               "https://s3.amazonaws.com/autoprint/115/images/branding/686/categories/cat50.png",
               "https://media.istockphoto.com/id/500592081/vector/blank-white-tri-fold-vector-brochure-template.jpg?s=612x612&w=0&k=20&c=eM_fYpEA_JB-HFPm5HdTZ8colrZaCqIXOtSHw5yZ3q8=",
-              "https://media.istockphoto.com/id/1441647184/vector/trifold-corporate-brochure-design-template.jpg?s=612x612&w=0&k=20&c=BVtzxNCYF--jy3M091n5BNgL-7icfZTDeFAYy9pyr-I="
+              "https://media.istockphoto.com/id/1441647184/vector/trifold-corporate-brochure-design-template.jpg?s=612x612&w=0&k=20&c=BVtzxNCYF--jy3M091n5BNgL-7icfZTDeFAYy9pyr-I=",
             ],
           },
           {
@@ -2523,7 +2547,7 @@
             images: [
               "https://img.freepik.com/free-photo/bi-fold-brochure-mockup_23-2148228980.jpg",
               "https://static.vecteezy.com/system/resources/previews/013/020/812/non_2x/bifold-brochure-template-professional-business-brochure-bi-fold-template-cover-page-half-fold-brochures-corporate-brochure-08-vector.jpg",
-              "https://static.vecteezy.com/system/resources/previews/013/020/813/non_2x/bifold-brochure-template-professional-business-brochure-bi-fold-template-cover-page-half-fold-brochures-corporate-brochure-06-vector.jpg"
+              "https://static.vecteezy.com/system/resources/previews/013/020/813/non_2x/bifold-brochure-template-professional-business-brochure-bi-fold-template-cover-page-half-fold-brochures-corporate-brochure-06-vector.jpg",
             ],
           },
           {
@@ -2541,7 +2565,7 @@
             images: [
               "https://img.freepik.com/free-photo/postcard-mockup_23-2148228972.jpg",
               "https://www.graphicpear.com/wp-content/uploads/2018/09/DL-Envelope-Mockup-White.jpg",
-              "https://img.freepik.com/premium-psd/realistic-dl-flyer-blank-mockup-template-isolated-background-empty-3d-landscape-paper-template-flyer-wedding-invitation-postcard-gift-card-note-cards-voucher-greeting-card-brochure_28616-2946.jpg"
+              "https://img.freepik.com/premium-psd/realistic-dl-flyer-blank-mockup-template-isolated-background-empty-3d-landscape-paper-template-flyer-wedding-invitation-postcard-gift-card-note-cards-voucher-greeting-card-brochure_28616-2946.jpg",
             ],
           },
 
@@ -2567,7 +2591,7 @@
               "https://hotcustomboxes.s3.amazonaws.com/wp-content/uploads/2024/10/29125119/Custom-Perfume-Boxes.webp",
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvQvoqAay1SkazAp3IAl-C_3ZVpfNydMCJBw&s",
               "https://hotcustomboxes.s3.amazonaws.com/wp-content/uploads/2024/10/29123224/Hot-Cuctom-Boxes-2-1-1.webp",
-              "https://media.istockphoto.com/id/1087407332/vector/packaging-design-label-on-cosmetic-container-with-red-and-gold-luxury-box-template-and.jpg?s=612x612&w=0&k=20&c=cmQCUR6r4lxY_0oNn2klEykM7IczW2NcO15QrT1edWc="
+              "https://media.istockphoto.com/id/1087407332/vector/packaging-design-label-on-cosmetic-container-with-red-and-gold-luxury-box-template-and.jpg?s=612x612&w=0&k=20&c=cmQCUR6r4lxY_0oNn2klEykM7IczW2NcO15QrT1edWc=",
             ],
           },
           {
@@ -2586,7 +2610,7 @@
               "https://falkesportswear.com/wp-content/uploads/2024/02/CUSTOM-SUBLIMATION-BASEBALL-JERSEY-MANUACTURER-AND-SUPPLIERS-IN-PAKISTAN-AND-UNITED-STATES-FALKE-SPORTS.jpg",
               "https://images.squarespace-cdn.com/content/v1/572a977a45bf21aba915b8ff/1576150432894-FMCRZQ2WT3G1X2NJLHRR/Custom+T-Shirt%2C+Custom+Shirts%2C+Design+Your+Own+Shirts+Online",
               "https://static.vecteezy.com/system/resources/previews/069/804/638/non_2x/custom-team-soccer-jersey-for-football-sublimation-vector.jpg",
-              "https://img.freepik.com/premium-vector/jersey-sports_913492-404.jpg"
+              "https://img.freepik.com/premium-vector/jersey-sports_913492-404.jpg",
             ],
           },
           {
@@ -2604,7 +2628,7 @@
             images: [
               "https://img.freepik.com/premium-psd/islamic-floral-wedding-invitation-with-brown-foliage_456063-1047.jpg",
               "https://img.freepik.com/premium-psd/modern-islamic-wedding-invitation-card-with-vintage-flower_639307-218.jpg",
-              "https://images.squarespace-cdn.com/content/v1/654bf4ea5f798c3bbb50f881/1705607740726-09VBOZGM0MZ9QEMZMIOE/Ink+and+Paper+flatlays+April+2022+-+011.jpg"
+              "https://images.squarespace-cdn.com/content/v1/654bf4ea5f798c3bbb50f881/1705607740726-09VBOZGM0MZ9QEMZMIOE/Ink+and+Paper+flatlays+April+2022+-+011.jpg",
             ],
           },
 

@@ -11,9 +11,12 @@
       rel="stylesheet"
     />
     <!-- fonts links-->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <style>
       /* ══════════════════════════════════════
    DESIGN TOKENS
@@ -353,6 +356,22 @@
         align-items: center;
         gap: 0.6rem;
       }
+
+   /* Default to light logo */
+.logo-light {
+  display: block;
+}
+.logo-dark {
+  display: none;
+}
+
+/* When data-theme="dark", switch */
+[data-theme="dark"] .logo-light {
+  display: none;
+}
+[data-theme="dark"] .logo-dark {
+  display: block;
+}
       .logo img {
         width: 42px;
         height: 42px;
@@ -1981,40 +2000,40 @@
         transform: translateY(80px);
       }
       .wB1 {
-  background-image: url('assets/image-1.jpg');
-  background-size: cover;
-  background-position: center;
-}
+        background-image: url("assets/image-1.jpg");
+        background-size: cover;
+        background-position: center;
+      }
 
-.wB2 {
-  background-image: url('assets/image-2.png');
-  background-size: cover;
-  background-position: center;
-}
+      .wB2 {
+        background-image: url("assets/image-2.png");
+        background-size: cover;
+        background-position: center;
+      }
 
-.wB3 {
-  background-image: url('assets/image-3.png');
-  background-size: cover;
-  background-position: center;
-}
+      .wB3 {
+        background-image: url("assets/image-3.png");
+        background-size: cover;
+        background-position: center;
+      }
 
-.wB4 {
-  background-image: url('assets/image-4.jpg');
-  background-size: cover;
-  background-position: center;
-}
+      .wB4 {
+        background-image: url("assets/image-4.jpg");
+        background-size: cover;
+        background-position: center;
+      }
 
-.wB5 {
-  background-image: url('assets/image-5.jpg');
-  background-size: cover;
-  background-position: center;
-}
+      .wB5 {
+        background-image: url("assets/image-5.jpg");
+        background-size: cover;
+        background-position: center;
+      }
 
-.wB6 {
-  background-image: url('assets/image-6.jpg');
-  background-size: cover;
-  background-position: center;
-}
+      .wB6 {
+        background-image: url("assets/image-6.jpg");
+        background-size: cover;
+        background-position: center;
+      }
     </style>
   </head>
   <body>
@@ -2050,9 +2069,19 @@
       <div class="nIn">
         <a href="#" class="logo">
           <img
+            src="https://res.cloudinary.com/djjz0rkuy/image/upload/v1772267857/ak-logo_socyfy.png"
+            class="logo-light"
+            alt="Logo"
+          />
+          <img
+            src="https://res.cloudinary.com/djjz0rkuy/image/upload/c_thumb,w_200,g_face/v1771261157/Logo_aL_kausar...._rmckyb.png"
+            class="logo-dark"
+            alt="Logo"
+          />
+          <!-- <img
             src="https://res.cloudinary.com/djjz0rkuy/image/upload/c_thumb,w_200,g_face/v1771261157/Logo_aL_kausar...._rmckyb.png"
             alt="Alkausar"
-          />
+          /> -->
           <span class="logoN">Alkausar<span class="logoDot">.</span></span>
         </a>
         <div class="dLinks">
@@ -2283,7 +2312,7 @@
               ></i>
             </div>
           </div>
-           <div class="svc">
+          <div class="svc">
             <div class="svcN">05</div>
             <div class="svcI">
               <i data-lucide="printer" style="width: 22px; height: 22px"></i>
@@ -2300,7 +2329,7 @@
               ></i>
             </div>
           </div>
-           <div class="svc">
+          <div class="svc">
             <div class="svcN">06</div>
             <div class="svcI">
               <i data-lucide="printer" style="width: 22px; height: 22px"></i>
@@ -2718,7 +2747,10 @@
             <a href="#" class="fSoc"
               ><i data-lucide="twitter" style="width: 15px; height: 15px"></i
             ></a>
-            <a href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/" target="_blank" class="fSoc"
+            <a
+              href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/"
+              target="_blank"
+              class="fSoc"
               ><i data-lucide="facebook" style="width: 15px; height: 15px"></i
             ></a>
             <a href="#" class="fSoc"
@@ -2751,7 +2783,8 @@
           <div class="fCI">
             <div class="fCLbl">Address</div>
             <div class="fCV">
-              Airport Road kapurwali,<br /> Sialkot , Pakistan
+              Airport Road kapurwali,<br />
+              Sialkot , Pakistan
             </div>
           </div>
           <div class="fCI">
