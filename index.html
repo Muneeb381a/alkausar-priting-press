@@ -2052,6 +2052,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.5s ease;
+        overflow: scroll;
       }
       .wpOverlay.active {
         opacity: 1;
@@ -2263,6 +2264,60 @@
         margin-top: 1rem;
         opacity: 0.7;
       }
+      /* ── Popup Image Gallery ── */
+      .wpGallery {
+        overflow: hidden;
+        border-bottom: 1px solid var(--bdr);
+        background: var(--bg);
+        position: relative;
+      }
+      .wpGalleryTrack {
+        display: flex;
+        gap: 0.55rem;
+        padding: 0.85rem 0;
+        width: max-content;
+        animation: wpAutoScroll 24s linear infinite;
+      }
+      .wpGallery:hover .wpGalleryTrack,
+      .wpGalleryTrack.paused {
+        animation-play-state: paused;
+      }
+      @keyframes wpAutoScroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .wpGalleryImg {
+        height: 175px;
+        width: auto;
+        min-width: 250px;
+        max-width: 320px;
+        object-fit: cover;
+        border-radius: 10px;
+        flex-shrink: 0;
+        border: 1px solid var(--bdr);
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+        cursor: pointer;
+        margin: 0 0.1rem;
+      }
+      .wpGalleryImg:hover {
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,204,0,0.25);
+      }
+      .wpGalleryHint {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.68rem;
+        color: var(--txt2);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        pointer-events: none;
+        opacity: 0.65;
+        animation: hintFade 2s ease 2s forwards;
+      }
+      @keyframes hintFade { to { opacity: 0; pointer-events: none; } }
       @media (max-width: 480px) {
         .wpCats { grid-template-columns: 1fr; }
         .wpBox { border-radius: 16px; }
@@ -2270,6 +2325,8 @@
         .wpCtaRow { flex-direction: column; }
         .wpWa { width: 100%; }
         .wpSkip { width: 100%; text-align: center; }
+        .wpGalleryImg { height: 135px; min-width: 190px; }
+        .wpGalleryTrack { padding: 0.65rem 0; animation-duration: 18s; }
       }
     </style>
   </head>
@@ -2298,6 +2355,25 @@
           <div class="wpBadge"><span>✦</span> Alkausar Printing Press</div>
           <h2 class="wpTitle">What can we <em>print</em> for you?</h2>
           <p class="wpSub">Explore our services — from everyday prints to stunning large-format displays.</p>
+        </div>
+        <!-- Image Gallery -->
+        <div class="wpGallery" id="wpGallery">
+          <div class="wpGalleryTrack" id="wpGalleryTrack">
+            <img src="assets/IMG-20260228-WA0008.jpg" class="wpGalleryImg" alt="Our Work 1">
+            <img src="assets/popup-1.jpg" class="wpGalleryImg" alt="Our Work 2">
+            <img src="assets/popup-2.jpg" class="wpGalleryImg" alt="Our Work 3">
+            <img src="assets/popup-3.jpg" class="wpGalleryImg" alt="Our Work 4">
+            <img src="assets/popup-4.jpg" class="wpGalleryImg" alt="Our Work 5">
+            <img src="assets/popup-5.jpg" class="wpGalleryImg" alt="Our Work 6">
+            <!-- duplicates for seamless loop -->
+            <img src="assets/IMG-20260228-WA0008.jpg" class="wpGalleryImg" aria-hidden="true" alt="">
+            <img src="assets/popup-1.jpg" class="wpGalleryImg" aria-hidden="true" alt="">
+            <img src="assets/popup-2.jpg" class="wpGalleryImg" aria-hidden="true" alt="">
+            <img src="assets/popup-3.jpg" class="wpGalleryImg" aria-hidden="true" alt="">
+            <img src="assets/popup-4.jpg" class="wpGalleryImg" aria-hidden="true" alt="">
+            <img src="assets/popup-5.jpg" class="wpGalleryImg" aria-hidden="true" alt="">
+          </div>
+          <span class="wpGalleryHint">auto ▶</span>
         </div>
         <!-- Body -->
         <div class="wpBody">
@@ -3335,6 +3411,13 @@
 
         wpClose.addEventListener("click", window.closePopup);
         wpSkip.addEventListener("click", window.closePopup);
+
+        // Pause carousel on touch (mobile)
+        const wpTrack = document.getElementById("wpGalleryTrack");
+        if (wpTrack) {
+          document.getElementById("wpGallery").addEventListener("touchstart", () => wpTrack.classList.add("paused"), { passive: true });
+          document.getElementById("wpGallery").addEventListener("touchend", () => wpTrack.classList.remove("paused"), { passive: true });
+        }
 
         // Close on overlay click (outside the box)
         wpOverlay.addEventListener("click", (e) => {
