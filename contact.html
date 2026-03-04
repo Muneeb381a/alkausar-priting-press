@@ -2121,19 +2121,51 @@
           }
         });
 
-        // Form submit (demo)
+        // Form submit — Web3Forms
+        const WEB3FORMS_KEY = "ad61bfee-0e2a-4d79-9064-063944349c7c"; // ← paste your key from web3forms.com
+
         document
           .getElementById("contactForm")
-          .addEventListener("submit", (e) => {
+          .addEventListener("submit", async (e) => {
             e.preventDefault();
             const btn = document.getElementById("submitBtn");
             btn.disabled = true;
             btn.querySelector("span").innerHTML = "Sending…";
-            setTimeout(() => {
-              document.getElementById("successMsg").classList.add("show");
-              btn.style.display = "none";
-              document.getElementById("submitNote").style.display = "none";
-            }, 1100);
+
+            const fd = new FormData();
+            fd.append("access_key", WEB3FORMS_KEY);
+            fd.append("subject", "New Contact Form Submission — Alkausar Printing Press");
+            fd.append("from_name", "Alkausar Printing Website");
+            fd.append("name", document.getElementById("fname").value);
+            fd.append("email", document.getElementById("femail").value);
+            fd.append("phone", document.getElementById("fphone").value || "—");
+            fd.append("company", document.getElementById("fco").value || "—");
+            fd.append("services", sel.length ? sel.join(", ") : "—");
+            fd.append("message", document.getElementById("fmsg").value);
+
+            const file = document.getElementById("fileInput").files[0];
+            if (file) fd.append("attachment", file);
+
+            try {
+              const res = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: fd,
+              });
+              const data = await res.json();
+              if (data.success) {
+                document.getElementById("successMsg").classList.add("show");
+                btn.style.display = "none";
+                document.getElementById("submitNote").style.display = "none";
+              } else {
+                throw new Error(data.message || "Submission failed");
+              }
+            } catch (err) {
+              btn.disabled = false;
+              btn.querySelector("span").innerHTML =
+                'Send Message <i data-lucide="arrow-right" style="width:15px;height:15px"></i>';
+              lucide.createIcons();
+              alert("Something went wrong. Please try again or email us directly at alkausarprinting418@gmail.com");
+            }
           });
 
         // WA hide on scroll
