@@ -965,6 +965,183 @@
         color: var(--yellow);
         flex-shrink: 0;
       }
+      a.svc {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ══════════════════════════════════════
+   PAKISTANI SERVICES GRID
+══════════════════════════════════════ */
+      .pkGrid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+      @media (max-width: 900px) {
+        .pkGrid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 560px) {
+        .pkGrid { grid-template-columns: 1fr; }
+      }
+      .pkCard {
+        background: var(--bg2);
+        border: 1px solid var(--bdr);
+        padding: 2.2rem 2rem 1.8rem;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.55s, transform 0.55s, border-color 0.3s, background 0.3s;
+      }
+      .pkCard.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .pkCard:nth-child(2) { transition-delay: 0.06s; }
+      .pkCard:nth-child(3) { transition-delay: 0.12s; }
+      .pkCard:nth-child(4) { transition-delay: 0.18s; }
+      .pkCard:nth-child(5) { transition-delay: 0.24s; }
+      .pkCard:nth-child(6) { transition-delay: 0.3s; }
+      .pkCard:nth-child(7) { transition-delay: 0.36s; }
+      .pkCard:nth-child(8) { transition-delay: 0.42s; }
+      .pkCard:nth-child(9) { transition-delay: 0.48s; }
+      .pkCard:nth-child(10) { transition-delay: 0.54s; }
+      .pkCard:hover {
+        border-color: rgba(255, 204, 0, 0.35);
+        background: var(--bg3);
+      }
+      .pkCard::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--yellow), var(--cyan));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.45s;
+      }
+      .pkCard:hover::before { transform: scaleX(1); }
+      .pkTop {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 1.2rem;
+      }
+      .pkIcon {
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--bdr);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--yellow);
+        transition: background 0.3s, border-color 0.3s;
+        flex-shrink: 0;
+      }
+      .pkCard:hover .pkIcon {
+        background: var(--yellow);
+        border-color: var(--yellow);
+        color: #0a0a0a;
+      }
+      .pkPrice {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        color: var(--yellow);
+        background: rgba(255, 204, 0, 0.1);
+        border: 1px solid rgba(255, 204, 0, 0.2);
+        padding: 4px 10px;
+        text-align: right;
+        line-height: 1.4;
+      }
+      .pkPriceLbl {
+        display: block;
+        font-size: 0.58rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--txt2);
+        margin-bottom: 1px;
+      }
+      .pkPriceVal {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--yellow);
+      }
+      .pkTi {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.55rem;
+        letter-spacing: 0.06em;
+        color: var(--txt);
+        margin-bottom: 0.55rem;
+        line-height: 1;
+      }
+      .pkD {
+        font-size: 0.85rem;
+        color: var(--txt2);
+        line-height: 1.65;
+        margin-bottom: 1.2rem;
+        flex: 1;
+      }
+      .pkFeats {
+        margin-bottom: 1.4rem;
+      }
+      .pkFeat {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.35rem 0;
+        font-size: 0.78rem;
+        color: var(--txt2);
+        border-bottom: 1px solid var(--bdr);
+      }
+      .pkFeat:last-child { border-bottom: none; }
+      .pkFeat svg { color: var(--yellow); flex-shrink: 0; }
+      .pkActions {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: auto;
+      }
+      .pkWa {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: #25d366;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .pkWa:hover { background: #1ebe5d; transform: translateY(-1px); }
+      .pkQt {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        border: 1px solid var(--bdg);
+        color: var(--txt2);
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        transition: border-color 0.2s, color 0.2s;
+        white-space: nowrap;
+      }
+      .pkQt:hover { border-color: var(--yellow); color: var(--yellow); }
 
       /* ══════════════════════════════════════
    PROCESS SECTION
@@ -1399,18 +1576,19 @@
         gap: 0.85rem;
       }
       .fSoc {
-        width: 34px;
-        height: 34px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #444;
+        color: #aaa;
         transition: all 0.3s;
       }
       .fSoc:hover {
         border-color: #ffcc00;
         color: #ffcc00;
+        background: rgba(255, 204, 0, 0.08);
         transform: translateY(-2px);
       }
       .fCT {
@@ -1563,7 +1741,7 @@
 
     <!-- WHATSAPP -->
     <a
-      href="https://wa.me/03239062418?text=Hello%20Alkausar%20Printing!"
+      href="https://wa.me/923239062418?text=Hello%20Alkausar%20Printing!"
       class="waF"
       id="waF"
       target="_blank"
@@ -1656,40 +1834,10 @@
       <div class="tckr" aria-hidden="true">
         <div class="tckrTk">
           <div class="tckrIt">
-            Offset Printing<span class="tckrDt">✦</span>Digital Print<span
-              class="tckrDt"
-              >✦</span
-            >Large Format<span class="tckrDt">✦</span>Packaging<span
-              class="tckrDt"
-              >✦</span
-            >Finishing<span class="tckrDt">✦</span>Foil Stamping<span
-              class="tckrDt"
-              >✦</span
-            >Embossing<span class="tckrDt">✦</span>Design<span class="tckrDt"
-              >✦</span
-            >Labels<span class="tckrDt">✦</span>Books<span class="tckrDt"
-              >✦</span
-            >Banners<span class="tckrDt">✦</span>Stickers<span class="tckrDt"
-              >✦</span
-            >
+            Offset Printing<span class="tckrDt">✦</span>Digital Print<span class="tckrDt">✦</span>Visiting Cards<span class="tckrDt">✦</span>Wedding Cards<span class="tckrDt">✦</span>Flex Banners<span class="tckrDt">✦</span>Sublimation<span class="tckrDt">✦</span>Letterhead<span class="tckrDt">✦</span>Bill Books<span class="tckrDt">✦</span>Brochures<span class="tckrDt">✦</span>Stickers<span class="tckrDt">✦</span>Wallpaper<span class="tckrDt">✦</span>Books<span class="tckrDt">✦</span>Packaging<span class="tckrDt">✦</span>Foil Stamping<span class="tckrDt">✦</span>
           </div>
           <div class="tckrIt">
-            Offset Printing<span class="tckrDt">✦</span>Digital Print<span
-              class="tckrDt"
-              >✦</span
-            >Large Format<span class="tckrDt">✦</span>Packaging<span
-              class="tckrDt"
-              >✦</span
-            >Finishing<span class="tckrDt">✦</span>Foil Stamping<span
-              class="tckrDt"
-              >✦</span
-            >Embossing<span class="tckrDt">✦</span>Design<span class="tckrDt"
-              >✦</span
-            >Labels<span class="tckrDt">✦</span>Books<span class="tckrDt"
-              >✦</span
-            >Banners<span class="tckrDt">✦</span>Stickers<span class="tckrDt"
-              >✦</span
-            >
+            Offset Printing<span class="tckrDt">✦</span>Digital Print<span class="tckrDt">✦</span>Visiting Cards<span class="tckrDt">✦</span>Wedding Cards<span class="tckrDt">✦</span>Flex Banners<span class="tckrDt">✦</span>Sublimation<span class="tckrDt">✦</span>Letterhead<span class="tckrDt">✦</span>Bill Books<span class="tckrDt">✦</span>Brochures<span class="tckrDt">✦</span>Stickers<span class="tckrDt">✦</span>Wallpaper<span class="tckrDt">✦</span>Books<span class="tckrDt">✦</span>Packaging<span class="tckrDt">✦</span>Foil Stamping<span class="tckrDt">✦</span>
           </div>
         </div>
       </div>
@@ -1707,7 +1855,7 @@
           </p>
         </div>
         <div class="svcGrid">
-          <div class="svc">
+          <a class="svc" href="https://wa.me/923239062418?text=Hello%20Alkausar!%20I%20need%20a%20quote%20for%20Offset%20Printing." target="_blank" rel="noopener">
             <div class="svcN">01</div>
             <div class="svcI">
               <i data-lucide="printer" style="width: 22px; height: 22px"></i>
@@ -1737,8 +1885,8 @@
                 style="width: 20px; height: 20px"
               ></i>
             </div>
-          </div>
-          <div class="svc">
+          </a>
+          <a class="svc" href="https://wa.me/923239062418?text=Hello%20Alkausar!%20I%20need%20a%20quote%20for%20Digital%20Printing." target="_blank" rel="noopener">
             <div class="svcN">02</div>
             <div class="svcI">
               <i data-lucide="zap" style="width: 22px; height: 22px"></i>
@@ -1769,8 +1917,8 @@
                 style="width: 20px; height: 20px"
               ></i>
             </div>
-          </div>
-          <div class="svc">
+          </a>
+          <a class="svc" href="https://wa.me/923239062418?text=Hello%20Alkausar!%20I%20need%20a%20quote%20for%20Large%20Format%20printing." target="_blank" rel="noopener">
             <div class="svcN">03</div>
             <div class="svcI">
               <i data-lucide="maximize" style="width: 22px; height: 22px"></i>
@@ -1800,8 +1948,8 @@
                 style="width: 20px; height: 20px"
               ></i>
             </div>
-          </div>
-          <div class="svc">
+          </a>
+          <a class="svc" href="https://wa.me/923239062418?text=Hello%20Alkausar!%20I%20need%20a%20quote%20for%20Packaging." target="_blank" rel="noopener">
             <div class="svcN">04</div>
             <div class="svcI">
               <i data-lucide="package" style="width: 22px; height: 22px"></i>
@@ -1831,8 +1979,8 @@
                 style="width: 20px; height: 20px"
               ></i>
             </div>
-          </div>
-          <div class="svc">
+          </a>
+          <a class="svc" href="https://wa.me/923239062418?text=Hello%20Alkausar!%20I%20need%20a%20quote%20for%20Finishing%20%26%20Bindery." target="_blank" rel="noopener">
             <div class="svcN">05</div>
             <div class="svcI">
               <i data-lucide="scissors" style="width: 22px; height: 22px"></i>
@@ -1862,8 +2010,8 @@
                 style="width: 20px; height: 20px"
               ></i>
             </div>
-          </div>
-          <div class="svc">
+          </a>
+          <a class="svc" href="https://wa.me/923239062418?text=Hello%20Alkausar!%20I%20need%20help%20with%20Design%20%26%20Prepress." target="_blank" rel="noopener">
             <div class="svcN">06</div>
             <div class="svcI">
               <i data-lucide="pen-tool" style="width: 22px; height: 22px"></i>
@@ -1893,7 +2041,444 @@
                 style="width: 20px; height: 20px"
               ></i>
             </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- PAKISTANI SERVICES WITH PRICING -->
+      <section class="sec secAlt" id="pakistani-services">
+        <div class="secTop">
+          <div>
+            <span class="secLbl">— Hamaray Services</span>
+            <h2 class="secH">Popular <em>Print</em><br />Services in Pakistan</h2>
           </div>
+          <p class="secP">
+            All services done in-house at our Sialkot press. WhatsApp us for a
+            same-day quote — prices in PKR, delivery nationwide.
+          </p>
+        </div>
+        <div class="pkGrid">
+
+          <!-- 1: Visiting Cards -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="credit-card" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 500</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Visiting Cards</h3>
+            <p class="pkD">
+              Professional business cards that leave a strong first impression.
+              Available in matte, gloss, soft-touch, and spot UV finishes.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                100 cards from Rs. 500
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Single & double-sided printing
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                UV, foil & embossed options
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Visiting%20Cards%20chahiye.%20Please%20quote%20dijiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 2: Wedding Cards -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="heart" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 2,500</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Wedding Cards — شادی کارڈ</h3>
+            <p class="pkD">
+              Elegant wedding invitations with foil stamping, embossing, and
+              luxury paper. Customized to your family's style and budget.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                50 cards from Rs. 2,500
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Gold / silver foil stamping
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Box packing & envelope included
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Shaadi%20Cards%20chahiye.%20Quantity%20aur%20design%20discuss%20karni%20hai." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 3: Flex & Banner -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="flag" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 120/sq ft</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Flex & Banner Printing</h3>
+            <p class="pkD">
+              High-resolution flex banners for shops, events, political
+              campaigns, and exhibitions. Fast turnaround, any size.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Backlit & frontlit flex available
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Pole pockets & grommets added
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Express delivery in 24 hours
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Flex%20Banner%20chahiye.%20Size%20aur%20quantity%20bataiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 4: Sublimation -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="shirt" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 350</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Sublimation Printing</h3>
+            <p class="pkD">
+              Vibrant, permanent prints on mugs, T-shirts, cushions, phone
+              cases, and custom gifts. Perfect for corporate giveaways.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Mugs from Rs. 350 each
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                T-shirts, jerseys, cushions
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Bulk corporate gifting available
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Sublimation%20printing%20chahiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 5: Letterhead & Envelope -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="mail" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 1,800</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Letterhead & Envelopes</h3>
+            <p class="pkD">
+              Branded stationery that projects credibility. Corporate
+              letterheads, DL envelopes, and compliment slips printed to order.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                500 letterheads from Rs. 1,800
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                DL & C5 envelopes with logo
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                100gsm premium paper stocks
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Letterhead%20aur%20Envelopes%20chahiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 6: Bill Books / Receipt Books -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="book-open" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 900</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Bill Books / Receipt Books</h3>
+            <p class="pkD">
+              Custom-numbered bill books, receipt pads, and cash memos for
+              shops, offices, and businesses. Duplicate & triplicate available.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                50-page book from Rs. 900
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Serial numbering included
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Duplicate (NCR) copies available
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Bill%20Books%20ya%20Receipt%20Books%20chahiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 7: Brochure & Flyer -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="layout" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 1,200</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Brochure & Flyer Printing</h3>
+            <p class="pkD">
+              Eye-catching marketing material for your business, events, and
+              promotions. Tri-fold, bi-fold, Z-fold — any style, any quantity.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                1,000 A5 flyers from Rs. 1,200
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Tri-fold & bi-fold brochures
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Gloss & matte lamination options
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Brochure%20ya%20Flyer%20printing%20chahiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 8: Sticker & Label -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="tag" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 600</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Sticker & Label Printing</h3>
+            <p class="pkD">
+              Custom stickers, product labels, and barcode tags for retail,
+              packaging, and branding. Die-cut shapes available.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                100 stickers from Rs. 600
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Waterproof & outdoor grades
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Die-cut, kiss-cut, rolls
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Sticker%20ya%20Label%20printing%20chahiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 9: Wallpaper & Murals -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="image" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 180/sq ft</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Wallpaper & 3D Murals</h3>
+            <p class="pkD">
+              Transform any wall with high-resolution custom wallpaper prints.
+              Offices, homes, restaurants, and showrooms — any size.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Vinyl, fabric & non-woven media
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                3D effect & textured designs
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Installation guidance provided
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Wallpaper%20ya%203D%20Mural%20chahiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
+          <!-- 10: Books & Magazines -->
+          <div class="pkCard">
+            <div class="pkTop">
+              <div class="pkIcon">
+                <i data-lucide="book" style="width:20px;height:20px"></i>
+              </div>
+              <div class="pkPrice">
+                <span class="pkPriceLbl">Starting from</span>
+                <span class="pkPriceVal">Rs. 3,500</span>
+              </div>
+            </div>
+            <h3 class="pkTi">Books & Magazines</h3>
+            <p class="pkD">
+              Perfect-bound softcovers, hardcover case binding, saddle-stitch
+              booklets, and magazines for schools, publishers, and businesses.
+            </p>
+            <div class="pkFeats">
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                100 copies from Rs. 3,500
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                Perfect / saddle-stitch binding
+              </div>
+              <div class="pkFeat">
+                <i data-lucide="check" style="width:12px;height:12px"></i>
+                School & madrassa catalogues
+              </div>
+            </div>
+            <div class="pkActions">
+              <a href="https://wa.me/923239062418?text=Assalam%20o%20Alaikum!%20Mujhe%20Book%20ya%20Magazine%20printing%20chahiye." class="pkWa" target="_blank" rel="noopener">
+                <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
+              <a href="contact.html" class="pkQt">
+                <i data-lucide="file-text" style="width:13px;height:13px"></i>
+                Quote
+              </a>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -2095,21 +2680,18 @@
             2019. We bring your vision to life with industrial-grade quality.
           </p>
           <div class="fSocs">
-            <a href="#" class="fSoc"
-              ><i data-lucide="instagram" style="width: 15px; height: 15px"></i
-            ></a>
-            <a href="#" class="fSoc"
-              ><i data-lucide="twitter" style="width: 15px; height: 15px"></i
-            ></a>
-            <a
-              href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/"
-              target="_blank"
-              class="fSoc"
-              ><i data-lucide="facebook" style="width: 15px; height: 15px"></i
-            ></a>
-            <a href="#" class="fSoc"
-              ><i data-lucide="linkedin" style="width: 15px; height: 15px"></i
-            ></a>
+            <a href="#" class="fSoc" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="fSoc" aria-label="Twitter / X">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/p/Al-Kausar-Printing-Press-100090044228010/" target="_blank" rel="noopener" class="fSoc" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="fSoc" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
           </div>
         </div>
         <div>
@@ -2125,11 +2707,12 @@
         <div>
           <div class="fCT">Services</div>
           <ul class="fLks">
-            <li><a href="#">Offset Printing</a></li>
-            <li><a href="#">Digital Printing</a></li>
-            <li><a href="#">Large Format</a></li>
-            <li><a href="#">Packaging</a></li>
-            <li><a href="#">Design Services</a></li>
+            <li><a href="service.html#services">Offset Printing</a></li>
+            <li><a href="service.html#services">Digital Printing</a></li>
+            <li><a href="service.html#pakistani-services">Visiting Cards</a></li>
+            <li><a href="service.html#pakistani-services">Wedding Cards</a></li>
+            <li><a href="service.html#pakistani-services">Flex Banners</a></li>
+            <li><a href="service.html#pakistani-services">Bill Books</a></li>
           </ul>
         </div>
         <div>
@@ -2270,7 +2853,7 @@
           { threshold: 0.15 },
         );
         document
-          .querySelectorAll(".svc,.procItem,.capItem,.techItem")
+          .querySelectorAll(".svc,.procItem,.capItem,.techItem,.pkCard")
           .forEach((el) => io.observe(el));
 
         // ── WA float ──
