@@ -1033,6 +1033,20 @@
         opacity: 1;
       }
 
+      /* Price badge */
+      .pCard-price {
+        display: inline-block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--yellow);
+        background: rgba(255,204,0,0.08);
+        border: 1px solid rgba(255,204,0,0.22);
+        padding: 0.2rem 0.6rem;
+        margin-bottom: 8px;
+      }
+
       /* CTA row at bottom of card */
       .pCard-cta {
         display: flex;
@@ -1068,6 +1082,51 @@
         border-color: var(--yellow);
         color: var(--yellow);
         transform: rotate(45deg);
+      }
+
+      /* WhatsApp button on card */
+      .pCard-wa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 0.6rem 1rem;
+        background: #25d366;
+        color: #fff;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        text-decoration: none;
+        margin-top: 8px;
+        transition: background 0.25s, transform 0.2s;
+        border: none;
+        cursor: pointer;
+      }
+      .pCard-wa:hover {
+        background: #1da851;
+        transform: translateY(-1px);
+      }
+
+      /* WhatsApp button in modal */
+      .modal-btn-wa {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0.72rem 1.4rem;
+        background: #25d366;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.76rem;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.25s;
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
+      }
+      .modal-btn-wa:hover {
+        background: #1da851;
       }
 
       .noRes {
@@ -1778,14 +1837,13 @@
         <div class="pgBlob pgB1"></div>
         <div class="pgBlob pgB2"></div>
         <div class="pgBody">
-          <div class="pgEye">— Print Portfolio</div>
+          <div class="pgEye">— Hamara Kaam · Sialkot, Pakistan</div>
           <h1 class="pgH1">
-            <span class="pgH1L1">Our Best</span>
-            <span class="pgH1L2">Projects</span>
+            <span class="pgH1L1">Alkausar Ki</span>
+            <span class="pgH1L2">Printing</span>
           </h1>
           <p class="pgSub">
-            Every project tells a story. Browse our finest print creations
-            across every format and discipline.
+            Visiting cards se lekar shaadi cards tak, flex se sublimation tak — yahan hai Alkausar ka asli kaam. Koi bhi service select karein aur seedha WhatsApp pe order karein.
           </p>
         </div>
       </section>
@@ -1794,32 +1852,10 @@
       <div class="tckr" aria-hidden="true">
         <div class="tckrTk">
           <div class="tckrIt">
-            Corporate<span class="tckrDt">✦</span>Packaging<span class="tckrDt"
-              >✦</span
-            >Editorial<span class="tckrDt">✦</span>Retail<span class="tckrDt"
-              >✦</span
-            >Large Format<span class="tckrDt">✦</span>Brand Identity<span
-              class="tckrDt"
-              >✦</span
-            >Books<span class="tckrDt">✦</span>Labels<span class="tckrDt"
-              >✦</span
-            >Signage<span class="tckrDt">✦</span>Banners<span class="tckrDt"
-              >✦</span
-            >
+            Visiting Cards<span class="tckrDt">✦</span>Shaadi Cards<span class="tckrDt">✦</span>Flex Printing<span class="tckrDt">✦</span>Sublimation<span class="tckrDt">✦</span>Bill Books<span class="tckrDt">✦</span>Brochures<span class="tckrDt">✦</span>Stickers &amp; Labels<span class="tckrDt">✦</span>Calendars<span class="tckrDt">✦</span>Sialkot, Pakistan<span class="tckrDt">✦</span>
           </div>
           <div class="tckrIt">
-            Corporate<span class="tckrDt">✦</span>Packaging<span class="tckrDt"
-              >✦</span
-            >Editorial<span class="tckrDt">✦</span>Retail<span class="tckrDt"
-              >✦</span
-            >Large Format<span class="tckrDt">✦</span>Brand Identity<span
-              class="tckrDt"
-              >✦</span
-            >Books<span class="tckrDt">✦</span>Labels<span class="tckrDt"
-              >✦</span
-            >Signage<span class="tckrDt">✦</span>Banners<span class="tckrDt"
-              >✦</span
-            >
+            Visiting Cards<span class="tckrDt">✦</span>Shaadi Cards<span class="tckrDt">✦</span>Flex Printing<span class="tckrDt">✦</span>Sublimation<span class="tckrDt">✦</span>Bill Books<span class="tckrDt">✦</span>Brochures<span class="tckrDt">✦</span>Stickers &amp; Labels<span class="tckrDt">✦</span>Calendars<span class="tckrDt">✦</span>Sialkot, Pakistan<span class="tckrDt">✦</span>
           </div>
         </div>
       </div>
@@ -1832,7 +1868,7 @@
             type="text"
             class="srchIn"
             id="searchInput"
-            placeholder="Search projects… (e.g. banner, packaging, annual report)"
+            placeholder="Dhundhen… (e.g. visiting cards, shaadi card, flex, sublimation)"
           />
         </div>
         <div class="filterRow" id="filterRow"></div>
@@ -1940,7 +1976,7 @@
         <p class="fCopy">
           © 2026 Alkausar Printing Press. All rights reserved.
         </p>
-        <p class="fCopy" style="opacity:0.45;">Created by HafizMuneeb</p>
+        <p class="fCopy" style="font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.1em;color:#2e2e2e;"><span style="color:rgba(255,204,0,0.55);">&#47;&#47;</span> designed &amp; built by <span style="color:#ffcc00;font-weight:700;letter-spacing:0.05em;">HafizMuneeb</span> <span style="color:rgba(255,204,0,0.3);">_</span></p>
         <div class="fCmyk">
           <div class="pip pC"></div>
           <div class="pip pM"></div>
@@ -1972,10 +2008,12 @@
             <ul class="modal-bullets" id="modalBullets"></ul>
           </div>
           <div class="modal-cta">
-            <a href="contact.html" class="modal-btn-primary">Request Similar</a>
-            <button class="modal-btn-outline" id="modalClose2">
-              <i data-lucide="x" style="width: 13px; height: 13px"></i> Close
-            </button>
+            <a href="#" class="modal-btn-wa" id="modalWaBtn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order on WhatsApp
+            </a>
+            <a href="contact.html" class="modal-btn-primary">Get Quote</a>
+            <button class="modal-btn-outline" id="modalClose2">&#x2715; Close</button>
           </div>
         </div>
         <!-- Bottom: gallery strip -->
@@ -2091,549 +2129,7 @@
         /* ════════════════════════════════
          PORTFOLIO DATA
       ════════════════════════════════ */
-        window.portfolioData = window.portfolioData || [
-          // ═══════════════════════════════════════════════════════════
-          // INTERIOR DECOR & WALLPAPER
-          // ═══════════════════════════════════════════════════════════
-
-          {
-            title: "Custom Textured Vinyl Wallpaper",
-            category: "Interior Decor",
-            description:
-              "Bespoke wall coverings with leather, linen, or sand textures, printed with eco-solvent inks for high-end interiors.",
-            bullets: [
-              "300gsm heavy-duty vinyl with paper backing",
-              "Scratch-resistant and wipeable surface",
-              "Custom seamless patterns or photographic murals",
-              "Fire-rated for commercial installations",
-              "Widths up to 1370mm per panel",
-            ],
-            images: [
-              "https://cdn.magicdecor.in/com/2023/02/29215232/image-1684845232-1963-710x488.jpg",
-              "https://cdn.magicdecor.in/com/2023/02/29202408/image-1686148972-5865-710x488.jpg",
-              "https://en.vavex.cz/uploads/item/23583/template/10118/images/x-10055.jpg",
-              "https://orchiddigitals.com/wp-content/uploads/2025/09/Large-sized-wallpaper-print-for-an-office-1024x683-1.jpg",
-            ],
-          },
-          {
-            title: "Removable 'Peel & Stick' Fabric Wallpaper",
-            category: "Interior Decor",
-            description:
-              "Self-adhesive polyester fabric wallpaper that leaves no residue—perfect for rentals and temporary retail displays.",
-            bullets: [
-              "100% opaque adhesive fabric",
-              "Repositionable during installation",
-              "PVC-free and non-toxic",
-              "Ideal for feature walls and nurseries",
-              "Vivid matte finish with no glare",
-            ],
-            images: [
-              "https://cdn.onlinefabricstore.com/products/NW47104_3.jpg?width=900",
-              "https://cdn.onlinefabricstore.com/products/NW52810_2.jpg",
-              "https://magicdecor.com/wp-content/uploads/2025/10/Dreamer-Blue-Gold-Bohemian-Pattern-Wallpaper-m1-600x450.jpg",
-            ],
-          },
-          {
-            title: "Metallic Accent Wallpaper",
-            category: "Interior Decor",
-            description:
-              "Luxury wallpaper with gold, silver, or copper base layers for high-impact reflective branding in lobbies.",
-            bullets: [
-              "High-shine metallic foil substrate",
-              "Over-printed with translucent inks for depth",
-              "Water-resistant and UV stable",
-              "Professional installation recommended",
-              "Custom luxury geometric designs",
-            ],
-            images: [
-              "https://png.pngtree.com/thumb_back/fh260/background/20251224/pngtree-abstract-red-and-black-metallic-background-with-silver-accents-image_20912164.webp",
-              "https://png.pngtree.com/thumb_back/fh260/background/20260102/pngtree-metallic-grain-shimmer-in-blue-black-with-pink-accent-image_20987029.webp",
-              "https://www.shutterstock.com/shutterstock/videos/3697080971/thumb/1.jpg?ip=x480",
-            ],
-          },
-
-          // ═══════════════════════════════════════════════════════════
-          // FLEX & OUTDOOR ADVERTISING
-          // ═══════════════════════════════════════════════════════════
-
-          {
-            title: "Heavy-Duty Frontlit Flex Banners",
-            category: "Flex Printing",
-            description:
-              "The industry standard for outdoor billboards and event backdrops, offering maximum durability and color pop.",
-            bullets: [
-              "510gsm high-tenacity polyester yarn",
-              "Weather-proof and fade-resistant (3-year outdoor)",
-              "Available with heat-welded hems and brass eyelets",
-              "Seamless printing up to 10ft width",
-              "Matte finish to reduce sun glare",
-            ],
-            images: [
-              "https://www.multiviscomindo.com/wp-content/uploads/2021/06/fronlit-banner-multi-viscomindo.jpg",
-              "https://www.hdl-corp.com/uploads/202335296/pvc-coated-frontlit-bannerdcc04d85-08a6-4725-855e-d1369fa2d996.jpg",
-              "",
-            ],
-          },
-          {
-            title: "Backlit Flex for Lightboxes",
-            category: "Flex Printing",
-            description:
-              "Translucent flex material designed for uniform light diffusion in glowing shop signs and night-time displays.",
-            bullets: [
-              "600gsm high-translucency media",
-              "Double-strike printing for rich colors when lit",
-              "Heat and UV resistant for internal bulbs",
-              "Smooth surface for high-detail graphics",
-              "Custom sizes for standard and slim lightboxes",
-            ],
-            images: [
-              "https://www.multiviscomindo.com/wp-content/uploads/2021/06/backlit-fabric-multi-viscomindo.jpg",
-              "",
-            ],
-          },
-          {
-            title: "Blackout / Blockout Flex Banners",
-            category: "Flex Printing",
-            description:
-              "Premium flex with an internal black layer to prevent light pass-through—perfect for double-sided hanging banners.",
-            bullets: [
-              "650gsm ultra-thick blackout media",
-              "100% opacity (no ghosting from behind)",
-              "Double-sided high-resolution printing",
-              "Ideal for street poles and mall hanging",
-              "Wind-resistant reinforced structure",
-            ],
-            images: [
-              "https://img.freepik.com/free-psd/street-banner-mockup_23-2148185855.jpg",
-            ],
-          },
-          {
-            title: "Mesh Flex for Construction Fencing",
-            category: "Flex Printing",
-            description:
-              "Perforated flex material that allows wind to pass through, reducing the 'sail effect' on large scaffolds.",
-            bullets: [
-              "350gsm air-permeable mesh",
-              "70/30 or 50/50 airflow ratios",
-              "Reinforced webbing on edges",
-              "Massive scale printing for building wraps",
-              "B1 Fire Rated for construction safety",
-            ],
-            images: [
-              "https://static.vecteezy.com/system/resources/thumbnails/034/060/188/small/grey-soccer-fabric-texture-with-air-mesh-sportswear-background-photo.jpg",
-              "https://static.vecteezy.com/system/resources/thumbnails/076/733/733/small/vibrant-blank-banner-on-construction-site-fence-photo.jpg",
-            ],
-          },
-          // ═══════════════════════════════════════════════════════════
-          // STATIONERY
-          // ═══════════════════════════════════════════════════════════
-
-          {
-            title: "Premium Foil & Spot UV Business Cards",
-            category: "Stationery",
-            description:
-              "Luxury 400gsm card with rose gold foil stamping and selective spot UV coating for an unforgettable first impression.",
-            bullets: [
-              "400gsm premium cardstock · soft-touch or rounded corners",
-              "Rose gold hot foil + high-gloss spot UV",
-              "Full CMYK double-sided printing",
-              "500–1,000 units per design · 48-hour express available",
-              "Packaged in elegant branded kraft boxes",
-            ],
-            images: [
-              "https://img.freepik.com/premium-psd/luxury-black-business-card-mockup-with-spot-uv-gold-embossed-effect_180294-247.jpg",
-              "https://img.freepik.com/premium-psd/gold-foil-modern-dark-business-card-mockup-with-spot-uv-effect_658083-23.jpg",
-              "https://img.freepik.com/premium-psd/luxury-gold-foil-dark-business-card-mockup-with-spot-uv-effect_658083-26.jpg",
-              "https://t3.ftcdn.net/jpg/16/65/59/78/360_F_1665597815_B2og6U69xvnAPeKQwQoURGysIcluQWtf.jpg",
-            ],
-          },
-          {
-            title: "Blind Embossed Letterheads",
-            category: "Stationery",
-            description:
-              "Sophisticated watermarked paper with deep blind embossing delivering subtle elegance for professional correspondence.",
-            bullets: [
-              "120gsm premium laid paper with watermark",
-              "Blind embossed logo and monogram",
-              "Pantone + CMYK options",
-              "1,000–2,500 sheets · A4 & US Letter",
-              "Matching envelopes available on request",
-            ],
-            images: [
-              "https://img.freepik.com/free-photo/embossed-letterhead-stack_23-2148229072.jpg",
-              "https://img.freepik.com/free-photo/letterhead-mockup_23-2148229074.jpg",
-              "https://s36499.pcdn.co/wp-content/uploads/2021/03/embossed-paper-that-was-designed-using-an-embosser.jpg",
-            ],
-          },
-          {
-            title: "Custom Die-Cut Window Envelopes",
-            category: "Stationery",
-            description:
-              "Precision die-cut envelopes with branded windows and security tint lining for impactful direct mail.",
-            bullets: [
-              "130gsm kraft, white or colored stock",
-              "Custom window die-cut + security tint",
-              "Peel-and-seal or gummed closure",
-              "2,000–10,000 units · DL, C5, C4",
-              "Full bleed printing supported",
-            ],
-            images: [
-              "https://img.freepik.com/free-photo/die-cut-envelope-design_23-2148229060.jpg",
-              "https://static.vecteezy.com/system/resources/previews/002/317/390/non_2x/envelope-die-cut-mock-up-template-vector.jpg",
-              "https://printandcopy.ndsu.edu/graphics/487-Envelope.jpg",
-            ],
-          },
-          {
-            title: "Branded Spiral Notepad Sets",
-            category: "Stationery",
-            description:
-              "Personalized spiral-bound notepads with laminated covers and perforated pages — perfect for offices and promotions.",
-            bullets: [
-              "80gsm offset inner pages · 50–100 sheets",
-              "300gsm gloss or matte laminated cover",
-              "Strong double-wire spiral binding",
-              "500–2,000 sets · A5, A6, pocket sizes",
-              "Optional elastic closure & pen loop",
-            ],
-            images: [
-              "https://www.qualitylogoproducts.com/custom-notebooks/mini-spiral-notebook-q84704-hq-874214.jpg",
-              "https://png.pngtree.com/png-clipart/20200224/original/pngtree-spiral-empty-notepad-blank-mockup-set-template-for-advertising-branding-corporate-png-image_5221993.jpg",
-              "https://www.qualitylogoproducts.com/custom-notepads/spiral-notebook-and-pen-hq-814421.jpg",
-            ],
-          },
-          {
-            title: "Custom Compliment Slips",
-            category: "Stationery",
-            description:
-              "Premium compliment slips on high-quality stock for short handwritten notes with consistent brand presence.",
-            bullets: [
-              "120gsm Conqueror or laid finish paper",
-              "Full color or single Pantone logo",
-              "210 × 99 mm (1/3 A4)",
-              "1,000–5,000 units per run",
-              "Pairs perfectly with letterheads & envelopes",
-            ],
-            images: [
-              "https://gforceprinting.com.au/wp-content/uploads/2025/03/istockphoto-176574122-612x612-1.jpg",
-              "https://aura-print.com/media/wysiwyg/AP_A4_Folder_Printing_Angled-500x500px_1.jpg",
-            ],
-          },
-          {
-            title: "Branded Notes Pads",
-            category: "Stationery",
-            description:
-              "Repositionable branded sticky notes in multiple sizes — ideal for office branding and giveaways.",
-            bullets: [
-              "80gsm paper · 100 sheets per pad",
-              "Full-color logo or full-sheet print option",
-              "76×76 mm, 100×75 mm, cube formats",
-              "250–2,000 pads per order",
-              "Individually shrink-wrapped or boxed",
-            ],
-            images: [
-              "https://www.qualitylogoproducts.com/custom-notepads/4x6x25-sticky-note-pad-hq.jpg",
-              "https://www.qualitylogoproducts.com/note-pad-cubes/post-it-custom-printed-notes3x350count-hq.jpg",
-              "",
-            ],
-          },
-          {
-            title: "Presentation Pocket Folders",
-            category: "Stationery",
-            description:
-              "Professional double-pocket folders with card slits and premium finishes for proposals and tenders.",
-            bullets: [
-              "350gsm artboard · gloss or soft-touch laminate",
-              "Die-cut business card slits + spine title",
-              "A4 & letter size variants",
-              "500–3,000 units",
-              "Spot UV, foil or embossing available",
-            ],
-            images: [
-              "https://media.istockphoto.com/id/859610656/photo/blank-white-reinforced-pocket-folders-on-grey-background-for-mock-up-3d-rendering.jpg?s=612x612&w=0&k=20&c=7OnguWdAftlS3U_yz7oMH7CGBhwHNGgqjvBi0Ps4Icc=",
-              "https://www.qualitylogoproducts.com/folders/splash-presentation-pocket-folders-hq.jpg",
-              "https://static.vecteezy.com/system/resources/thumbnails/026/532/684/small/professional-presentation-folder-mockup-vector.jpg",
-              "https://content.oppictures.com/Master_Images/Master_Variants/Variant_1500/739803.jpg",
-            ],
-          },
-          {
-            title: "Carbonless Invoice & Receipt Pads",
-            category: "Stationery",
-            description:
-              "Duplicate or triplicate NCR invoice pads with sequential numbering for professional billing & record keeping.",
-            bullets: [
-              "2-part or 3-part NCR sets",
-              "Red or black sequential numbering",
-              "A5, A4 or custom glued pads",
-              "100–500 sets per pad",
-              "Company terms & logo footer",
-            ],
-            images: [
-              "https://static.vecteezy.com/system/resources/thumbnails/065/908/837/small_2x/realistic-invoice-pad-design-mockup-free-psd.png",
-              "https://www.printedinvoicebooks.co.uk/wp-content/uploads/2023/06/receipt-book-768x768.jpg",
-              "https://static.vecteezy.com/system/resources/previews/065/987/675/non_2x/editable-cash-memo-invoice-pad-mockup-template-isolated-view-free-psd.png",
-              "https://static.vecteezy.com/system/resources/previews/049/947/683/non_2x/corporate-invoice-receipt-book-design-template-vector.jpg?odnHeight=117&odnWidth=117&odnBg=FFFFFF",
-              "https://img.freepik.com/premium-psd/receipt-book-mockup_899942-79.jpg",
-            ],
-          },
-          {
-            title: "Premium Greeting Cards with Envelopes",
-            category: "Stationery",
-            description:
-              "Folded greeting cards on thick stock for corporate holidays, client appreciation and seasonal campaigns.",
-            bullets: [
-              "300–350gsm card · matt or gloss laminate",
-              "Full color inside & out",
-              "C6, A6 or DL with matching envelopes",
-              "500–2,500 units",
-              "Cellophane wrapped in packs of 10–25",
-            ],
-            images: [
-              "https://img.freepik.com/premium-psd/landscape-a7-greeting-card-mockup-with-envelope_1332-777.jpg",
-              "https://img.freepik.com/premium-psd/dark-greeting-card-with-envelope-mockup-close-up_1332-44821.jpg",
-              "https://img.freepik.com/premium-psd/dark-greeting-card-with-envelope-mockup-top-view_1332-43290.jpg?w=360",
-              "https://img.freepik.com/free-vector/christmas-greeting-card-envelope-template_1361-1892.jpg",
-            ],
-          },
-          {
-            title: "Appointment Reminder Cards",
-            category: "Stationery",
-            description:
-              "Durable appointment cards for salons, clinics and service businesses — compact and professional.",
-            bullets: [
-              "350gsm artboard or 400gsm cotton",
-              "Full color both sides",
-              "85×55 mm standard size",
-              "1,000–5,000 per design",
-              "Rounded corners standard",
-            ],
-            images: [
-              "https://img.freepik.com/premium-vector/appointment-reminder-card-professional-concept-design_842344-421.jpg",
-              "https://t4.ftcdn.net/jpg/10/89/51/89/360_F_1089518965_8hqMP5tbIK2sI8A3ImtU55duIwmTiVcO.jpg",
-              "https://img.freepik.com/premium-vector/flat-design-appointment-card-template_23-2149627511.jpg",
-            ],
-          },
-          {
-            title: "PVC Loyalty & Membership Cards",
-            category: "Stationery",
-            description:
-              "Durable plastic loyalty cards with barcodes, magnetic stripes or QR codes for retail & membership programs.",
-            bullets: [
-              "0.76 mm PVC plastic stock",
-              "Full color + barcode/QR/magstripe encoding",
-              "85×54 mm standard credit card size",
-              "500–10,000 units",
-              "Numbering & personalization available",
-            ],
-            images: [
-              "https://png.pngtree.com/templates/20190516/ourmid/pngtree-fitness-platinum-membership-card-design-weightmotionscientific-slimmingincrease-muscle-image_172788.jpg",
-              "https://deq64r0ss2hgl.cloudfront.net/images/product/thick-premium-visitingbusiness-cards-84043033675883.jpg",
-              "https://jiarfidtag.com/wp-content/uploads/2025/02/pvc-id-card-4.jpg",
-              "https://img.freepik.com/free-vector/realistic-vip-card-template-with-golden-details_23-2149129368.jpg",
-            ],
-          },
-          {
-            title: "Wire-Bound Desk Calendars",
-            category: "Stationery",
-            description:
-              "Custom monthly desk calendars with company branding on every page — practical year-round promotion.",
-            bullets: [
-              "250gsm gloss cover + 150gsm inner pages",
-              "13-sheet format (12 months + cover)",
-              "Wiro binding with hanger",
-              "300–2,000 units",
-              "Custom photography or artwork per month",
-            ],
-            images: [
-              "https://thumbs.dreamstime.com/b/spiral-bound-desk-calendar-year-displayed-white-background-features-black-stand-open-to-show-multiple-monthly-417959231.jpg",
-              "https://png.pngtree.com/png-vector/20251218/ourlarge/pngtree-three-white-spiral-bound-desk-calendars-arranged-staggered-on-grey-background-png-image_18257069.webp",
-              "https://thumbs.dreamstime.com/b/spiral-bound-desk-calendar-displaying-month-january-days-arranged-grid-format-sundays-highlighted-red-394166244.jpg",
-              "https://png.pngtree.com/thumb_back/fw800/background/20251122/pngtree-a-2025-spiral-bound-desk-calendar-open-to-january-standing-on-image_20533258.webp",
-            ],
-          },
-          {
-            title: "Large Format Wall Calendars (A3)",
-            category: "Stationery",
-            description:
-              "Premium A3 wall calendars with stunning visuals and full branding — ideal for offices and retail spaces.",
-            bullets: [
-              "200gsm gloss art paper",
-              "13 pages + cover",
-              "Spiral bound with hanger",
-              "500–3,000 units",
-              "Pantone spot colors optional",
-            ],
-            images: [
-              "https://static.vecteezy.com/system/resources/previews/052/943/932/non_2x/wall-calendar-2025-a3-size-vector.jpg",
-              "https://www.creativefabrica.com/wp-content/uploads/2021/10/11/Wall-Calendar-Template-2022-Template-Graphics-18668232-1-1-580x387.jpg",
-              "https://cdn.dribbble.com/userupload/40763255/file/original-fa10160c0d8091bebcdf722b0537354f.jpg?resize=400x0",
-            ],
-          },
-
-          // ═══════════════════════════════════════════════════════════
-          // PROMOTIONAL PRINT
-          // ═══════════════════════════════════════════════════════════
-
-          {
-            title: "High-Impact A5 Double-Sided Flyers",
-            category: "Promotional",
-            description:
-              "Bright full-color flyers on thick stock — perfect for events, product launches and local marketing.",
-            bullets: [
-              "350gsm gloss or matte artboard",
-              "Full CMYK double-sided print",
-              "5,000–50,000 units",
-              "Express 48–72 hour turnaround",
-              "Optional soft-touch or aqueous coating",
-            ],
-            images: [
-              "https://img.freepik.com/free-photo/double-sided-flyer-mockup_23-2148229000.jpg",
-              "https://djuqbvg97u5zb.cloudfront.net/bestatpri/images/products_gallery_images/flyer_printing_a5_1738752243761.jpg",
-              "https://elements-resized.envatousercontent.com/elements-preview-images/89eed655-a6a6-4cb2-a6df-8dd9d9ef061f?w=632&cf_fit=scale-down&q=85&format=auto&s=c526e73a317d9fbb5804efd9a1ce7e73ea8778977dc58fe4cc3ae1228a175f8e",
-              "https://img.freepik.com/free-vector/leaflet-with-blue-polygonal-shapes_1207-510.jpg",
-            ],
-          },
-          {
-            title: "Large Format A1 & A0 Posters",
-            category: "Promotional",
-            description:
-              "Vivid weather-resistant posters for outdoor campaigns, retail windows and exhibitions.",
-            bullets: [
-              "200gsm art paper or 510gsm banner vinyl",
-              "High-resolution latex printing",
-              "50–1,000 units · rolled or folded",
-              "Grommets, hem & eyelets optional",
-              "3–7 day production",
-            ],
-            images: [
-              "https://img.freepik.com/free-photo/large-poster-mockup_23-2148228996.jpg",
-              "https://www.inknition.com.au/wp-content/uploads/bb-plugin/cache/Full-colour-wide-format-printed-posters-square-815ba011c0a93daec16cbe5714f5ed49-.jpg",
-              "https://t3.ftcdn.net/jpg/01/99/45/20/360_F_199452023_aIYQnl38PXT9F1Gyz8RClqsfxZs22StS.jpg",
-              "https://yi-files.s3.amazonaws.com/products/290000/290682/290686-cover.jpg",
-            ],
-          },
-          {
-            title: "Gloss Tri-Fold Brochures",
-            category: "Promotional",
-            description:
-              "Elegant tri-fold brochures for service menus, product catalogs and corporate overviews.",
-            bullets: [
-              "350gsm gloss or matte cover",
-              "Full color throughout",
-              "A4 folded to DL size",
-              "2,000–15,000 units",
-              "Precision creasing & folding",
-            ],
-            images: [
-              "https://img.freepik.com/free-photo/tri-fold-brochure-mockup_23-2148228988.jpg",
-              "https://img.freepik.com/premium-vector/two-sides-cosmetic-trifold-brochure-commercial-uses_317810-1483.jpg",
-              "https://s3.amazonaws.com/autoprint/115/images/branding/686/categories/cat50.png",
-              "https://media.istockphoto.com/id/500592081/vector/blank-white-tri-fold-vector-brochure-template.jpg?s=612x612&w=0&k=20&c=eM_fYpEA_JB-HFPm5HdTZ8colrZaCqIXOtSHw5yZ3q8=",
-              "https://media.istockphoto.com/id/1441647184/vector/trifold-corporate-brochure-design-template.jpg?s=612x612&w=0&k=20&c=BVtzxNCYF--jy3M091n5BNgL-7icfZTDeFAYy9pyr-I=",
-            ],
-          },
-          {
-            title: "Bi-Fold / Half-Fold Brochures",
-            category: "Promotional",
-            description:
-              "Clean and professional half-fold brochures for simple product sheets and service guides.",
-            bullets: [
-              "300–350gsm stock",
-              "Full color both sides",
-              "A4 or letter folded once",
-              "1,000–10,000 units",
-              "Matt, gloss or soft-touch laminate",
-            ],
-            images: [
-              "https://img.freepik.com/free-photo/bi-fold-brochure-mockup_23-2148228980.jpg",
-              "https://static.vecteezy.com/system/resources/previews/013/020/812/non_2x/bifold-brochure-template-professional-business-brochure-bi-fold-template-cover-page-half-fold-brochures-corporate-brochure-08-vector.jpg",
-              "https://static.vecteezy.com/system/resources/previews/013/020/813/non_2x/bifold-brochure-template-professional-business-brochure-bi-fold-template-cover-page-half-fold-brochures-corporate-brochure-06-vector.jpg",
-            ],
-          },
-          {
-            title: "Premium Postcards (4×6 & DL)",
-            category: "Promotional",
-            description:
-              "Double-sided postcards ideal for direct mail, real estate, events and promotions.",
-            bullets: [
-              "350gsm artboard · rounded corners optional",
-              "Full color both sides",
-              "5,000–25,000 units",
-              "UV coating or soft-touch finish",
-              "Mailing compliant",
-            ],
-            images: [
-              "https://img.freepik.com/free-photo/postcard-mockup_23-2148228972.jpg",
-              "https://www.graphicpear.com/wp-content/uploads/2018/09/DL-Envelope-Mockup-White.jpg",
-              "https://img.freepik.com/premium-psd/realistic-dl-flyer-blank-mockup-template-isolated-background-empty-3d-landscape-paper-template-flyer-wedding-invitation-postcard-gift-card-note-cards-voucher-greeting-card-brochure_28616-2946.jpg",
-            ],
-          },
-
-          // ... continuing pattern for remaining promotional items ...
-
-          // (To keep this readable here, I've shown structure for first two categories.
-          // The full list continues identically for all remaining items from your original file.)
-
-          // Last few examples as demonstration:
-          {
-            title: "Luxury Rigid Perfume Gift Boxes",
-            category: "Packaging",
-            description:
-              "High-end rigid boxes with magnetic closure, velvet lining and foil stamping — crafted for premium fragrances.",
-            bullets: [
-              "2.5 mm greyboard + soft-touch matte lamination",
-              "Gold or silver hot foil stamping",
-              "Magnetic closure + custom foam insert",
-              "300–1,200 units · hand-assembled",
-              "Passed international export packaging tests",
-            ],
-            images: [
-              "https://hotcustomboxes.s3.amazonaws.com/wp-content/uploads/2024/10/29125119/Custom-Perfume-Boxes.webp",
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvQvoqAay1SkazAp3IAl-C_3ZVpfNydMCJBw&s",
-              "https://hotcustomboxes.s3.amazonaws.com/wp-content/uploads/2024/10/29123224/Hot-Cuctom-Boxes-2-1-1.webp",
-              "https://media.istockphoto.com/id/1087407332/vector/packaging-design-label-on-cosmetic-container-with-red-and-gold-luxury-box-template-and.jpg?s=612x612&w=0&k=20&c=cmQCUR6r4lxY_0oNn2klEykM7IczW2NcO15QrT1edWc=",
-            ],
-          },
-          {
-            title: "Custom Sublimation Sports Jerseys",
-            category: "Apparel",
-            description:
-              "All-over dye-sublimation jerseys with vibrant team designs for cricket, football and sports clubs.",
-            bullets: [
-              "100% polyester breathable fabric",
-              "Full-color all-over sublimation",
-              "Custom cut & sew patterns",
-              "50–500 units per design",
-              "Quick-dry moisture-wicking finish",
-            ],
-            images: [
-              "https://falkesportswear.com/wp-content/uploads/2024/02/CUSTOM-SUBLIMATION-BASEBALL-JERSEY-MANUACTURER-AND-SUPPLIERS-IN-PAKISTAN-AND-UNITED-STATES-FALKE-SPORTS.jpg",
-              "https://images.squarespace-cdn.com/content/v1/572a977a45bf21aba915b8ff/1576150432894-FMCRZQ2WT3G1X2NJLHRR/Custom+T-Shirt%2C+Custom+Shirts%2C+Design+Your+Own+Shirts+Online",
-              "https://static.vecteezy.com/system/resources/previews/069/804/638/non_2x/custom-team-soccer-jersey-for-football-sublimation-vector.jpg",
-              "https://img.freepik.com/premium-vector/jersey-sports_913492-404.jpg",
-            ],
-          },
-          {
-            title: "Wedding Invitation Letterpress Suites",
-            category: "Events",
-            description:
-              "Luxury letterpress wedding invitations with matching envelopes, RSVP cards and information inserts.",
-            bullets: [
-              "600gsm cotton stock · deckle edge option",
-              "Deep letterpress impression",
-              "Rose gold or black foil accents",
-              "100–500 suites",
-              "Hand-finished assembly",
-            ],
-            images: [
-              "https://img.freepik.com/premium-psd/islamic-floral-wedding-invitation-with-brown-foliage_456063-1047.jpg",
-              "https://img.freepik.com/premium-psd/modern-islamic-wedding-invitation-card-with-vintage-flower_639307-218.jpg",
-              "https://images.squarespace-cdn.com/content/v1/654bf4ea5f798c3bbb50f881/1705607740726-09VBOZGM0MZ9QEMZMIOE/Ink+and+Paper+flatlays+April+2022+-+011.jpg",
-            ],
-          },
-
-          // ... all remaining items follow this exact structure ...
-          // Total count: 128+ items (full list from your original work.js file converted)
-        ];
+        let portfolioData = [];
 
         /* ════════════════════════════════
          RENDERING ENGINE
@@ -2660,7 +2156,7 @@
           "linear-gradient(145deg,#063042,#020f1c)",
         ];
 
-        const cats = ["all", ...new Set(portfolioData.map((i) => i.category))];
+        let cats = [];
 
         function renderFilters() {
           filterRow.innerHTML = "";
@@ -2724,6 +2220,13 @@
               /* first 3 bullets only on card */
               const bullets = (item.bullets || [item.description]).slice(0, 3);
               const bulletHTML = bullets.map((b) => `<li>${b}</li>`).join("");
+              const priceHTML = item.priceFrom
+                ? `<div class="pCard-price">Starting ${item.priceFrom}</div>`
+                : "";
+              const waMsg = encodeURIComponent(
+                item.wa || `Assalam o Alaikum! Mujhe ${item.title} ke baare mein info chahiye.`
+              );
+              const waHref = `https://wa.me/923239062418?text=${waMsg}`;
 
               return `<div class="pCard" data-idx="${oi}" style="animation-delay:${i * 0.06}s">
             <div class="pCard-img">
@@ -2733,15 +2236,20 @@
               <div class="pCard-num">${String(oi + 1).padStart(2, "0")}</div>
             </div>
             <div class="pCard-info">
+              ${priceHTML}
               <div class="pCard-title">${item.title}</div>
               <div class="pCard-divider"></div>
               <ul class="pCard-bullets">${bulletHTML}</ul>
               <div class="pCard-cta">
-                <span class="pCard-view">View Project</span>
+                <span class="pCard-view">View Details</span>
                 <div class="pCard-arrow">
                   <i data-lucide="arrow-up-right" style="width:14px;height:14px"></i>
                 </div>
               </div>
+              <a class="pCard-wa" href="${waHref}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order Now
+              </a>
             </div>
           </div>`;
             })
@@ -2787,6 +2295,15 @@
           document.getElementById("modalTi").textContent = item.title;
           document.getElementById("modalDesc").textContent = item.description;
 
+          /* wire WA button */
+          const waBtn = document.getElementById("modalWaBtn");
+          if (waBtn) {
+            const waMsg = encodeURIComponent(
+              item.wa || `Assalam o Alaikum! Mujhe ${item.title} ke baare mein info chahiye.`
+            );
+            waBtn.href = `https://wa.me/923239062418?text=${waMsg}`;
+          }
+
           /* bullet specs */
           const bl = document.getElementById("modalBullets");
           bl.innerHTML = (item.bullets || [item.description])
@@ -2816,8 +2333,9 @@
           document.body.style.overflow = "";
         }
 
-        /* Card click */
+        /* Card click — skip if WA button was clicked */
         document.addEventListener("click", (e) => {
+          if (e.target.closest(".pCard-wa")) return;
           const card = e.target.closest(".pCard");
           if (!card) return;
           const item = portfolioData[+card.dataset.idx];
@@ -2846,10 +2364,27 @@
             }, 300);
           });
 
-        renderFilters();
-        renderGrid();
-        attachHover();
-        if (typeof lucide !== "undefined") lucide.createIcons();
+        /* ── LOAD DATA FROM portfolio-data.json ── */
+        if (grid) grid.innerHTML = '<div class="noRes" style="opacity:0.5;font-family:\'JetBrains Mono\',monospace;font-size:0.8rem;letter-spacing:0.1em;">Loading...</div>';
+
+        fetch("portfolio-data.json")
+          .then((r) => {
+            if (!r.ok) throw new Error("fetch failed");
+            return r.json();
+          })
+          .then((data) => {
+            portfolioData = data;
+            cats = ["all", ...new Set(data.map((i) => i.category))];
+            renderFilters();
+            renderGrid();
+            attachHover();
+            if (typeof lucide !== "undefined") lucide.createIcons();
+          })
+          .catch(() => {
+            if (grid)
+              grid.innerHTML =
+                '<div class="noRes">Portfolio data unavailable. Please refresh.</div>';
+          });
       });
     </script>
   </body>
