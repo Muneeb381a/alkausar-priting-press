@@ -1180,6 +1180,251 @@
       }
 
       /* ══════════════════════════════════════
+   SERVICE PRODUCT CARDS
+══════════════════════════════════════ */
+      .pcGrid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--bdr);
+        border: 1px solid var(--bdr);
+      }
+      @media (max-width: 900px) {
+        .pcGrid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 560px) {
+        .pcGrid { grid-template-columns: 1fr; }
+      }
+      .pcCard {
+        background: var(--bg2);
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          border-color 0.3s,
+          transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.35s,
+          opacity 0.5s;
+      }
+      .pcCard.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .pcCard:hover {
+        border-color: var(--yellow);
+        transform: translateY(-6px);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px var(--yellow);
+      }
+      .pcCard::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 0; height: 0;
+        border-style: solid;
+        border-width: 0;
+        border-color: var(--yellow) transparent transparent transparent;
+        transition: border-width 0.3s ease;
+        z-index: 10;
+      }
+      .pcCard:hover::before { border-width: 22px 22px 0 0; }
+      .pcCard-img {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: var(--bg3);
+      }
+      .pcCard-img-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.65s cubic-bezier(0.33, 1, 0.68, 1), filter 0.4s;
+      }
+      .pcCard:hover .pcCard-img-bg { transform: scale(1.06); filter: brightness(1.05); }
+      .pcCard-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px);
+        pointer-events: none;
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .pcCard:hover .pcCard-img::after { opacity: 1; }
+      .pcCard-cat {
+        position: absolute;
+        top: 12px; right: 12px;
+        z-index: 5;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        background: #0a0a0a;
+        color: var(--yellow);
+        border: 1px solid var(--yellow);
+        pointer-events: none;
+      }
+      .pcCard-dots {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        background-image: radial-gradient(circle, rgba(255,204,0,0.3) 1.5px, transparent 1.5px);
+        background-size: 14px 14px;
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+      }
+      .pcCard:hover .pcCard-dots { opacity: 1; }
+      .pcCard-num {
+        position: absolute;
+        bottom: 10px; left: 12px;
+        z-index: 5;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        color: rgba(255,255,255,0.22);
+        pointer-events: none;
+        transition: color 0.3s;
+      }
+      .pcCard:hover .pcCard-num { color: var(--yellow); }
+      .pcCard-info {
+        padding: 20px 22px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex: 1;
+        position: relative;
+      }
+      .pcCard-info::before {
+        content: "";
+        position: absolute;
+        left: 0; top: 20px; bottom: 20px;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--yellow), var(--cyan));
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .pcCard:hover .pcCard-info::before { opacity: 1; }
+      .pcCard-price {
+        display: inline-block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--yellow);
+        background: rgba(255,204,0,0.08);
+        border: 1px solid rgba(255,204,0,0.22);
+        padding: 0.2rem 0.6rem;
+        align-self: flex-start;
+      }
+      .pcCard-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.3rem;
+        letter-spacing: 0.06em;
+        color: var(--txt);
+        line-height: 1;
+        transition: color 0.25s;
+      }
+      .pcCard:hover .pcCard-title { color: var(--yellow); }
+      .pcCard-divider {
+        width: 32px; height: 1.5px;
+        background: var(--yellow);
+        transition: width 0.35s ease;
+      }
+      .pcCard:hover .pcCard-divider { width: 60px; }
+      .pcCard-bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        padding: 0;
+      }
+      .pcCard-bullets li {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        font-size: 0.8rem;
+        color: var(--txt2);
+        line-height: 1.5;
+      }
+      .pcCard-bullets li::before {
+        content: "";
+        flex-shrink: 0;
+        margin-top: 6px;
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: var(--yellow);
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+      .pcCard-bullets li:nth-child(2)::before { background: var(--cyan); }
+      .pcCard-bullets li:nth-child(3)::before { background: var(--magenta); }
+      .pcCard:hover .pcCard-bullets li::before { opacity: 1; }
+      .pcCard-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid var(--bdr);
+      }
+      .pcCard-view {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--txt3);
+        transition: color 0.2s;
+      }
+      .pcCard:hover .pcCard-view { color: var(--yellow); }
+      .pcCard-arrow {
+        width: 30px; height: 30px;
+        border: 1px solid var(--bdr);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--txt3);
+        transition: all 0.25s;
+        flex-shrink: 0;
+      }
+      .pcCard:hover .pcCard-arrow {
+        border-color: var(--yellow);
+        color: var(--yellow);
+        transform: rotate(45deg);
+      }
+      .pcCard-wa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 0.6rem 1rem;
+        background: #25d366;
+        color: #fff;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        text-decoration: none;
+        margin-top: 8px;
+        transition: background 0.25s, transform 0.2s;
+      }
+      .pcCard-wa:hover { background: #1da851; transform: translateY(-1px); }
+
+      /* ══════════════════════════════════════
    WORK GRID
 ══════════════════════════════════════ */
       .wTop {
@@ -2649,189 +2894,176 @@
             in-house — from visiting cards to wedding invitations.
           </p>
         </div>
-        <div class="svcGrid">
-          <a class="svc" href="service.html#pakistani-services" style="color:inherit;text-decoration:none;display:block;">
-            <div class="svcN">01</div>
-            <div class="svcI">
-              <i data-lucide="credit-card" style="width: 22px; height: 22px"></i>
-            </div>
-            <h3 class="svcTi">Visiting Cards</h3>
-            <p class="svcD">
-              Professional business cards in matte, gloss, soft-touch, and spot
-              UV finishes. 100 cards from Rs. 500 — same-day available.
-            </p>
-            <div class="svcAr">
-              <i data-lucide="arrow-up-right" style="width: 20px; height: 20px"></i>
-            </div>
-          </a>
-          <a class="svc" href="service.html#pakistani-services" style="color:inherit;text-decoration:none;display:block;">
-            <div class="svcN">02</div>
-            <div class="svcI">
-              <i data-lucide="heart" style="width: 22px; height: 22px"></i>
-            </div>
-            <h3 class="svcTi">Wedding Cards </h3>
-            <p class="svcD">
-              Luxury shaadi cards with gold foil stamping, embossing, and
-              premium paper. Box packing included. From Rs. 2,500 / 50 cards.
-            </p>
-            <div class="svcAr">
-              <i data-lucide="arrow-up-right" style="width: 20px; height: 20px"></i>
-            </div>
-          </a>
-          <a class="svc" href="service.html#pakistani-services" style="color:inherit;text-decoration:none;display:block;">
-            <div class="svcN">03</div>
-            <div class="svcI">
-              <i data-lucide="flag" style="width: 22px; height: 22px"></i>
-            </div>
-            <h3 class="svcTi">Flex & Banner Printing</h3>
-            <p class="svcD">
-              High-resolution flex banners for shops, events, and campaigns.
-              Any size, frontlit & backlit, with grommets. From Rs. 120/sq ft.
-            </p>
-            <div class="svcAr">
-              <i data-lucide="arrow-up-right" style="width: 20px; height: 20px"></i>
-            </div>
-          </a>
-          <a class="svc" href="service.html#pakistani-services" style="color:inherit;text-decoration:none;display:block;">
-            <div class="svcN">04</div>
-            <div class="svcI">
-              <i data-lucide="shirt" style="width: 22px; height: 22px"></i>
-            </div>
-            <h3 class="svcTi">Sublimation Printing</h3>
-            <p class="svcD">
-              Vibrant full-color prints on mugs, T-shirts, cushions, and phone
-              cases. Perfect for gifts and corporate giveaways. From Rs. 350.
-            </p>
-            <div class="svcAr">
-              <i data-lucide="arrow-up-right" style="width: 20px; height: 20px"></i>
-            </div>
-          </a>
-          <a class="svc" href="service.html#pakistani-services" style="color:inherit;text-decoration:none;display:block;">
-            <div class="svcN">05</div>
-            <div class="svcI">
-              <i data-lucide="book-open" style="width: 22px; height: 22px"></i>
-            </div>
-            <h3 class="svcTi">Bill Books & Receipt Pads</h3>
-            <p class="svcD">
-              Custom-numbered bill books, cash memos, and receipt pads for shops
-              and offices. Duplicate NCR copies available. From Rs. 900.
-            </p>
-            <div class="svcAr">
-              <i data-lucide="arrow-up-right" style="width: 20px; height: 20px"></i>
-            </div>
-          </a>
-          <a class="svc" href="service.html#pakistani-services" style="color:inherit;text-decoration:none;display:block;">
-            <div class="svcN">06</div>
-            <div class="svcI">
-              <i data-lucide="layout" style="width: 22px; height: 22px"></i>
-            </div>
-            <h3 class="svcTi">Brochures & Flyers</h3>
-            <p class="svcD">
-              Marketing material for businesses, schools, and events. Tri-fold,
-              bi-fold, Z-fold — gloss or matte lamination. From Rs. 1,200.
-            </p>
-            <div class="svcAr">
-              <i data-lucide="arrow-up-right" style="width: 20px; height: 20px"></i>
-            </div>
-          </a>
-        </div>
-      </section>
+        <div class="pcGrid">
 
-      <!-- WORK -->
-      <section
-        class="sec secAlt"
-        id="portfolio"
-        style="padding-left: 0; padding-right: 0"
-      >
-        <div class="wTop">
-          <div>
-            <span class="secLbl">— Recent Work</span>
-            <h2 class="secH">Our Best <em>Projects</em></h2>
-          </div>
-          <a href="portfolio.html" class="vAll"
-            >View All
-            <i
-              data-lucide="arrow-up-right"
-              style="width: 14px; height: 14px"
-            ></i
-          ></a>
-        </div>
-        <div class="wGrid">
-          <div class="wCard">
-            <div class="wBg wB1"></div>
-            <div class="wHt"></div>
-            <div class="wOv">
-              <div class="wCat">Traditional Press</div>
-              <h3 class="wTi">Offset Printing</h3>
-              <div class="wLn"></div>
+          <!-- 01 Visiting Cards -->
+          <div class="pcCard" onclick="location.href='service.html'">
+            <div class="pcCard-img">
+              <div class="pcCard-img-bg" style="background-image:url('https://www.islamabadprinters.com/wp-content/uploads/2025/09/Visiting-Cards-Printing-Online-in-Pakistan.webp')"></div>
+              <div class="pcCard-cat">Offset</div>
+              <div class="pcCard-dots"></div>
+              <div class="pcCard-num">01</div>
             </div>
-            <div class="wCor">
-              <i
-                data-lucide="arrow-up-right"
-                style="width: 22px; height: 22px"
-              ></i>
+            <div class="pcCard-info">
+              <span class="pcCard-price">Starting PKR 500</span>
+              <div class="pcCard-title">Visiting Cards</div>
+              <div class="pcCard-divider"></div>
+              <ul class="pcCard-bullets">
+                <li>350gsm artboard — gloss or matte lamination</li>
+                <li>Single or double-sided CMYK print</li>
+                <li>100 to 5,000 cards — same-day available</li>
+              </ul>
+              <div class="pcCard-cta">
+                <span class="pcCard-view">View Details</span>
+                <div class="pcCard-arrow"><i data-lucide="arrow-up-right" style="width:14px;height:14px"></i></div>
+              </div>
+              <a class="pcCard-wa" href="https://wa.me/923239062418?text=Hello!%20I%20would%20like%20to%20order%20Visiting%20Cards.%20Please%20share%20quantity%20options%20and%20pricing." onclick="event.stopPropagation()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.531 5.858L.057 23.272a.75.75 0 00.92.921l5.422-1.471A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.381l-.361-.214-3.754 1.018 1.021-3.739-.233-.374A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                Order on WhatsApp
+              </a>
             </div>
           </div>
-          <div class="wCard">
-            <div class="wBg wB2"></div>
-            <div class="wHt"></div>
-            <div class="wOv">
-              <div class="wCat">Outdoor & Indoor</div>
-              <h3 class="wTi">Large Format Printing</h3>
-              <div class="wLn"></div>
+
+          <!-- 02 Wedding Cards -->
+          <div class="pcCard" onclick="location.href='service.html'">
+            <div class="pcCard-img">
+              <div class="pcCard-img-bg" style="background-image:url('https://www.islamabadprinters.com/wp-content/uploads/2020/09/Laser_Cut_Wedding_Invitations_in_Islamabad.webp')"></div>
+              <div class="pcCard-cat">Premium</div>
+              <div class="pcCard-dots"></div>
+              <div class="pcCard-num">02</div>
             </div>
-            <div class="wCor">
-              <i
-                data-lucide="arrow-up-right"
-                style="width: 22px; height: 22px"
-              ></i>
-            </div>
-          </div>
-          <div class="wCard">
-            <div class="wBg wB3"></div>
-            <div class="wHt"></div>
-            <div class="wOv">
-              <div class="wCat">High Resolution</div>
-              <h3 class="wTi">Digital Printing</h3>
-              <div class="wLn"></div>
-            </div>
-            <div class="wCor">
-              <i
-                data-lucide="arrow-up-right"
-                style="width: 22px; height: 22px"
-              ></i>
+            <div class="pcCard-info">
+              <span class="pcCard-price">Starting PKR 2,500</span>
+              <div class="pcCard-title">Wedding Cards</div>
+              <div class="pcCard-divider"></div>
+              <ul class="pcCard-bullets">
+                <li>Gold foil stamping & laser-cut detailing</li>
+                <li>Mehndi, Nikah & Walima sets available</li>
+                <li>50 to 1,000 sets with envelopes</li>
+              </ul>
+              <div class="pcCard-cta">
+                <span class="pcCard-view">View Details</span>
+                <div class="pcCard-arrow"><i data-lucide="arrow-up-right" style="width:14px;height:14px"></i></div>
+              </div>
+              <a class="pcCard-wa" href="https://wa.me/923239062418?text=Hello!%20I%20need%20Wedding%20Invitation%20Cards%20printed.%20Please%20share%20designs%20and%20pricing." onclick="event.stopPropagation()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.531 5.858L.057 23.272a.75.75 0 00.92.921l5.422-1.471A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.381l-.361-.214-3.754 1.018 1.021-3.739-.233-.374A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                Order on WhatsApp
+              </a>
             </div>
           </div>
-          <div class="wCard">
-            <div class="wBg wB4"></div>
-            <div class="wHt"></div>
-            <div class="wOv">
-              <div class="wCat">Photo Quality</div>
-              <h3 class="wTi">Sublimation</h3>
-              <div class="wLn"></div>
+
+          <!-- 03 Flex & Banner -->
+          <div class="pcCard" onclick="location.href='service.html'">
+            <div class="pcCard-img">
+              <div class="pcCard-img-bg" style="background-image:url('https://www.islamabadprinters.com/wp-content/uploads/2023/06/Panaflex_Printing_in_Pakistan.webp')"></div>
+              <div class="pcCard-cat">Large Format</div>
+              <div class="pcCard-dots"></div>
+              <div class="pcCard-num">03</div>
             </div>
-            <div class="wCor">
-              <i
-                data-lucide="arrow-up-right"
-                style="width: 22px; height: 22px"
-              ></i>
-            </div>
-          </div>
-          <div class="wCard">
-            <div class="wBg wB5"></div>
-            <div class="wHt"></div>
-            <div class="wOv">
-              <div class="wCat">Interior Decor</div>
-              <h3 class="wTi">3D Wallpaper</h3>
-              <div class="wLn"></div>
-            </div>
-            <div class="wCor">
-              <i
-                data-lucide="arrow-up-right"
-                style="width: 22px; height: 22px"
-              ></i>
+            <div class="pcCard-info">
+              <span class="pcCard-price">PKR 70 per sq.ft</span>
+              <div class="pcCard-title">Flex & Banner</div>
+              <div class="pcCard-divider"></div>
+              <ul class="pcCard-bullets">
+                <li>510gsm frontlit flex — UV-resistant inks</li>
+                <li>Shop fronts, backdrops & standee banners</li>
+                <li>Any size — ready within 24 hours</li>
+              </ul>
+              <div class="pcCard-cta">
+                <span class="pcCard-view">View Details</span>
+                <div class="pcCard-arrow"><i data-lucide="arrow-up-right" style="width:14px;height:14px"></i></div>
+              </div>
+              <a class="pcCard-wa" href="https://wa.me/923239062418?text=Hello!%20I%20need%20a%20Flex%20Banner%20printed.%20Please%20share%20size%20options%20and%20pricing." onclick="event.stopPropagation()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.531 5.858L.057 23.272a.75.75 0 00.92.921l5.422-1.471A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.381l-.361-.214-3.754 1.018 1.021-3.739-.233-.374A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                Order on WhatsApp
+              </a>
             </div>
           </div>
+
+          <!-- 04 Sublimation -->
+          <div class="pcCard" onclick="location.href='service.html'">
+            <div class="pcCard-img">
+              <div class="pcCard-img-bg" style="background-image:url('https://www.islamabadprinters.com/wp-content/uploads/2023/06/T_Shirt_Printing_Online_in_Islamabad_and_Rawalpindi_Pakistan.webp')"></div>
+              <div class="pcCard-cat">Sublimation</div>
+              <div class="pcCard-dots"></div>
+              <div class="pcCard-num">04</div>
+            </div>
+            <div class="pcCard-info">
+              <span class="pcCard-price">Starting PKR 350</span>
+              <div class="pcCard-title">Sublimation Printing</div>
+              <div class="pcCard-divider"></div>
+              <ul class="pcCard-bullets">
+                <li>Mugs, T-shirts, cushions & caps</li>
+                <li>Full-colour — colours never fade</li>
+                <li>Corporate gifting & bulk orders welcome</li>
+              </ul>
+              <div class="pcCard-cta">
+                <span class="pcCard-view">View Details</span>
+                <div class="pcCard-arrow"><i data-lucide="arrow-up-right" style="width:14px;height:14px"></i></div>
+              </div>
+              <a class="pcCard-wa" href="https://wa.me/923239062418?text=Hello!%20I%20need%20Sublimation%20Printing.%20Please%20share%20options%20and%20pricing." onclick="event.stopPropagation()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.531 5.858L.057 23.272a.75.75 0 00.92.921l5.422-1.471A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.381l-.361-.214-3.754 1.018 1.021-3.739-.233-.374A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                Order on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- 05 Bill Books -->
+          <div class="pcCard" onclick="location.href='service.html'">
+            <div class="pcCard-img">
+              <div class="pcCard-img-bg" style="background-image:url('https://www.islamabadprinters.com/wp-content/uploads/2024/06/Bill_Book_Printing_in_Islamabad_and_Rawalpindi_Pakistan.webp')"></div>
+              <div class="pcCard-cat">NCR Print</div>
+              <div class="pcCard-dots"></div>
+              <div class="pcCard-num">05</div>
+            </div>
+            <div class="pcCard-info">
+              <span class="pcCard-price">Starting PKR 900</span>
+              <div class="pcCard-title">Bill Books</div>
+              <div class="pcCard-divider"></div>
+              <ul class="pcCard-bullets">
+                <li>2-part & 3-part NCR duplicate / triplicate</li>
+                <li>Sequential numbering with company logo</li>
+                <li>Cash memos, invoices & receipt pads</li>
+              </ul>
+              <div class="pcCard-cta">
+                <span class="pcCard-view">View Details</span>
+                <div class="pcCard-arrow"><i data-lucide="arrow-up-right" style="width:14px;height:14px"></i></div>
+              </div>
+              <a class="pcCard-wa" href="https://wa.me/923239062418?text=Hello!%20I%20need%20Bill%20Books%20printed.%20Please%20share%20size%2C%20quantity%20and%20pricing." onclick="event.stopPropagation()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.531 5.858L.057 23.272a.75.75 0 00.92.921l5.422-1.471A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.381l-.361-.214-3.754 1.018 1.021-3.739-.233-.374A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                Order on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- 06 Brochures -->
+          <div class="pcCard" onclick="location.href='service.html'">
+            <div class="pcCard-img">
+              <div class="pcCard-img-bg" style="background-image:url('https://www.islamabadprinters.com/wp-content/uploads/2024/06/Brochure_Printing_in_Islamabad_and_Rawalpindi_Pakistan.webp')"></div>
+              <div class="pcCard-cat">Marketing</div>
+              <div class="pcCard-dots"></div>
+              <div class="pcCard-num">06</div>
+            </div>
+            <div class="pcCard-info">
+              <span class="pcCard-price">Starting PKR 1,200</span>
+              <div class="pcCard-title">Brochures & Flyers</div>
+              <div class="pcCard-divider"></div>
+              <ul class="pcCard-bullets">
+                <li>Tri-fold, bi-fold & Z-fold formats</li>
+                <li>130–170gsm gloss or matte art paper</li>
+                <li>500 to 10,000 prints with bulk discount</li>
+              </ul>
+              <div class="pcCard-cta">
+                <span class="pcCard-view">View Details</span>
+                <div class="pcCard-arrow"><i data-lucide="arrow-up-right" style="width:14px;height:14px"></i></div>
+              </div>
+              <a class="pcCard-wa" href="https://wa.me/923239062418?text=Hello!%20I%20need%20Brochures%20or%20Flyers%20printed.%20Please%20share%20size%2C%20quantity%20and%20pricing." onclick="event.stopPropagation()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.531 5.858L.057 23.272a.75.75 0 00.92.921l5.422-1.471A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.381l-.361-.214-3.754 1.018 1.021-3.739-.233-.374A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                Order on WhatsApp
+              </a>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -3287,7 +3519,7 @@
           { threshold: 0.15 },
         );
         document
-          .querySelectorAll(".stat,.svc,.wCard,.why,.faqItem,.tc")
+          .querySelectorAll(".stat,.svc,.pcCard,.wCard,.why,.faqItem,.tc")
           .forEach((el) => io.observe(el));
 
         // ── Work grid responsive ──
