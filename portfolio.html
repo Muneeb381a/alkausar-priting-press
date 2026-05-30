@@ -812,28 +812,21 @@
         display: flex;
         flex-direction: column;
         cursor: pointer;
-        transition:
-          border-color 0.3s,
-          transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.35s;
         opacity: 0;
         transform: translateY(24px);
         animation: cFadeUp 0.5s ease forwards;
         position: relative;
         overflow: hidden;
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition: border-color 0.3s, box-shadow 0.3s;
       }
       .pCard:hover {
         border-color: var(--yellow);
-        transform: translateY(-6px);
-        box-shadow:
-          0 20px 60px rgba(0, 0, 0, 0.5),
-          0 0 0 1px var(--yellow);
+        box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px var(--yellow);
       }
       @keyframes cFadeUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       /* Corner accent */
@@ -2097,12 +2090,20 @@
         })();
         function attachHover() {
           document.querySelectorAll("a,button,.pCard,.fBtn").forEach((el) => {
-            el.addEventListener("mouseenter", () =>
-              document.body.classList.add("ch"),
-            );
-            el.addEventListener("mouseleave", () =>
-              document.body.classList.remove("ch"),
-            );
+            el.addEventListener("mouseenter", () => document.body.classList.add("ch"));
+            el.addEventListener("mouseleave", () => document.body.classList.remove("ch"));
+          });
+          /* 3D tilt */
+          document.querySelectorAll(".pCard").forEach((card) => {
+            card.addEventListener("mousemove", (e) => {
+              const r = card.getBoundingClientRect();
+              const x = (e.clientX - r.left) / r.width - 0.5;
+              const y = (e.clientY - r.top) / r.height - 0.5;
+              card.style.transform = `perspective(700px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale3d(1.03,1.03,1.03)`;
+            });
+            card.addEventListener("mouseleave", () => {
+              card.style.transform = "perspective(700px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)";
+            });
           });
         }
 
@@ -2289,10 +2290,8 @@
             <div class="pCard-img">
               <div class="pCard-img-bg" style="${imgStyle}"></div>
               <div class="pCard-dots"></div>
-              <div class="pCard-cat">${item.category}</div>
               <div class="pCard-num">${String(oi + 1).padStart(2, "0")}</div>
               <div class="pCard-ov">
-                ${item.priceFrom ? `<div class="pCard-ov-price">From ${item.priceFrom}</div>` : ""}
                 <div class="pCard-ov-title">${item.title}</div>
                 <div class="pCard-ov-cta">View Details <i data-lucide="arrow-up-right" style="width:11px;height:11px"></i></div>
               </div>

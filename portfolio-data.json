@@ -153,6 +153,23 @@
     ],
     "wa": "Hello! I need Photo Cushions, Caps or Coasters. Please share options and pricing."
   },
+  {
+  "title": "Custom Stamp Making",
+  "category": "Office & Business Essentials",
+  "priceFrom": "PKR 800",
+  "description": "Professional custom stamp making services for businesses, offices, schools, and personal use. Available in self-inking, rubber, and pocket stamp options with clear, long-lasting impressions and fast delivery across Pakistan.",
+  "bullets": [
+    "Self-inking, rubber, and pocket stamp options available",
+    "Custom company name, logo, signature, or address stamps",
+    "Sharp and durable impressions for daily office use",
+    "Multiple sizes and shapes to suit your requirements",
+    "Fast production and nationwide delivery available"
+  ],
+  "images": [
+    "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780152495/IMG-20260530-WA0049_ghakkb.jpg"
+  ],
+  "wa": "Hello! I would like to order a Custom Stamp. Please share available sizes, stamp types, and pricing. Thank you."
+},
 
   {
     "title": "Duplicate Bill Books (2-Part NCR)",
