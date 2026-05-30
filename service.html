@@ -3,7 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Services — Alkausar Printing Press</title>
+    <title>Printing Services Sialkot Pakistan | Offset, Digital, Sublimation, Flex | Alkausar</title>
+    <meta name="description" content="Professional printing services in Sialkot: offset printing, digital printing, large format flex banners, sublimation, screen printing, stamp making, brochures & more. WhatsApp 0323-9062418 for instant quote.">
+    <meta name="keywords" content="printing services sialkot, offset printing sialkot, digital printing sialkot, flex printing sialkot, sublimation sialkot, screen printing sialkot, stamp maker sialkot, brochure printing sialkot, large format printing sialkot, printing company sialkot pakistan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://muneeb381a.github.io/qRI-NAEEEM/service.html">
+    <meta name="geo.region" content="PK-PB">
+    <meta name="geo.placename" content="Sialkot, Punjab, Pakistan">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://muneeb381a.github.io/qRI-NAEEEM/service.html">
+    <meta property="og:title" content="Printing Services Sialkot | Offset, Digital, Sublimation, Flex Banners">
+    <meta property="og:description" content="Full-spectrum printing services in Sialkot Pakistan. Offset, digital, large format, sublimation, screen printing & more. Fast turnaround, nationwide delivery.">
+    <meta property="og:image" content="https://res.cloudinary.com/djjz0rkuy/image/upload/v1771261157/Logo_aL_kausar...._rmckyb.png">
+    <meta property="og:site_name" content="Alkausar Printing Press">
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
     <script src="https://unpkg.com/lucide@latest"></script>
     <link
@@ -691,43 +703,124 @@
       /* ══════════════════════════════════════
    TICKER
 ══════════════════════════════════════ */
+      /* TICKER */
       .tckr {
-        background: var(--yellow);
-        padding: 0.7rem 0;
+        background: #050505;
         overflow: hidden;
-        border-top: 2px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        position: relative;
+        background-image: repeating-linear-gradient(
+          0deg,
+          rgba(255,204,0,0.018) 0px,
+          rgba(255,204,0,0.018) 1px,
+          transparent 1px,
+          transparent 5px
+        );
       }
-      .tckrTk {
+      .tckr::before {
+        content: "";
+        position: absolute;
+        top: 0; left: -100%; right: 0;
+        height: 2px;
+        width: 300%;
+        background: linear-gradient(90deg, transparent 0%, #ffcc00 15%, #00ffff 30%, #ff00ff 45%, #ffcc00 60%, #00ffff 75%, #ff00ff 90%, transparent 100%);
+        opacity: 0.7;
+        z-index: 3;
+        animation: tBdr 5s linear infinite;
+      }
+      .tckrBot {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 2px;
+        width: 300%;
+        margin-left: -100%;
+        background: linear-gradient(90deg, transparent 0%, #ff00ff 15%, #00ffff 30%, #ffcc00 45%, #ff00ff 60%, #00ffff 75%, #ffcc00 90%, transparent 100%);
+        opacity: 0.7;
+        z-index: 3;
+        animation: tBdr2 5s linear infinite;
+      }
+      @keyframes tBdr  { from{transform:translateX(0)} to{transform:translateX(33.33%)} }
+      @keyframes tBdr2 { from{transform:translateX(33.33%)} to{transform:translateX(0)} }
+      .tckrFadeL,
+      .tckrFadeR {
+        position: absolute;
+        top: 0; bottom: 0;
+        width: 140px;
+        z-index: 4;
+        pointer-events: none;
+      }
+      .tckrFadeL { left: 0;  background: linear-gradient(to right, #050505, transparent); }
+      .tckrFadeR { right: 0; background: linear-gradient(to left,  #050505, transparent); }
+      .tckrMid {
+        height: 1px;
+        background: linear-gradient(90deg, transparent 5%, rgba(255,204,0,0.08) 30%, rgba(0,255,255,0.08) 50%, rgba(255,0,255,0.08) 70%, transparent 95%);
+      }
+      .tckrRow {
         display: flex;
         width: max-content;
-        animation: tSc 28s linear infinite;
+        align-items: center;
+        padding: 0.8rem 0;
       }
+      .tckrRow1 { animation: tSc  36s linear infinite; }
+      .tckrRow2 { animation: tSc2 22s linear infinite; }
+      .tckr:hover .tckrRow1,
+      .tckr:hover .tckrRow2 { animation-play-state: paused; }
       .tckrIt {
         display: flex;
         align-items: center;
-        gap: 2rem;
-        padding: 0 2rem;
         white-space: nowrap;
-        font-size: 0.95rem;
-        font-weight: 800;
-        letter-spacing: 0.18em;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 0.26em;
         text-transform: uppercase;
-        color: #0a0a0a;
+      }
+      .tChip {
+        padding: 0.22rem 0.9rem;
+        border: 1px solid rgba(255,204,0,0.18);
+        background: rgba(255,204,0,0.04);
+        color: rgba(255,255,255,0.82);
+        letter-spacing: 0.22em;
+        transition: border-color 0.3s, background 0.3s, color 0.3s;
+      }
+      .tChip:hover {
+        border-color: rgba(255,204,0,0.55);
+        background: rgba(255,204,0,0.09);
+        color: #ffcc00;
+        text-shadow: 0 0 12px rgba(255,204,0,0.5);
       }
       .tckrDt {
-        color: #0a0a0a;
-        opacity: 0.3;
-        font-size: 1.1rem;
+        font-size: 0.38rem;
+        margin: 0 1.2rem;
+        vertical-align: middle;
+        display: inline-block;
+        border-radius: 50%;
+        width: 5px; height: 5px;
+        flex-shrink: 0;
       }
-      @keyframes tSc {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
+      .dc { background: var(--cyan);    box-shadow: 0 0 6px var(--cyan); }
+      .dm { background: var(--magenta); box-shadow: 0 0 6px var(--magenta); }
+      .dy { background: var(--yellow);  box-shadow: 0 0 6px var(--yellow); }
+      .tckrIt2 {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.2);
       }
+      .tckrDt2 {
+        font-size: 0.35rem;
+        margin: 0 1.2rem;
+        vertical-align: middle;
+        display: inline-block;
+        width: 4px; height: 4px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.15);
+        flex-shrink: 0;
+      }
+      @keyframes tSc  { from{transform:translateX(0)}    to{transform:translateX(-50%)} }
+      @keyframes tSc2 { from{transform:translateX(-50%)} to{transform:translateX(0)}    }
 
       /* ══════════════════════════════════════
    SECTION UTIL
@@ -1832,13 +1925,17 @@
 
       <!-- TICKER -->
       <div class="tckr" aria-hidden="true">
-        <div class="tckrTk">
-          <div class="tckrIt">
-            Offset Printing<span class="tckrDt">✦</span>Digital Print<span class="tckrDt">✦</span>Visiting Cards<span class="tckrDt">✦</span>Wedding Cards<span class="tckrDt">✦</span>Flex Banners<span class="tckrDt">✦</span>Sublimation<span class="tckrDt">✦</span>Letterhead<span class="tckrDt">✦</span>Bill Books<span class="tckrDt">✦</span>Brochures<span class="tckrDt">✦</span>Stickers<span class="tckrDt">✦</span>Wallpaper<span class="tckrDt">✦</span>Books<span class="tckrDt">✦</span>Packaging<span class="tckrDt">✦</span>Foil Stamping<span class="tckrDt">✦</span>
-          </div>
-          <div class="tckrIt">
-            Offset Printing<span class="tckrDt">✦</span>Digital Print<span class="tckrDt">✦</span>Visiting Cards<span class="tckrDt">✦</span>Wedding Cards<span class="tckrDt">✦</span>Flex Banners<span class="tckrDt">✦</span>Sublimation<span class="tckrDt">✦</span>Letterhead<span class="tckrDt">✦</span>Bill Books<span class="tckrDt">✦</span>Brochures<span class="tckrDt">✦</span>Stickers<span class="tckrDt">✦</span>Wallpaper<span class="tckrDt">✦</span>Books<span class="tckrDt">✦</span>Packaging<span class="tckrDt">✦</span>Foil Stamping<span class="tckrDt">✦</span>
-          </div>
+        <div class="tckrBot"></div>
+        <div class="tckrFadeL"></div>
+        <div class="tckrFadeR"></div>
+        <div class="tckrRow tckrRow1">
+          <div class="tckrIt"><span class="tChip">Offset Printing</span><span class="tckrDt dy"></span><span class="tChip">Visiting Cards</span><span class="tckrDt dc"></span><span class="tChip">Wedding Cards</span><span class="tckrDt dm"></span><span class="tChip">Flex Banners</span><span class="tckrDt dy"></span><span class="tChip">Sublimation</span><span class="tckrDt dc"></span><span class="tChip">Screen Printing</span><span class="tckrDt dm"></span><span class="tChip">Digital Printing</span><span class="tckrDt dy"></span><span class="tChip">Bill Books</span><span class="tckrDt dc"></span><span class="tChip">Brochures</span><span class="tckrDt dm"></span><span class="tChip">Stamp Maker</span><span class="tckrDt dy"></span><span class="tChip">Stickers</span><span class="tckrDt dc"></span><span class="tChip">Calendars</span><span class="tckrDt dm"></span><span class="tChip">Large Format</span><span class="tckrDt dy"></span></div>
+          <div class="tckrIt"><span class="tChip">Offset Printing</span><span class="tckrDt dy"></span><span class="tChip">Visiting Cards</span><span class="tckrDt dc"></span><span class="tChip">Wedding Cards</span><span class="tckrDt dm"></span><span class="tChip">Flex Banners</span><span class="tckrDt dy"></span><span class="tChip">Sublimation</span><span class="tckrDt dc"></span><span class="tChip">Screen Printing</span><span class="tckrDt dm"></span><span class="tChip">Digital Printing</span><span class="tckrDt dy"></span><span class="tChip">Bill Books</span><span class="tckrDt dc"></span><span class="tChip">Brochures</span><span class="tckrDt dm"></span><span class="tChip">Stamp Maker</span><span class="tckrDt dy"></span><span class="tChip">Stickers</span><span class="tckrDt dc"></span><span class="tChip">Calendars</span><span class="tckrDt dm"></span><span class="tChip">Large Format</span><span class="tckrDt dy"></span></div>
+        </div>
+        <div class="tckrMid"></div>
+        <div class="tckrRow tckrRow2">
+          <div class="tckrIt2">Full Spectrum Printing<span class="tckrDt2"></span>In-House Production<span class="tckrDt2"></span>Same-Day Turnaround<span class="tckrDt2"></span>Sialkot Pakistan<span class="tckrDt2"></span>Nationwide Delivery<span class="tckrDt2"></span>Quality Guaranteed<span class="tckrDt2"></span></div>
+          <div class="tckrIt2">Full Spectrum Printing<span class="tckrDt2"></span>In-House Production<span class="tckrDt2"></span>Same-Day Turnaround<span class="tckrDt2"></span>Sialkot Pakistan<span class="tckrDt2"></span>Nationwide Delivery<span class="tckrDt2"></span>Quality Guaranteed<span class="tckrDt2"></span></div>
         </div>
       </div>
 
