@@ -172,7 +172,7 @@
 },
 
   {
-    "title": "Duplicate Bill Books (2-Part NCR)",
+    "title": "Bill Books Printing",
     "category": "Bill Books",
     "priceFrom": "PKR 1,200 per pad",
     "description": "Two-part NCR bill books — one copy for you, one for the customer. Trusted by shops and businesses across Sialkot for daily invoicing and receipt management.",
@@ -184,14 +184,13 @@
       "A5, A4, or custom size — 50 sheets per pad"
     ],
     "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2024/06/Bill_Book_Printing_in_Islamabad_and_Rawalpindi_Pakistan.webp",
-      "assets/product-1.jpg"
+      "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780154395/IMG-20260530-WA0050_udgiqx.jpg"
     ],
     "wa": "Hello! I need Duplicate Bill Books. Please share size, quantity, and pricing details."
   },
   {
-    "title": "Cash Memo & Triplicate Invoice Books",
-    "category": "Bill Books",
+    "title": "Receipt Book Printing",
+    "category": "Receipt Bill Books",
     "priceFrom": "PKR 1,800 per pad",
     "description": "Cash memo books and three-part NCR invoice books for wholesale, retail, and record-keeping. Original plus two copies for every transaction.",
     "bullets": [
@@ -202,30 +201,28 @@
       "Minimum 10 pads per order"
     ],
     "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2025/09/Cash-Memo-Printing-Online-in-Pakistan.png",
-      "https://www.islamabadprinters.com/wp-content/uploads/2024/06/Bill_Book_Printing_in_Islamabad_and_Rawalpindi_Pakistan.webp"
+      "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780154399/IMG-20260530-WA0055_gxvfmc.jpg"
     ],
     "wa": "Hello! I need Cash Memo or Invoice Books. Please share size, quantity, and numbering details."
   },
 
   {
-    "title": "Tri-Fold & Bi-Fold Brochures",
-    "category": "Brochures",
-    "priceFrom": "PKR 3,500 per 500",
-    "description": "Present your products and services in a professional brochure. We handle design, print, and delivery — sharp full-colour results on gloss or matte art paper.",
-    "bullets": [
-      "130gsm or 170gsm gloss or matte art paper",
-      "Full-colour double-sided printing",
-      "Tri-fold or bi-fold format available",
-      "500 to 10,000 prints with bulk discount",
-      "Free design service on orders above 1,000"
-    ],
-    "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2024/06/Brochure_Printing_in_Islamabad_and_Rawalpindi_Pakistan.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2025/09/Booklet-Printing-Online-in-Pakistan.webp"
-    ],
-    "wa": "Hello! I need Brochures printed. Please share size, quantity, and design requirements."
-  },
+  "title": "School Fee Cards",
+  "category": "School Printing",
+  "priceFrom": "PKR 30",
+  "description": "Professionally printed school fee cards designed for fee tracking and student record management. Printed on durable card stock with clear layouts, making monthly fee collection and record keeping simple and organized.",
+  "bullets": [
+    "Custom school name, logo, and contact details",
+    "Monthly fee record and payment tracking sections",
+    "Printed on high-quality durable card stock",
+    "Single-colour or full-colour printing options",
+    "Bulk printing available for schools and academies"
+  ],
+  "images": [
+    "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780154396/IMG-20260530-WA0056_nwthv7.jpg"
+  ],
+  "wa": "Hello! I would like to order School Fee Cards. Please share available sizes, design options, and pricing. Thank you."
+},
   {
     "title": "Letterhead & Corporate Printing",
     "category": "Brochures",
