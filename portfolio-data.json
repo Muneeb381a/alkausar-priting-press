@@ -16,8 +16,42 @@
     ],
     "wa": "Hello! I would like to order Visiting Cards. Please share quantity options and pricing. Thank you."
   },
+ {
+  "title": "3D Wallpaper",
+  "category": "Wallpapers",
+  "priceFrom": "PKR 250 / sq.ft",
+  "description": "Premium-quality 3D wallpapers designed to transform your walls with stunning depth, texture, and modern visual effects. Ideal for homes, offices, shops, and feature walls, available in a wide range of designs and custom sizes.",
+  "bullets": [
+    "High-resolution 3D designs with realistic depth effects",
+    "Suitable for bedrooms, lounges, offices, and commercial spaces",
+    "Custom sizes available to fit any wall dimension",
+    "Durable, fade-resistant, and easy-to-clean material",
+    "Professional installation support available on request"
+  ],
+  "images": [
+    "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780149562/IMG-20260530-WA0030_fu4wqx.jpg"
+  ],
+  "wa": "Hello! I would like to order a 3D Wallpaper. Please share available designs, wall measurement requirements, and pricing. Thank you."
+},
+{
+  "title": "Vinyl Sticker",
+  "category": "Signage & Branding",
+  "priceFrom": "PKR 200 / sq.ft",
+  "description": "Premium-quality vinyl stickers for indoor and outdoor branding, shop fronts, glass panels, vehicles, and promotional displays. Printed in vibrant colours with durable, weather-resistant material for long-lasting results.",
+  "bullets": [
+    "High-resolution full-colour printing",
+    "Suitable for walls, glass, vehicles, and signboards",
+    "Weather-resistant and UV-protected material",
+    "Custom sizes and shapes available",
+    "Professional installation support available on request"
+  ],
+  "images": [
+    "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780149962/IMG-20260530-WA0031_m68xg5.jpg"
+  ],
+  "wa": "Hello! I would like to order Vinyl Stickers. Please share available sizes, material options, and pricing. Thank you."
+},
   {
-    "title": "Standard Wedding Invitation Cards",
+    "title": "Wedding Invitation Cards",
     "category": "Wedding Cards",
     "priceFrom": "PKR 2,500",
     "description": "Beautiful wedding invitation cards for your special occasion. Available in traditional Pakistani designs or modern styles, supplied with matching envelopes.",
@@ -29,50 +63,12 @@
       "Custom design service available"
     ],
     "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2020/09/Laser_Cut_Wedding_Invitations_in_Islamabad.webp",
-      "assets/popup-2.jpg"
+      "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780149962/IMG-20260530-WA0032_ndplan.jpg"
     ],
     "wa": "Hello! I need Wedding Invitation Cards printed. Please share designs, quantity options and pricing."
   },
   {
-    "title": "Deluxe Laser-Cut Gold Foil Cards",
-    "category": "Wedding Cards",
-    "priceFrom": "PKR 5,000",
-    "description": "Premium wedding cards with laser-cut detailing, gold foil stamping, and deep embossing — a truly memorable invitation for a once-in-a-lifetime occasion.",
-    "bullets": [
-      "350gsm cardboard with gold or silver hot foil",
-      "Laser-cut or deep embossing on design elements",
-      "Soft-touch lamination with optional satin ribbon",
-      "Box or folder packaging available",
-      "Custom calligraphy design service offered"
-    ],
-    "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2020/09/Laser_Cut_Wedding_Invitations_in_Islamabad.webp",
-      "assets/popup-2.jpg"
-    ],
-    "wa": "Hello! I am interested in Deluxe Gold Foil Wedding Cards. Please share sample designs and pricing."
-  },
-  {
-    "title": "Mehndi & Nikah Invitation Cards",
-    "category": "Wedding Cards",
-    "priceFrom": "PKR 1,800",
-    "description": "Separate invitation cards for Mehndi, Nikah, and Walima ceremonies — each themed to perfectly match the occasion. Colourful and elegant.",
-    "bullets": [
-      "300gsm artboard with custom theme per ceremony",
-      "Mehndi: green and yellow henna motifs",
-      "Nikah: elegant Islamic calligraphy with border",
-      "Walima: refined banquet style design",
-      "50 to 500 sets with matching envelopes"
-    ],
-    "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2020/09/Laser_Cut_Wedding_Invitations_in_Islamabad.webp",
-      "assets/popup-2.jpg"
-    ],
-    "wa": "Hello! I need Mehndi / Nikah Invitation Cards. Please share designs and pricing details."
-  },
-
-  {
-    "title": "Shop Front Panaflex Banner",
+    "title": "Flex Printing",
     "category": "Flex & Banner",
     "priceFrom": "PKR 70 per sq.ft",
     "description": "Durable outdoor panaflex banners for shops, offices, and showrooms. Vivid colour printing that withstands heat, rain, and direct sunlight — ready within 24 hours.",
@@ -84,8 +80,7 @@
       "Express delivery — ready within 24 hours"
     ],
     "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2023/06/Panaflex_Printing_in_Pakistan.webp",
-      "assets/popup-3.jpg"
+      "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780149562/IMG-20260530-WA0029_lbjp6k.jpg"
     ],
     "wa": "Hello! I need a Shop Front Panaflex Banner. Please share size options and pricing."
   },
