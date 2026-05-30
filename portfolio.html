@@ -150,129 +150,50 @@
       }
 
       /* PRELOADER */
+      /* ── PRELOADER ── */
       .pl {
         position: fixed;
         inset: 0;
         z-index: 10000;
-        background: #080808;
+        background: #030303;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        gap: 2rem;
-        transition:
-          opacity 0.7s,
-          visibility 0.7s;
+        overflow: hidden;
+        transition: opacity 0.9s cubic-bezier(0.77,0,0.18,1), visibility 0.9s;
       }
-      .pl.out {
-        opacity: 0;
-        visibility: hidden;
-      }
-      .plR {
-        position: relative;
-        width: 110px;
-        height: 110px;
-      }
-      .plR::before,
-      .plR::after {
+      .pl::before {
         content: "";
         position: absolute;
-        background: rgba(255, 255, 255, 0.1);
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(255,204,0,0.12) 1px, transparent 1px);
+        background-size: 36px 36px;
+        animation: plGrid 6s linear infinite;
+        pointer-events: none;
       }
-      .plR::before {
-        width: 1px;
-        height: 100%;
-        left: 50%;
-      }
-      .plR::after {
-        height: 1px;
-        width: 100%;
-        top: 50%;
-      }
-      .plC {
-        position: absolute;
-        border-radius: 50%;
-        mix-blend-mode: screen;
-        opacity: 0;
-        animation: plPop 1.8s ease forwards;
-      }
-      .plC1 {
-        width: 50px;
-        height: 50px;
-        background: #00ffff;
-        top: -2px;
-        left: 50%;
-        transform: translateX(-50%);
-        animation-delay: 0.1s;
-      }
-      .plC2 {
-        width: 50px;
-        height: 50px;
-        background: #ff00ff;
-        bottom: -2px;
-        left: 50%;
-        transform: translateX(-50%);
-        animation-delay: 0.3s;
-      }
-      .plC3 {
-        width: 50px;
-        height: 50px;
-        background: #ffcc00;
-        left: -2px;
-        top: 50%;
-        transform: translateY(-50%);
-        animation-delay: 0.2s;
-      }
-      .plC4 {
-        width: 50px;
-        height: 50px;
-        background: rgba(255, 255, 255, 0.4);
-        right: -2px;
-        top: 50%;
-        transform: translateY(-50%);
-        animation-delay: 0.4s;
-      }
-      @keyframes plPop {
-        0% {
-          opacity: 0;
-        }
-        70% {
-          opacity: 0.8;
-        }
-        100% {
-          opacity: 0.7;
-        }
-      }
-      .plT {
-        font-family: "Poppins", sans-serif;
-        font-size: 2.5rem;
-        letter-spacing: 0.6em;
-        color: #fff;
-        animation: plT 1.2s 1s ease forwards;
-        opacity: 0;
-      }
-      @keyframes plT {
-        0% {
-          opacity: 0;
-          letter-spacing: 0.5em;
-        }
-        100% {
-          opacity: 1;
-          letter-spacing: 0.2em;
-        }
-      }
-      .plB {
-        width: 0;
-        height: 2px;
-        background: #ffcc00;
-        animation: plB 1.4s 1.2s ease forwards;
-      }
-      @keyframes plB {
-        to {
-          width: 200px;
-        }
-      }
-
+      @keyframes plGrid { from{background-position:0 0} to{background-position:36px 36px} }
+      .pl.out { opacity: 0; visibility: hidden; }
+      .pl-center { position:relative; display:flex; flex-direction:column; align-items:center; gap:2.2rem; z-index:2; }
+      .pl-arcs { position:relative; width:130px; height:130px; }
+      .plArc { position:absolute; inset:0; border-radius:50%; border:2.5px solid transparent; }
+      .plArc1 { border-top-color:#ffcc00; border-right-color:rgba(255,204,0,0.25); box-shadow:0 0 16px rgba(255,204,0,0.25); animation:plSpin 1.4s linear infinite; }
+      .plArc2 { inset:14px; border-bottom-color:#00ffff; border-left-color:rgba(0,255,255,0.25); box-shadow:0 0 14px rgba(0,255,255,0.2); animation:plSpin 2.1s linear infinite reverse; }
+      .plArc3 { inset:28px; border-top-color:#ff00ff; border-right-color:rgba(255,0,255,0.25); box-shadow:0 0 12px rgba(255,0,255,0.2); animation:plSpin 1.7s linear infinite; animation-delay:-0.4s; }
+      @keyframes plSpin { to{transform:rotate(360deg)} }
+      .pl-mono { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:"Bebas Neue",sans-serif; font-size:1.7rem; letter-spacing:0.1em; color:#fff; opacity:0; animation:plFd 0.5s 0.6s ease forwards; }
+      @keyframes plFd { to{opacity:1} }
+      .pl-name { display:flex; gap:0.08em; overflow:hidden; }
+      .pl-name span { display:inline-block; font-family:"Bebas Neue",sans-serif; font-size:2.5rem; letter-spacing:0.18em; color:#fff; opacity:0; transform:translateY(48px); animation:plLet 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+      .pl-name span:nth-child(1){animation-delay:0.3s} .pl-name span:nth-child(2){animation-delay:0.38s} .pl-name span:nth-child(3){animation-delay:0.46s} .pl-name span:nth-child(4){animation-delay:0.54s} .pl-name span:nth-child(5){animation-delay:0.62s} .pl-name span:nth-child(6){animation-delay:0.70s} .pl-name span:nth-child(7){animation-delay:0.78s} .pl-name span:nth-child(8){animation-delay:0.86s}
+      @keyframes plLet { to{opacity:1;transform:translateY(0)} }
+      .pl-tag { font-family:"JetBrains Mono",monospace; font-size:0.68rem; letter-spacing:0.35em; text-transform:uppercase; color:rgba(255,204,0,0.65); opacity:0; animation:plFd 0.6s 1.1s ease forwards; }
+      .pl-foot { position:absolute; bottom:3rem; left:50%; transform:translateX(-50%); width:260px; z-index:2; }
+      .pl-bar-track { width:100%; height:1px; background:rgba(255,255,255,0.08); margin-bottom:0.7rem; }
+      .pl-bar { height:100%; width:0%; background:linear-gradient(90deg,#ffcc00,#00ffff); box-shadow:0 0 10px rgba(255,204,0,0.5); transition:width 0.08s linear; }
+      .pl-pct { display:block; text-align:right; font-family:"JetBrains Mono",monospace; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.3); }
+      .pl-corn { position:absolute; width:32px; height:32px; border-color:rgba(255,204,0,0.25); border-style:solid; opacity:0; animation:plFd 0.5s 0.4s ease forwards; }
+      .pl-corn.tl{top:2rem;left:2rem;border-width:1px 0 0 1px} .pl-corn.tr{top:2rem;right:2rem;border-width:1px 1px 0 0} .pl-corn.bl{bottom:2rem;left:2rem;border-width:0 0 1px 1px} .pl-corn.br{bottom:2rem;right:2rem;border-width:0 1px 1px 0}
       /* THEME TOGGLE */
       .tmBtn {
         position: relative;
@@ -1842,12 +1763,31 @@
 
     <!-- PRELOADER -->
     <div class="pl" id="pl">
-      <div class="plR">
-        <div class="plC plC1"></div>
-        <div class="plC plC2"></div>
-        <div class="plC plC3"></div>
-        <div class="plC plC4"></div>
+      <div class="pl-corn tl"></div><div class="pl-corn tr"></div>
+      <div class="pl-corn bl"></div><div class="pl-corn br"></div>
+      <div class="pl-center">
+        <div class="pl-arcs">
+          <div class="plArc plArc1"></div>
+          <div class="plArc plArc2"></div>
+          <div class="plArc plArc3"></div>
+          <div class="pl-mono">AK</div>
+        </div>
+        <div class="pl-name"><span>A</span><span>L</span><span>K</span><span>A</span><span>U</span><span>S</span><span>A</span><span>R</span></div>
+        <div class="pl-tag">Printing Press &nbsp;&#183;&nbsp; Sialkot, Pakistan</div>
       </div>
+      <div class="pl-foot">
+        <div class="pl-bar-track"><div class="pl-bar" id="plBar"></div></div>
+        <span class="pl-pct" id="plPct">0%</span>
+      </div>
+    </div>
+        <div class="pl-name"><span>A</span><span>L</span><span>K</span><span>A</span><span>U</span><span>S</span><span>A</span><span>R</span></div>
+        <div class="pl-tag">Printing Press &nbsp;&#183;&nbsp; Sialkot, Pakistan</div>
+      </div>
+      <div class="pl-foot">
+        <div class="pl-bar-track"><div class="pl-bar" id="plBar"></div></div>
+        <span class="pl-pct" id="plPct">0%</span>
+      </div>
+    </div>
       <div class="plT">Alkausar Printing Press</div>
       <div class="plB"></div>
     </div>
@@ -2158,6 +2098,17 @@
         }
 
         /* ── PRELOADER ── */
+        (function() {
+          const bar = document.getElementById("plBar");
+          const pct = document.getElementById("plPct");
+          let v = 0;
+          const tick = setInterval(() => {
+            v += v < 70 ? Math.random() * 3 + 1 : Math.random() * 1.2 + 0.3;
+            if (v >= 100) { v = 100; clearInterval(tick); }
+            if (bar) bar.style.width = v + "%";
+            if (pct) pct.textContent = Math.floor(v) + "%";
+          }, 28);
+        })();
         setTimeout(() => {
           document.getElementById("pl").classList.add("out");
           document.body.classList.add("loaded");
