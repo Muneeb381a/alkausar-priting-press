@@ -34,7 +34,7 @@
   "wa": "Hello! I would like to order a 3D Wallpaper. Please share available designs, wall measurement requirements, and pricing. Thank you."
 },
 {
-  "title": "Vinyl Sticker",
+  "title": "Vinyl & 1 Vision",
   "category": "Signage & Branding",
   "priceFrom": "PKR 200 / sq.ft",
   "description": "Premium-quality vinyl stickers for indoor and outdoor branding, shop fronts, glass panels, vehicles, and promotional displays. Printed in vibrant colours with durable, weather-resistant material for long-lasting results.",
@@ -85,41 +85,22 @@
     "wa": "Hello! I need a Shop Front Panaflex Banner. Please share size options and pricing."
   },
   {
-    "title": "Wedding Stage Backdrop",
-    "category": "Flex & Banner",
-    "priceFrom": "PKR 300 per sq.ft",
-    "description": "Large-format backdrop flex for wedding stages, reception halls, and events. Smooth matte finish ideal for photography — any size printed.",
-    "bullets": [
-      "Smooth matte finish ideal for event photography",
-      "High-resolution 720dpi+ print quality",
-      "10ft, 12ft, and 15ft widths available",
-      "Backlit option for illuminated stage backdrops",
-      "Optional metal frame or stand hire"
-    ],
-    "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2018/02/Backdrop-Printing-in-Islamabad.jpg",
-      "assets/popup-3.jpg"
-    ],
-    "wa": "Hello! I need a Wedding Stage Backdrop. Please share size options and pricing."
-  },
-  {
-    "title": "Roll-Up & X Standee Banners",
-    "category": "Flex & Banner",
-    "priceFrom": "PKR 2,000",
-    "description": "Portable roll-up and X standee banners for exhibitions, offices, and events. Set up in seconds — perfect for product launches, trade shows, and counters.",
-    "bullets": [
-      "Standard 85cm × 200cm or custom sizes",
-      "Full-colour high-resolution digital print",
-      "Lightweight aluminium frame with carry bag",
-      "Double-sided X standee option available",
-      "Replacement banner prints available separately"
-    ],
-    "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2025/08/Roll-Up-Standee-Printing-in-Pakistan.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2025/08/xStandee-Printing-in-Pakistan.webp"
-    ],
-    "wa": "Hello! I need Roll-Up or X Standee Banners. Please share size and pricing details."
-  },
+  "title": "Custom Cap Printing",
+  "category": "Promotional Products",
+  "priceFrom": "PKR 450",
+  "description": "Premium custom cap printing for businesses, events, sports teams, schools, and promotional campaigns. Available with logo printing or embroidery on a variety of cap styles, delivering a professional and long-lasting finish.",
+  "bullets": [
+    "High-quality logo printing and embroidery options",
+    "Available in baseball caps, trucker caps, and snapback styles",
+    "Wide range of colours and custom branding choices",
+    "Suitable for corporate events, giveaways, teams, and uniforms",
+    "Bulk order discounts available across Pakistan"
+  ],
+  "images": [
+    "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780152320/IMG-20260530-WA0048_cadq2l.jpg"
+  ],
+  "wa": "Hello! I would like to order Custom Printed Caps. Please share available cap styles, minimum order quantity, and pricing. Thank you."
+},
 
   {
     "title": "Custom Sublimation Mugs",
@@ -134,9 +115,7 @@
       "Gift box packaging available — single to bulk"
     ],
     "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2018/01/Mug_Printing_in_Islamabad_Rawalpindi_Pakistan.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2024/07/Magic_Mug_Printing_in_Islamabad_and_Rawalpindi.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2024/06/Birthday_Mug_Printing_in_Pakistan.webp"
+      "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780151954/IMG-20260530-WA0044_yc72di.jpg"
     ],
     "wa": "Hello! I would like to order Sublimation Mugs. Please share quantity options and pricing."
   },
@@ -153,9 +132,7 @@
       "School, company, and sports team logos supported"
     ],
     "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2023/06/T_Shirt_Printing_Online_in_Islamabad_and_Rawalpindi_Pakistan.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2025/09/Custom-Polo-Shirts-Online-in-Pakistan.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2025/09/Tshirt-Printing-Online-in-Pakistan.webp"
+      "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780151954/IMG-20260530-WA0047_sinxux.jpg"
     ],
     "wa": "Hello! I need Sublimation T-Shirts or Polo Shirts. Please share sizes, quantity and pricing details."
   },
@@ -172,9 +149,7 @@
       "Single piece or bulk corporate gifting orders"
     ],
     "images": [
-      "https://www.islamabadprinters.com/wp-content/uploads/2018/02/Cushion_Printing_Price_in_Pakistan.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2024/06/Cap_Printing_Price_in_Pakistan.webp",
-      "https://www.islamabadprinters.com/wp-content/uploads/2024/06/Tea_Coaster_Printing_Price_in_Pakistan.webp"
+      "https://res.cloudinary.com/djjz0rkuy/image/upload/v1780151954/IMG-20260530-WA0046_urzofz.jpg"
     ],
     "wa": "Hello! I need Photo Cushions, Caps or Coasters. Please share options and pricing."
   },
