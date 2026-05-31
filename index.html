@@ -517,6 +517,11 @@
           display: none;
         }
       }
+      .hasDropdown{position:relative;display:flex;align-items:center}
+      .nDrop{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-6px);background:var(--nbg);border:1px solid var(--bdr);min-width:175px;padding:.4rem 0;opacity:0;visibility:hidden;transition:opacity .22s,transform .22s,visibility .22s;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:600}
+      .hasDropdown:hover .nDrop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+      .nDropA{display:block;padding:.55rem 1.2rem;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt2);transition:color .2s,background .2s;white-space:nowrap}
+      .nDropA:hover{color:var(--yellow);background:rgba(255,204,0,.05)}
       .nA {
         font-size: 0.78rem;
         font-weight: 600;
@@ -2864,7 +2869,13 @@
         <div class="dLinks">
           <a href="#" class="nA">Home</a>
           <a href="about.html" class="nA">About</a>
+          <div class="hasDropdown">
           <a href="portfolio.html" class="nA">Portfolio</a>
+          <div class="nDrop">
+            <a href="decor.html#wallpaper" class="nDropA">3D Wallpaper</a>
+            <a href="decor.html#pvc" class="nDropA">PVC Panel</a>
+          </div>
+        </div>
           <a href="contact.html" class="nA">Contact</a>
         </div>
         <div class="nActs">
