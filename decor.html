@@ -201,13 +201,7 @@
       <div class="dLinks">
         <a href="index.html" class="nA">Home</a>
         <a href="about.html" class="nA">About</a>
-        <div class="hasDropdown">
-          <a href="portfolio.html" class="nA">Portfolio</a>
-          <div class="nDrop">
-            <a href="decor.html#wallpaper" class="nDropA">3D Wallpaper</a>
-            <a href="decor.html#pvc" class="nDropA">PVC Panel</a>
-          </div>
-        </div>
+        <a href="portfolio.html" class="nA">Portfolio</a>
         <a href="contact.html" class="nA">Contact</a>
       </div>
       <div class="nActs">
@@ -300,25 +294,13 @@
   </footer>
 
   <script>
-    const wallpaperDesigns = [
-      {room:"living",title:"Tropical Forest Mural",img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80"},
-      {room:"living",title:"Abstract Geometric Wall",img:"https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=700&q=80"},
-      {room:"living",title:"Ocean Wave Mural",img:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=700&q=80"},
-      {room:"living",title:"Floral Living Room",img:"https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=700&q=80"},
-      {room:"bedroom",title:"Luxury Floral Bedroom",img:"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=700&q=80"},
-      {room:"bedroom",title:"Starry Night Bedroom",img:"https://images.unsplash.com/photo-1615529328331-f8917597711f?w=700&q=80"},
-      {room:"bedroom",title:"Marble Effect Wall",img:"https://images.unsplash.com/photo-1588046130717-0eb0c9a3ba15?w=700&q=80"},
-      {room:"bedroom",title:"Modern Dark Bedroom",img:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80"},
-      {room:"kitchen",title:"Brick Effect Kitchen",img:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80"},
-      {room:"kitchen",title:"Tile Pattern Kitchen",img:"https://images.unsplash.com/photo-1556909190-1dfcbde8c21b?w=700&q=80"},
-      {room:"kitchen",title:"Marble Kitchen Wall",img:"https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80"},
-      {room:"office",title:"Abstract Office Wall",img:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80"},
-      {room:"office",title:"Brand Wall Mural",img:"https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=700&q=80"},
-      {room:"office",title:"Creative Studio Wall",img:"https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=700&q=80"},
-      {room:"kids",title:"Adventure Map Mural",img:"https://images.unsplash.com/photo-1586105449897-20b5efeb3233?w=700&q=80"},
-      {room:"kids",title:"Jungle Safari Wall",img:"https://images.unsplash.com/photo-1560185127-e06c7bb56ea2?w=700&q=80"},
-      {room:"kids",title:"Space Galaxy Mural",img:"https://images.unsplash.com/photo-1445112098124-3e76dd67983d?w=700&q=80"},
-    ];
+    const _pdf = "https://res.cloudinary.com/djjz0rkuy/image/upload/pg_IDX,f_jpg,c_fill,w_600,h_800/v1781371780/Royal_Desing-51-75_m8knwh.pdf";
+    const _rooms = ["living","living","living","living","living","bedroom","bedroom","bedroom","bedroom","bedroom","kitchen","kitchen","kitchen","kitchen","kitchen","office","office","office","office","office","kids","kids","kids","kids","kids"];
+    const wallpaperDesigns = Array.from({length:25},(_,i)=>({
+      room: _rooms[i],
+      title: `Royal Design #${51+i}`,
+      img: _pdf.replace("IDX", i+1)
+    }));
 
     const pvcDesigns = [
       {room:"living",title:"3D Wave PVC Panel",img:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=700&q=80"},
